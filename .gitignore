@@ -53,3 +53,30 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
+
+# Idea Settings Folder
+.idea/
+
+# OS Crap
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Compressed Files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and DB
+*.log
+*.sql
+*.sqlite
