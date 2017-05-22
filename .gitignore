@@ -76,7 +76,6 @@ Thumbs.db
 *.tar
 *.zip
 
-# Logs and DB
-*.log
+# DB
 *.sql
 *.sqlite

@@ -1,8 +1,11 @@
-<h1>plantr</h1>
-An app to smooth the transition into the plant lyfe
+# plantr 
+:seedling:*An app to smooth the transition into the plant lyfe* :seedling:
 
-COMP3350 Group 7:
-	<strong>Raman Maan</strong>
-	Some other blokes
+## COMP3350 Group 7
++ Austin Cooke
++ Kevin Dam
++ Raman Maan
++ Keaton Macleod
++ Michael Ramsay
 
-Will make a better readme after Iteration 0 is complete.
+The [project log](group_log.md) is located in the root directory
