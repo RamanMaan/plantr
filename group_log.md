@@ -25,4 +25,5 @@
 - Found out that SQLite is integrated into Android Studo
 - Wrote code to create a sample "PLANT" table with some specific attributes
 - Pushed changes so others can review and discuss if this is a possible database implementation we want to pursue for development.
+- Will implement generic CRUD operations for the sample table if this is the implementation we choose.
 ---
