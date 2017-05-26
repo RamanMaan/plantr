@@ -20,3 +20,8 @@
   - add dev tasks to issue tracker
   - possibly add Kotlin (must discuss with Bristow)
 ---
+### Keaton - 5/26/2017
+- Researched possible database implementations
+- Found out that SQLite is integrated into Android Studo
+- Wrote code to create a sample "PLANT" table with some specific attributes
+- Pushed changes so others can review and discuss if this is a possible database implementation we want to pursue for development.
