@@ -27,3 +27,11 @@
 - Pushed changes so others can review and discuss if this is a possible database implementation we want to pursue for development.
 - Will implement generic CRUD operations for the sample table if this is the implementation we choose.
 ---
+### Group Discussion - 5/30/2017
+- Discussed architecture of project.
+- Heavy DB work for next iteration (lots of functionality depends on the DB).
+- Three-point scale for plant difficulty based on How hardy it is, how long it can go without water, if it needs any other care, etc.
+- GUI design discussed.
+- Iteration focus discussed.
+- Everyone claimed an issue.
+---
