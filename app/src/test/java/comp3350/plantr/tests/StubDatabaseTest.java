@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 public class StubDatabaseTest{
 
-    StubDatabase database = new StubDatabase(); //Create a stub database to be used in all tests
+    StubDatabase database = new StubDatabase(); //Create a stub database to be used in all unit tests
 
     @Test
     public void plantReturned() throws JSONException {
