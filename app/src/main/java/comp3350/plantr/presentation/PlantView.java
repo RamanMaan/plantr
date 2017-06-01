@@ -13,6 +13,5 @@ public class PlantView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_view);
-        tableManager = new TableManager(this); //Calls the constructor of TableManager to Create a Table in the Database
     }
 }
