@@ -17,14 +17,17 @@ public class StubDatabaseTest{
 
     @Test
     public void plantReturned() throws JSONException {
-        JSONObject plant = database.getPlant();
+        JSONObject plant = database.getTestPlant();
         assertNotNull(plant);
+		System.out.println(plant);
     }
 
     @Test
     public void getMultiplePlants() throws JSONException {
-        JSONArray plants = database.getMultiplePlants();
+        JSONArray plants = database.getAllTestPlants();
         for (int a = 0; a < plants.length(); a++)
-        assertNotNull(plants.getJSONObject(a));
+        	assertNotNull(plants.getJSONObject(a));
+		System.out.println(plants);
+
     }
 }//StubDatabaseTest
