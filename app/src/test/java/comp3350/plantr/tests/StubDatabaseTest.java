@@ -16,18 +16,16 @@ public class StubDatabaseTest{
     StubDatabase database = new StubDatabase(); //Create a stub database to be used in all unit tests
 
     @Test
-    public void plantReturned() throws JSONException {
+    public void getTestPlant() throws JSONException {
         JSONObject plant = database.getTestPlant();
         assertNotNull(plant);
-		System.out.println(plant);
-    }
+    }//getTestPlant
 
     @Test
-    public void getMultiplePlants() throws JSONException {
+    public void getAllTestPlants() throws JSONException {
         JSONArray plants = database.getAllTestPlants();
         for (int a = 0; a < plants.length(); a++)
         	assertNotNull(plants.getJSONObject(a));
-		System.out.println(plants);
+    }//getAllTestPlants
 
-    }
 }//StubDatabaseTest
