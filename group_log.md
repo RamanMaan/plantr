@@ -34,14 +34,17 @@
 - GUI design discussed.
 - Iteration focus discussed.
 - Everyone claimed an issue.
+- We identified our workflow:
+  - iteration will be the branch with all the information of our current iteration. 
+  - We do feature branches off Iteration and do dev work in those, then merge them back into Iteration. 
+  - Once the iteration is complete we merge it into master. Bug fixes go into Iteration and are merged into master.
 ---
-
 ### Keaton - 5/31/2017
 - Added a stub database class to perform basic creation of plants as JSONObjects to be used as test data.
 - Added a stub database interface to allow abstraction from implementation details.
 - Created a stub database test class that tests the current methods in the stub database.
 - Added testCompile 'org.json:json:20140107' to build.gradle file to allow JSON objects within Unit Tests.
-
+---
 ### Keaton - 6/01/2017
 - Refactored stub database functions with more accurate sample test data so they can be used more robustly throughout development
 - Refactored stub database tests to model these changes
