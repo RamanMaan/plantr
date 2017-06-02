@@ -41,3 +41,11 @@
 - Added a stub database interface to allow abstraction from implementation details.
 - Created a stub database test class that tests the current methods in the stub database.
 - Added testCompile 'org.json:json:20140107' to build.gradle file to allow JSON objects within Unit Tests.
+
+### Keaton - 6/01/2017
+- Refactored stub database functions with more accurate sample test data so they can be used more robustly throughout development
+- Refactored stub database tests to model these changes
+- Created a class and interface for the "PlantLookup" page of the application
+- Implemented a function to lookup a plant by name from the stub database
+- Created a PlantLookupTest class to test current and future functions in the PlantLookup class
+- Created a "Constants" class under application for constants that will be used across the entire applcation
