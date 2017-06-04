@@ -52,3 +52,9 @@
 - Implemented a function to lookup a plant by name from the stub database
 - Created a PlantLookupTest class to test current and future functions in the PlantLookup class
 - Created a "Constants" class under application for constants that will be used across the entire applcation
+---
+### Group Discussion - 6/04/2017
+- Discussed project state
+- Stub database overhaul
+- Discussed requirements + implementation of GUI for plant view
+- Distributed remaining high priority tasks
