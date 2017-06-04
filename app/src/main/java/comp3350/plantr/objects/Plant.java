@@ -2,6 +2,8 @@ package comp3350.plantr.objects;
 
 import android.media.Image;
 
+import java.util.Locale;
+
 /**
  * Created: 5/28/2017
  * Raman Maan
@@ -12,12 +14,12 @@ import android.media.Image;
 public class Plant {
 	private int _plantID;
 	private String _plantName;
-	private String _plantDesc;//TODO : should we have a short and long desc, or just the one?
+	private String _plantDesc;
 	private Image _plantImg;
 
-	private Temperature _optimalTemp;
-	private int _hardiness;//TODO: discuss how we'll store this information
-	private int _wateringFreq;
+	private TemperatureRange _optimalTemp;
+	private int _hardiness;
+	private int _wateringFreq; // the amount of times it needs to be watered per week
 
 	public Plant(int id) {
 		_plantID = id;
@@ -29,7 +31,7 @@ public class Plant {
 		_wateringFreq = -1;
 	}
 
-	public Plant(int id, String name, String desc, Image img, Temperature optimalTemp, int hardiness, int wateringFreq) {
+	public Plant(int id, String name, String desc, Image img, TemperatureRange optimalTemp, int hardiness, int wateringFreq) {
 		_plantID = id;
 		_plantName = name;
 		_plantDesc = desc;
@@ -55,7 +57,7 @@ public class Plant {
 		return _plantImg;
 	}
 
-	public Temperature getOptimalTemp() {
+	public TemperatureRange getOptimalTemp() {
 		return _optimalTemp;
 	}
 
@@ -76,6 +78,7 @@ public class Plant {
 	}
 
 	public String toString() {
-		return String.format("{id : %d, name : %s, desc : %s}", _plantID, _plantName, _plantDesc);
+		return String.format(Locale.CANADA, "{id : %d, name : %s, desc : %s, optimalTemp : %s, hardiness : %d, wateringFreq : %d}"
+				, _plantID, _plantName, _plantDesc, _optimalTemp, _hardiness, _wateringFreq);
 	}
 }
