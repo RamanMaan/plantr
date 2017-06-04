@@ -27,6 +27,15 @@
 - Pushed changes so others can review and discuss if this is a possible database implementation we want to pursue for development.
 - Will implement generic CRUD operations for the sample table if this is the implementation we choose.
 ---
+### Raman - 5/28/2017
+- Added dev tasks to issue tracker
+- Assigned myself [DT3-I1](raman-maan/plantr/issues/3)
+- Added project consistent coding standards to git for easier control
+- Got a basic CLI working using the sample project as a guide
+- Created a Plant object holding the information required for [DT3-I1](raman-maan/plantr/issues/3) and [DT4-I1]((raman-maan/plantr/issues/4))
+- Added a temperature object - need to discuss where we'll keep "helper" classes
+- Created a Database interface and an empty database stub for this iteration
+---
 ### Group Discussion - 5/30/2017
 - Discussed architecture of project.
 - Heavy DB work for next iteration (lots of functionality depends on the DB).
@@ -58,3 +67,10 @@
 - Stub database overhaul
 - Discussed requirements + implementation of GUI for plant view
 - Distributed remaining high priority tasks
+---
+### Raman - 6/04/2017
+- Completed [DT3-I1](raman-maan/plantr/issues/3)
+  - Waiting on Kevin to complete GUI portion
+- Added an AllTests.java file to organize tests
+- Code reviewed #16
+---
