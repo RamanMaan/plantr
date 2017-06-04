@@ -17,7 +17,7 @@ class Difficulty {
 
 		final int levels = _difficultyLevels.length;
 
-		final double tempSlope = 0.3; //
+		final double tempSlope = 0.1; //
 		final double wateringSlopeConstant = (levels-1)/levels; //so that at point weeks = 1, the watering difficulty also = 1
 
 		final int roomTemp = 21; //celsius
