@@ -28,7 +28,7 @@ public class StubDatabaseTest{
         assertNotNull(plant);
     }//getPlant
 
-    public void getPlantbyName()
+    public void getPlantByName()
     {
         Plant plant = database.getPlant("aloe");
         assertNotNull(plant);
