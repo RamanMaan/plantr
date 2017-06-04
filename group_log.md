@@ -74,3 +74,9 @@
 - Added an AllTests.java file to organize tests
 - Code reviewed #16
 ---
+### Keaton - 6/01/2017
+- Reviewed current Iteration branch and removed code that would be replaced by the newly added changes for the StubDatabase
+- Reworked current StubDatabase functions to use ArrayLists to store records
+- Reworked tests for the StubDatabase functions to use ArrayLists
+- Implemented a Singleton pattern for the database
+---
