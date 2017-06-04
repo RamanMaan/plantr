@@ -16,8 +16,8 @@ public class Plant {
 	private Image _plantImg;
 
 	private Temperature _optimalTemp;
-	private int _hardiness;//TODO: discuss how we'll store this information
-	private int _wateringFreq;
+	private Difficulty _difficulty;
+	private int _wateringPeriod;
 
 	public Plant(int id) {
 		_plantID = id;
@@ -25,18 +25,18 @@ public class Plant {
 		_plantDesc = null;
 		_plantImg = null;
 		_optimalTemp = null;
-		_hardiness = -1;
-		_wateringFreq = -1;
+		_difficulty = null;
+		_wateringPeriod = -1;
 	}
 
-	public Plant(int id, String name, String desc, Image img, Temperature optimalTemp, int hardiness, int wateringFreq) {
+	public Plant(int id, String name, String desc, Image img, Temperature optimalTemp, int wateringPeriod) {
 		_plantID = id;
 		_plantName = name;
 		_plantDesc = desc;
 		_plantImg = img;
 		_optimalTemp = optimalTemp;
-		_hardiness = hardiness;
-		_wateringFreq = wateringFreq;
+		_difficulty = new Difficulty(optimalTemp, wateringPeriod); //this is a derived attribute
+		_wateringPeriod = wateringPeriod;
 	}
 
 	public int getPlantID() {
@@ -59,12 +59,12 @@ public class Plant {
 		return _optimalTemp;
 	}
 
-	public int getHardiness() {
-		return _hardiness;
+	public Difficulty getDifficulty() {
+		return _difficulty;
 	}
 
 	public int getWateringFreq() {
-		return _wateringFreq;
+		return _wateringPeriod;
 	}
 
 	public boolean equals(Object object) {
@@ -78,4 +78,5 @@ public class Plant {
 	public String toString() {
 		return String.format("{id : %d, name : %s, desc : %s}", _plantID, _plantName, _plantDesc);
 	}
+
 }
