@@ -16,8 +16,8 @@ public class StubDatabase implements DatabaseInterface {
     private ArrayList<Plant> plants = new ArrayList<Plant>();
 
     public StubDatabase() {
-        Plant aloe = new Plant(1, Constants.ALOE, Constants.PLANT_DESCRIPTOR + " " + Constants.ALOE , null, null, 1, 1);
-        Plant anthurium = new Plant(2, Constants.ANTHURIUM, Constants.PLANT_DESCRIPTOR + " " + Constants.ANTHURIUM , null, null, 1, 1);
+        Plant aloe = new Plant(1, Constants.ALOE, Constants.PLANT_DESCRIPTOR + " " + Constants.ALOE , "aloe", null, 1, 1);
+        Plant anthurium = new Plant(2, Constants.ANTHURIUM, Constants.PLANT_DESCRIPTOR + " " + Constants.ANTHURIUM , "anthurium", null, 1, 1);
         Plant asparagusFern = new Plant(3, Constants.ASPARAGUS_FERN, Constants.PLANT_DESCRIPTOR + " " + Constants.ASPARAGUS_FERN , null, null, 1, 1);
         Plant peaceLily = new Plant(4, Constants.PEACE_LILY, Constants.PLANT_DESCRIPTOR + " " + Constants.PEACE_LILY , null, null, 1, 1);
         Plant peperomia = new Plant(5, Constants.PEPEROMIA, Constants.PLANT_DESCRIPTOR + " " + Constants.PEPEROMIA , null, null, 1, 1);
@@ -61,7 +61,7 @@ public class StubDatabase implements DatabaseInterface {
         Plant plant = null;
         for (int a = 0; a < plants.size() && plant == null; a++)
         {
-            if (plants.get(a).getPlantName().toLowerCase() == name.toLowerCase())
+            if (plants.get(a).getPlantName().toLowerCase().equals(name.toLowerCase()))
                 plant = plants.get(a);
         }
         return plant;

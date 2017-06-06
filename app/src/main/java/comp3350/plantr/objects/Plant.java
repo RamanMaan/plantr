@@ -15,7 +15,7 @@ public class Plant {
 	private int _plantID;
 	private String _plantName;
 	private String _plantDesc;
-	private Image _plantImg;
+	private String _plantImg;
 
 	private TemperatureRange _optimalTemp;
 	private int _hardiness;
@@ -31,7 +31,7 @@ public class Plant {
 		_wateringFreq = -1;
 	}
 
-	public Plant(int id, String name, String desc, Image img, TemperatureRange optimalTemp, int hardiness, int wateringFreq) {
+	public Plant(int id, String name, String desc, String img, TemperatureRange optimalTemp, int hardiness, int wateringFreq) {
 		_plantID = id;
 		_plantName = name;
 		_plantDesc = desc;
@@ -53,7 +53,7 @@ public class Plant {
 		return _plantDesc;
 	}
 
-	public Image getPlantImg() {
+	public String getPlantImg() {
 		return _plantImg;
 	}
 
