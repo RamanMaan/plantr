@@ -8,7 +8,7 @@ package comp3350.plantr.objects;
 
 
 
-class Difficulty {
+public class Difficulty {
 
 	private static String[] _difficultyLevels = {"easy", "medium", "hard"};
 	private double _difficulty; //it's a double so that two plants of similar difficulty can still be compared
