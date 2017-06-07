@@ -56,7 +56,6 @@ public class Difficulty {
 	}
 
 	private static DifficultyType getDifficultyType(double difficulty) {
-		int diff = (int) Math.max(Math.ceil(difficulty), 1) - 1;//math.ceil and math.max make it so the range is 1 to _difficulty.length inclusive.
-		return DifficultyType.getType(diff);
+		return DifficultyType.getType((int) difficulty);
 	}
 }
