@@ -91,4 +91,5 @@
 - Re-added the database service manager
   - any database calls should just call it's open method instead of calling the database specifically
 - refactored current database to exclude singleton instance
+- added ability to view different types of plants
 ---
