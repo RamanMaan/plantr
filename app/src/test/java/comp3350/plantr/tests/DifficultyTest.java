@@ -20,7 +20,7 @@ public class DifficultyTest {
 	@Test
 	public void createDifficulty(){
 		assertNotNull(_difficultyInstance);
-		assertEquals("hard", _difficultyInstance.toString());
+		assertEquals("medium", _difficultyInstance.toString());
 
 
 	}
