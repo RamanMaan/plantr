@@ -61,6 +61,10 @@
 - Implemented a function to lookup a plant by name from the stub database
 - Created a PlantLookupTest class to test current and future functions in the PlantLookup class
 - Created a "Constants" class under application for constants that will be used across the entire applcation
+- Reviewed current Iteration branch and removed code that would be replaced by the newly added changes for the StubDatabase
+- Reworked current StubDatabase functions to use ArrayLists to store records
+- Reworked tests for the StubDatabase functions to use ArrayLists
+- Implemented a Singleton pattern for the database
 ---
 ### Group Discussion - 6/04/2017
 - Discussed project state
@@ -74,12 +78,6 @@
 - Added an AllTests.java file to organize tests
 - Code reviewed #16
 ---
-### Keaton - 6/01/2017
-- Reviewed current Iteration branch and removed code that would be replaced by the newly added changes for the StubDatabase
-- Reworked current StubDatabase functions to use ArrayLists to store records
-- Reworked tests for the StubDatabase functions to use ArrayLists
-- Implemented a Singleton pattern for the database
----
 ### Keaton - 6/06/2017
 - Revised all PlantLookup Class / Interface functions to use different code structure (ArrayLists)
 - Refactored build.gradle file since we will not be using JSONObjects
@@ -88,4 +86,9 @@
 ### Michael - 06/06/2017
 - Created a Difficulty class that represents how difficult it is to take care of a Plant
 - Finished [DT5-I1](https://github.com/Raman-Maan/plantr/issues/5)
+---
+### Raman - 06/06/2017
+- Re-added the database service manager
+  - any database calls should just call it's open method instead of calling the database specifically
+- refactored current database to exclude singleton instance
 ---
