@@ -20,7 +20,7 @@ public class PlantView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         DatabaseInterface db;
-        Plant testPlant;
+        Plant plant;
         ImageView plantImage;
         TextView plantTitle, plantDesc;
 
@@ -31,15 +31,16 @@ public class PlantView extends AppCompatActivity {
         // initialize the stub database
         db = DatabaseAccess.open();
 
-        testPlant = db.getPlant("aloe");
+        int plantPosition = getIntent().getIntExtra(getString(R.string.plantID), -1);
+        plant = db.getPlant(plantPosition);
 
         plantImage = (ImageView) findViewById(R.id.plantImageView);
         plantTitle = (TextView) findViewById(R.id.plantViewTitle);
         plantDesc = (TextView) findViewById(R.id.plantViewDescription);
 
-        plantImage.setImageResource(getResources().getIdentifier("@drawable/"+testPlant.getPlantImg(), null, this.getPackageName()));
-        plantTitle.setText(testPlant.getPlantName());
-        plantDesc.setText(testPlant.getPlantDesc());
+        plantImage.setImageResource(getResources().getIdentifier("@drawable/"+plant.getPlantImg(), null, this.getPackageName()));
+        plantTitle.setText(plant.getPlantName());
+        plantDesc.setText(plant.getPlantDesc());
     }
 
 }

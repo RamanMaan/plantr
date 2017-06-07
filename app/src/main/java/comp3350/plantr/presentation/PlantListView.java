@@ -51,7 +51,10 @@ public class PlantListView extends AppCompatActivity{
 		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				startActivity(new Intent(PlantListView.this, PlantView.class));
+				Intent intent = new Intent(PlantListView.this, PlantView.class);
+				//store the plant ID with the intent to display
+				intent.putExtra(getString(R.string.plantID), position+1);
+				startActivity(intent);
 			}
 		});
 
