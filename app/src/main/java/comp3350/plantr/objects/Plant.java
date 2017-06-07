@@ -1,7 +1,6 @@
 package comp3350.plantr.objects;
 
 import android.media.Image;
-
 import java.util.Locale;
 
 /**
