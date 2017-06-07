@@ -13,17 +13,14 @@ import comp3350.plantr.objects.TemperatureRange;
 
 public class Difficulty {
 
-	static final int levels = DifficultyType.values().length;
-
-	static final double tempSlope = 0.1; //
-	static final double wateringSlopeConstant = (levels - 1.0) / levels; //so that at point weeks = 1, the watering difficulty also = 1
-
-	static final Temperature roomTemp = new Temperature(21);
-	static final int day = 24;
-	static final int week = day * 7; //hours in a week.
-
-	static final double tempWeight = 0.6;
-	static final double wateringWeight = 1 - tempWeight;
+	private static final int levels = DifficultyType.values().length;
+	private static final double tempSlope = 0.1;
+	private static final double wateringSlopeConstant = (levels - 1.0) / levels; //so that at point weeks = 1, the watering difficulty also = 1
+	private static final Temperature roomTemp = new Temperature(21);
+	private static final int day = 24; // hours in a day
+	private static final int week = day * 7; // hours in a week.
+	private static final double tempWeight = 0.6; //the weight we apply to temperature
+	private static final double wateringWeight = 1 - tempWeight; //the weight we apply to watering frequency
 
 	public static DifficultyType calculateDifficulty(Plant p) {
 		return calculateDifficulty(p.getOptimalTemp(), p.getWateringFreq());
@@ -34,7 +31,6 @@ public class Difficulty {
 		if(wateringPeriod <= day * 2) {
 			return DifficultyType.HARD;
 		}
-
 		double combinedDifficulty = calculateCombinedDifficulty(optimalTemps, wateringPeriod);
 
 		return getDifficultyType(combinedDifficulty);
