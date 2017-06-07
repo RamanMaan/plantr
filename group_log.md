@@ -80,7 +80,7 @@
 - Reworked tests for the StubDatabase functions to use ArrayLists
 - Implemented a Singleton pattern for the database
 ---
-### Keaton - 6/01/2017
+### Keaton - 6/06/2017
 - Revised all PlantLookup Class / Interface functions to use different code structure (ArrayLists)
 - Refactored build.gradle file since we will not be using JSONObjects
 - Removed unnecessary code from main
