@@ -29,10 +29,10 @@
 ---
 ### Raman - 5/28/2017
 - Added dev tasks to issue tracker
-- Assigned myself [DT3-I1](raman-maan/plantr/issues/3)
+- Assigned myself [DT3-I1](https://github.com/Raman-Maan/plantr/issues/3)
 - Added project consistent coding standards to git for easier control
 - Got a basic CLI working using the sample project as a guide
-- Created a Plant object holding the information required for [DT3-I1](raman-maan/plantr/issues/3) and [DT4-I1]((raman-maan/plantr/issues/4))
+- Created a Plant object holding the information required for [DT3-I1](https://github.com/Raman-Maan/plantr/issues/3) and [DT4-I1](https://github.com/Raman-Maan/plantr/issues/4)
 - Added a temperature object - need to discuss where we'll keep "helper" classes
 - Created a Database interface and an empty database stub for this iteration
 ---
@@ -76,7 +76,7 @@
 - Distributed remaining high priority tasks
 ---
 ### Raman - 6/04/2017
-- Completed [DT3-I1](raman-maan/plantr/issues/3)
+- Completed [DT3-I1](https://github.com/Raman-Maan/plantr/issues/3)
   - Waiting on Kevin to complete GUI portion
 - Added an AllTests.java file to organize tests
 - Code reviewed #16
