@@ -8,6 +8,7 @@ public class Constants {
 	final static public String NAME = "Name";
 	final static public String DESCRIPTION = "Description";
 	final static public String PLANT_DESCRIPTOR = "It's a(n)";
+	final static public String PLANT_DIFFICULTY_TEXT = "It has a(n) %s difficulty to take care of";
 	final static public String ALOE = "Aloe";
 	final static public String ANTHURIUM = "Anthurium";
 	final static public String ASPARAGUS_FERN = "Asparagus fern";
