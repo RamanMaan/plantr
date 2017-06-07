@@ -1,7 +1,8 @@
 package comp3350.plantr.objects;
 
-import android.media.Image;
 import java.util.Locale;
+
+import comp3350.plantr.business.Difficulty;
 
 /**
  * Created: 5/28/2017
@@ -17,7 +18,7 @@ public class Plant {
 	private String _plantImg;
 
 	private TemperatureRange _optimalTemp;
-	private Difficulty _difficulty;
+	private DifficultyType _difficulty;
 	private int _wateringPeriod;
 
 	public Plant(int id) {
@@ -36,7 +37,7 @@ public class Plant {
 		_plantDesc = desc;
 		_plantImg = img;
 		_optimalTemp = optimalTemp;
-		_difficulty = new Difficulty(optimalTemp, wateringPeriod); //this is a derived attribute
+		_difficulty = Difficulty.calculateDifficulty(optimalTemp, wateringPeriod); //this is a derived attribute
 		_wateringPeriod = wateringPeriod;
 	}
 
@@ -60,7 +61,7 @@ public class Plant {
 		return _optimalTemp;
 	}
 
-	public Difficulty getDifficulty() {
+	public DifficultyType getDifficulty() {
 		return _difficulty;
 	}
 
