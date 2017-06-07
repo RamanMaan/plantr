@@ -55,7 +55,7 @@ public class Difficulty {
 	}
 
 	public int getDifficulty(){
-		return (int)Math.max(Math.ceil(_difficulty),1) - 1 ; 	//math.ceil and math.max make it so the range is 1 to _difficulty.length inclusive.
+		return (int)Math.max(Math.ceil(_difficulty),1); 	//math.ceil and math.max make it so the range is 1 to _difficulty.length inclusive.
 	}
 
 	public String toString(){
