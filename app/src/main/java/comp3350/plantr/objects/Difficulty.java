@@ -59,7 +59,7 @@ public class Difficulty {
 	}
 
 	public String toString(){
-		int index = getDifficulty()	- 1; //difficulty is 1 to _difficulty.length, so minus one to line up with _difficulty array indices 
+		int index = getDifficulty()	- 1; //difficulty is 1 to _difficulty.length, so minus one to line up with _difficulty array indices
 		return _difficultyLevels[index];
 	}
 }
