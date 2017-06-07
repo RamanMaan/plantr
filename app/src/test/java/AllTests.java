@@ -3,6 +3,7 @@ import org.junit.runners.Suite;
 
 import comp3350.plantr.tests.StubDatabaseTest;
 import comp3350.plantr.tests.application.DatabaseAccessTest;
+import comp3350.plantr.tests.business.DifficultyTest;
 import comp3350.plantr.tests.objects.TemperatureTest;
 
 /**
@@ -13,5 +14,8 @@ import comp3350.plantr.tests.objects.TemperatureTest;
  */
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({TemperatureTest.class, StubDatabaseTest.class, DatabaseAccessTest.class})
-public class AllTests {}
+@Suite.SuiteClasses({
+		TemperatureTest.class, StubDatabaseTest.class, DatabaseAccessTest.class, DifficultyTest.class
+})
+public class AllTests {
+}

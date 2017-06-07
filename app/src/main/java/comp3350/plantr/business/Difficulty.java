@@ -7,7 +7,7 @@ import comp3350.plantr.objects.TemperatureRange;
 
 /**
  * Created by Michael on 04/06/2017.
- * <p>
+ * 
  * Purpose: This is a way of measuring the difficulty of taking care of a Plant
  */
 
@@ -23,12 +23,16 @@ public class Difficulty {
 	private static final double wateringWeight = 1 - tempWeight; //the weight we apply to watering frequency
 
 	public static DifficultyType calculateDifficulty(Plant p) {
-		return calculateDifficulty(p.getOptimalTemp(), p.getWateringFreq());
+		return p == null ? null : calculateDifficulty(p.getOptimalTemp(), p.getWateringFreq());
 	}
 
 	public static DifficultyType calculateDifficulty(TemperatureRange optimalTemps, int wateringPeriod) {
+		if (optimalTemps == null || wateringPeriod < 0) {
+			return null;
+		}
+
 		//if the watering period is less than 2 days, it's automatically max difficulty
-		if(wateringPeriod <= day * 2) {
+		if (wateringPeriod <= day * 2) {
 			return DifficultyType.HARD;
 		}
 		double combinedDifficulty = calculateCombinedDifficulty(optimalTemps, wateringPeriod);
@@ -52,7 +56,7 @@ public class Difficulty {
 	}
 
 	private static DifficultyType getDifficultyType(double difficulty) {
-		int diff = (int)Math.max(Math.ceil(difficulty), 1) - 1;//math.ceil and math.max make it so the range is 1 to _difficulty.length inclusive.
+		int diff = (int) Math.max(Math.ceil(difficulty), 1) - 1;//math.ceil and math.max make it so the range is 1 to _difficulty.length inclusive.
 		return DifficultyType.getType(diff);
 	}
 }
