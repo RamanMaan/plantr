@@ -2,6 +2,8 @@ package comp3350.plantr.objects;
 
 import android.media.Image;
 
+import java.util.Locale;
+
 /**
  * Created: 5/28/2017
  * Raman Maan
@@ -12,8 +14,8 @@ import android.media.Image;
 public class Plant {
 	private int _plantID;
 	private String _plantName;
-	private String _plantDesc;//TODO : should we have a short and long desc, or just the one?
-	private Image _plantImg;
+	private String _plantDesc;
+	private String _plantImg;
 
 	private Temperature _optimalTemp;
 	private Difficulty _difficulty;
@@ -51,11 +53,11 @@ public class Plant {
 		return _plantDesc;
 	}
 
-	public Image getPlantImg() {
+	public String getPlantImg() {
 		return _plantImg;
 	}
 
-	public Temperature getOptimalTemp() {
+	public TemperatureRange getOptimalTemp() {
 		return _optimalTemp;
 	}
 
@@ -76,7 +78,7 @@ public class Plant {
 	}
 
 	public String toString() {
-		return String.format("{id : %d, name : %s, desc : %s}", _plantID, _plantName, _plantDesc);
+		return String.format(Locale.CANADA, "{id : %d, name : %s, desc : %s, optimalTemp : %s, hardiness : %d, wateringFreq : %d}"
+				, _plantID, _plantName, _plantDesc, _optimalTemp, _hardiness, _wateringFreq);
 	}
-
 }

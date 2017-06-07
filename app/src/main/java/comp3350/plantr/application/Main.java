@@ -1,5 +1,7 @@
 package comp3350.plantr.application;
 
+import comp3350.plantr.persistence.DatabaseInterface;
+import comp3350.plantr.persistence.StubDatabase;
 import comp3350.plantr.presentation.TempGUI;
 
 /**
