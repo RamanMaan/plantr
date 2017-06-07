@@ -45,8 +45,11 @@
 - Everyone claimed an issue.
 - We identified our workflow:
   - iteration will be the branch with all the information of our current iteration. 
-  - We do feature branches off Iteration and do dev work in those, then merge them back into Iteration. 
-  - Once the iteration is complete we merge it into master. Bug fixes go into Iteration and are merged into master.
+  - We do feature branches off Iteration and do dev work in those
+  - When complete we merge iteration into our branch and conduct a CR through slack
+  - After an changes need to be made we merge our feature branch into Iteration
+  - Any bugfixes go directly into Iteration
+  - Once the iteration is complete we merge it into master
 ---
 ### Keaton - 5/31/2017
 - Added a stub database class to perform basic creation of plants as JSONObjects to be used as test data.
@@ -92,4 +95,8 @@
   - any database calls should just call it's open method instead of calling the database specifically
 - refactored current database to exclude singleton instance
 - added ability to view different types of plants
+---
+### Raman - 06/07/2017
+- Refactored difficulty algorithm handling so it's not an object, rather it's an alogorithm that assigns a plant a difficulty
+- Added to the Difficulty Tests range
 ---
