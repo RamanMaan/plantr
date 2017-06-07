@@ -20,6 +20,7 @@ public class StubDatabaseTest{
         assertNotNull(plant);
     }//getPlant
 
+    @Test
     public void getPlantByName()
     {
         Plant plant = database.getPlant("aloe");

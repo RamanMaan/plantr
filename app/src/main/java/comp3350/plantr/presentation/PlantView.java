@@ -7,7 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import comp3350.plantr.R;
+import comp3350.plantr.application.DatabaseAccess;
 import comp3350.plantr.objects.Plant;
+import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
 
 public class PlantView extends AppCompatActivity {
@@ -17,8 +19,8 @@ public class PlantView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        StubDatabase testStub;
-        Plant testPlant;
+        DatabaseInterface db;
+        Plant plant;
         ImageView plantImage;
         TextView plantTitle, plantDesc;
 
@@ -27,18 +29,18 @@ public class PlantView extends AppCompatActivity {
         Log.d(TAG, "onCreate: started.");
 
         // initialize the stub database
-        testStub = new StubDatabase();
-        testStub.open();
+        db = DatabaseAccess.open();
 
-        testPlant = testStub.getPlant("aloe");
+        int plantPosition = getIntent().getIntExtra(getString(R.string.plantID), -1);
+        plant = db.getPlant(plantPosition);
 
         plantImage = (ImageView) findViewById(R.id.plantImageView);
         plantTitle = (TextView) findViewById(R.id.plantViewTitle);
         plantDesc = (TextView) findViewById(R.id.plantViewDescription);
 
-        plantImage.setImageResource(getResources().getIdentifier("@drawable/"+testPlant.getPlantImg(), null, this.getPackageName()));
-        plantTitle.setText(testPlant.getPlantName());
-        plantDesc.setText(testPlant.getPlantDesc());
+        plantImage.setImageResource(getResources().getIdentifier("@drawable/"+plant.getPlantImg(), null, this.getPackageName()));
+        plantTitle.setText(plant.getPlantName());
+        plantDesc.setText(plant.getPlantDesc());
     }
 
 }

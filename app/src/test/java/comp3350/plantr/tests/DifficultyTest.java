@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import comp3350.plantr.objects.Difficulty;
+import comp3350.plantr.business.Difficulty;
 import comp3350.plantr.objects.Temperature;
 import comp3350.plantr.objects.TemperatureRange;
 
@@ -15,13 +15,4 @@ import comp3350.plantr.objects.TemperatureRange;
 
 public class DifficultyTest {
 
-	Difficulty _difficultyInstance = new Difficulty(new TemperatureRange(new Temperature(21), new Temperature(24)), 48);
-
-	@Test
-	public void createDifficulty(){
-		assertNotNull(_difficultyInstance);
-		assertEquals("hard", _difficultyInstance.toString());
-
-
-	}
 }
