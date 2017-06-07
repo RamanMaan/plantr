@@ -87,5 +87,5 @@
 ---
 ### Michael - 06/06/2017
 - Created a Difficulty class that represents how difficult it is to take care of a Plant
-- Finished [DT5-I1](raman-maan/plantr/issues/5)
+- Finished [DT5-I1](https://github.com/Raman-Maan/plantr/issues/5)
 ---
