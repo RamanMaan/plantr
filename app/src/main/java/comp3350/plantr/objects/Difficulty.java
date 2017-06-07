@@ -4,6 +4,7 @@ package comp3350.plantr.objects;
  * Created by Michael on 04/06/2017.
  *
  * Purpose: This is a way of measuring the difficulty of taking care of a Plant
+ *
  */
 
 public class Difficulty {
@@ -53,13 +54,12 @@ public class Difficulty {
 		_difficulty = combinedDifficulty;
 	}
 
-	public double getDifficulty(){
-		return _difficulty;
+	public int getDifficulty(){
+		return (int)Math.max(Math.ceil(_difficulty),1) - 1 ; 	//math.ceil and math.max make it so the range is 1 to _difficulty.length inclusive.
 	}
 
 	public String toString(){
-		int index = (int)Math.max(Math.ceil(_difficulty),1) - 1 ; 	//math.ceil and math.max make it so the range is 1 to _difficulty.length inclusive.
-																	//Then subtracting 1 makes it line up to indices 0 to _difficulty.length - 1
-		return _difficultyLevels[index]; //
+		int index = getDifficulty()	- 1; //difficulty is 1 to _difficulty.length, so minus one to line up with _difficulty array indices 
+		return _difficultyLevels[index];
 	}
 }
