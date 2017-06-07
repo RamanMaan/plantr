@@ -85,3 +85,6 @@
 - Refactored build.gradle file since we will not be using JSONObjects
 - Removed unnecessary code from main
 ---
+### Michael - 06/06/2017
+- Created a Difficulty class that represents how difficult it is to take care of a Plant (#5)
+---
