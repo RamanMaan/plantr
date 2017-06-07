@@ -7,7 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import comp3350.plantr.R;
+import comp3350.plantr.application.DatabaseAccess;
 import comp3350.plantr.objects.Plant;
+import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
 
 public class PlantView extends AppCompatActivity {
@@ -17,7 +19,7 @@ public class PlantView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        StubDatabase testStub;
+        DatabaseInterface db;
         Plant testPlant;
         ImageView plantImage;
         TextView plantTitle, plantDesc;
@@ -27,10 +29,9 @@ public class PlantView extends AppCompatActivity {
         Log.d(TAG, "onCreate: started.");
 
         // initialize the stub database
-        testStub = new StubDatabase();
-        testStub.open();
+        db = DatabaseAccess.open();
 
-        testPlant = testStub.getPlant("aloe");
+        testPlant = db.getPlant("aloe");
 
         plantImage = (ImageView) findViewById(R.id.plantImageView);
         plantTitle = (TextView) findViewById(R.id.plantViewTitle);

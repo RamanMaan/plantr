@@ -17,7 +17,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import comp3350.plantr.R;
+import comp3350.plantr.application.DatabaseAccess;
 import comp3350.plantr.objects.Plant;
+import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
 
 /**
@@ -31,7 +33,7 @@ public class PlantListView extends AppCompatActivity{
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 
-		StubDatabase testStub;
+		DatabaseInterface db;
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_plant_list_view);
@@ -39,11 +41,10 @@ public class PlantListView extends AppCompatActivity{
 
 		ListView list = (ListView) findViewById(R.id.plantList);
 
-		// initialize the stub database
-		testStub = new StubDatabase();
-		testStub.open();
+		//initialize the database
+		db = DatabaseAccess.open();
 
-		ArrayList<Plant> plantList = testStub.getAllPlants();
+		ArrayList<Plant> plantList = db.getAllPlants();
 		PlantListAdapter adapter = new PlantListAdapter(this, plantList);
 
 		list.setAdapter(adapter);
