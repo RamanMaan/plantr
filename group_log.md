@@ -86,5 +86,6 @@
 - Removed unnecessary code from main
 ---
 ### Michael - 06/06/2017
-- Created a Difficulty class that represents how difficult it is to take care of a Plant (#5)
+- Created a Difficulty class that represents how difficult it is to take care of a Plant
+- Finished [DT5-I1](raman-maan/plantr/issues/5)
 ---
