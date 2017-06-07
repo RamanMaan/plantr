@@ -22,6 +22,10 @@ public class TemperatureRange {
 		return t.inRange(_min, _max);
 	}
 
+	public double getMean(){
+		return (_min.getTemp() + _max.getTemp())/2;
+	}
+
 	public String toString() {
 		return String.format(Locale.CANADA, "{min: %.1fC, max: %.1fF}", _min.getTemp(), _max.getTemp());
 	}

@@ -17,7 +17,7 @@ public class Plant {
 	private String _plantDesc;
 	private String _plantImg;
 
-	private Temperature _optimalTemp;
+	private TemperatureRange _optimalTemp;
 	private Difficulty _difficulty;
 	private int _wateringPeriod;
 
@@ -31,7 +31,7 @@ public class Plant {
 		_wateringPeriod = -1;
 	}
 
-	public Plant(int id, String name, String desc, Image img, Temperature optimalTemp, int wateringPeriod) {
+	public Plant(int id, String name, String desc, String img, TemperatureRange optimalTemp, int wateringPeriod) {
 		_plantID = id;
 		_plantName = name;
 		_plantDesc = desc;
@@ -79,6 +79,6 @@ public class Plant {
 
 	public String toString() {
 		return String.format(Locale.CANADA, "{id : %d, name : %s, desc : %s, optimalTemp : %s, hardiness : %d, wateringFreq : %d}"
-				, _plantID, _plantName, _plantDesc, _optimalTemp, _hardiness, _wateringFreq);
+				, _plantID, _plantName, _plantDesc, _optimalTemp, _difficulty, _wateringPeriod);
 	}
 }
