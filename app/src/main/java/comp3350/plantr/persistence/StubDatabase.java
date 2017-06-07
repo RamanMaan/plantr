@@ -4,6 +4,8 @@ import comp3350.plantr.application.Constants;
 import comp3350.plantr.objects.Plant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import comp3350.plantr.objects.Temperature;
+import comp3350.plantr.objects.TemperatureRange;
 
 /**
  * Created by Keaton MacLeod on 5/30/2017.
@@ -16,15 +18,16 @@ public class StubDatabase implements DatabaseInterface {
 
     public StubDatabase() {
         plants = new ArrayList<Plant>(Arrays.asList(
-                new Plant(1, Constants.ALOE, Constants.PLANT_DESCRIPTOR + " " + Constants.ALOE , "aloe", null, 1, 1),
-                new Plant(2, Constants.ANTHURIUM, Constants.PLANT_DESCRIPTOR + " " + Constants.ANTHURIUM , "anthurium", null, 1, 1),
-                new Plant(3, Constants.ASPARAGUS_FERN, Constants.PLANT_DESCRIPTOR + " " + Constants.ASPARAGUS_FERN , null, null, 1, 1),
-                new Plant(4, Constants.PEACE_LILY, Constants.PLANT_DESCRIPTOR + " " + Constants.PEACE_LILY , null, null, 1, 1),
-                new Plant(5, Constants.PEPEROMIA, Constants.PLANT_DESCRIPTOR + " " + Constants.PEPEROMIA , null, null, 1, 1),
-                new Plant(6, Constants.SNAKE_PLANT, Constants.PLANT_DESCRIPTOR + " " + Constants.SNAKE_PLANT , null, null, 1, 1),
-                new Plant(7, Constants.DRACAENA, Constants.PLANT_DESCRIPTOR + " " + Constants.DRACAENA , null, null, 1, 1),
-                new Plant(8, Constants.PHILODENDRON, Constants.PLANT_DESCRIPTOR + " " + Constants.PHILODENDRON , null, null, 1, 1)
+            new Plant(1, Constants.ALOE, Constants.PLANT_DESCRIPTOR + " " + Constants.ALOE , "aloe", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+        	new Plant(2, Constants.ANTHURIUM, Constants.PLANT_DESCRIPTOR + " " + Constants.ANTHURIUM , "anthurium", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+        	new Plant(3, Constants.ASPARAGUS_FERN, Constants.PLANT_DESCRIPTOR + " " + Constants.ASPARAGUS_FERN , null, new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+        	new Plant(4, Constants.PEACE_LILY, Constants.PLANT_DESCRIPTOR + " " + Constants.PEACE_LILY , null,new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+        	new Plant(5, Constants.PEPEROMIA, Constants.PLANT_DESCRIPTOR + " " + Constants.PEPEROMIA , null, new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+        	new Plant(6, Constants.SNAKE_PLANT, Constants.PLANT_DESCRIPTOR + " " + Constants.SNAKE_PLANT , null, new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+        	new Plant(7, Constants.DRACAENA, Constants.PLANT_DESCRIPTOR + " " + Constants.DRACAENA , null, new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+        	new Plant(8, Constants.PHILODENDRON, Constants.PLANT_DESCRIPTOR + " " + Constants.PHILODENDRON , null, new TemperatureRange(new Temperature(21), new Temperature(23)), 1)
         ));
+        
     }//Constructor
 
     @Override

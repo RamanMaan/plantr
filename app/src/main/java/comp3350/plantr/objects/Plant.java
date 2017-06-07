@@ -17,8 +17,8 @@ public class Plant {
 	private String _plantImg;
 
 	private TemperatureRange _optimalTemp;
-	private int _hardiness;
-	private int _wateringFreq; // the amount of times it needs to be watered per week
+	private Difficulty _difficulty;
+	private int _wateringPeriod;
 
 	public Plant(int id) {
 		_plantID = id;
@@ -26,18 +26,18 @@ public class Plant {
 		_plantDesc = null;
 		_plantImg = null;
 		_optimalTemp = null;
-		_hardiness = -1;
-		_wateringFreq = -1;
+		_difficulty = null;
+		_wateringPeriod = -1;
 	}
 
-	public Plant(int id, String name, String desc, String img, TemperatureRange optimalTemp, int hardiness, int wateringFreq) {
+	public Plant(int id, String name, String desc, String img, TemperatureRange optimalTemp, int wateringPeriod) {
 		_plantID = id;
 		_plantName = name;
 		_plantDesc = desc;
 		_plantImg = img;
 		_optimalTemp = optimalTemp;
-		_hardiness = hardiness;
-		_wateringFreq = wateringFreq;
+		_difficulty = new Difficulty(optimalTemp, wateringPeriod); //this is a derived attribute
+		_wateringPeriod = wateringPeriod;
 	}
 
 	public int getPlantID() {
@@ -60,12 +60,12 @@ public class Plant {
 		return _optimalTemp;
 	}
 
-	public int getHardiness() {
-		return _hardiness;
+	public Difficulty getDifficulty() {
+		return _difficulty;
 	}
 
 	public int getWateringFreq() {
-		return _wateringFreq;
+		return _wateringPeriod;
 	}
 
 	public boolean equals(Object object) {
@@ -78,6 +78,6 @@ public class Plant {
 
 	public String toString() {
 		return String.format(Locale.CANADA, "{id : %d, name : %s, desc : %s, optimalTemp : %s, hardiness : %d, wateringFreq : %d}"
-				, _plantID, _plantName, _plantDesc, _optimalTemp, _hardiness, _wateringFreq);
+				, _plantID, _plantName, _plantDesc, _optimalTemp, _difficulty, _wateringPeriod);
 	}
 }
