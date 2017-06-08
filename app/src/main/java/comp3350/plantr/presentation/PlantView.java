@@ -25,7 +25,7 @@ public class PlantView extends AppCompatActivity {
         DatabaseInterface db;
         Plant plant;
         ImageView plantImage;
-        TextView plantTitle, plantDesc, plantDifficulty;
+        TextView plantTitle, plantDesc, plantDifficulty, plantOptimalTempRange, wateringFrequency;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_view);
@@ -41,11 +41,15 @@ public class PlantView extends AppCompatActivity {
         plantTitle = (TextView) findViewById(R.id.plantViewTitle);
         plantDesc = (TextView) findViewById(R.id.plantViewDescription);
         plantDifficulty = (TextView) findViewById(R.id.plantViewDifficulty);
+        plantOptimalTempRange = (TextView) findViewById(R.id.plantview_optimalTemperatures);
+        wateringFrequency = (TextView) findViewById(R.id.plantview_wateringFrequency);
 
         plantImage.setImageResource(getResources().getIdentifier("@drawable/"+plant.getPlantImg(), null, this.getPackageName()));
         plantTitle.setText(plant.getPlantName());
         plantDesc.setText(plant.getPlantDesc());
         plantDifficulty.setText(String.format(Constants.PLANT_DIFFICULTY_TEXT, plant.getDifficulty()));
+        plantOptimalTempRange.setText(String.format(Constants.PLANTVIEW_OPTIMALTEMPS, plant.getOptimalTemp().getLowerTemp(), plant.getOptimalTemp().getUpperTemp()));
+        wateringFrequency.setText(String.format(Constants.PLANTVIEW_WATERINGFREQ, plant.getWateringFreq(), "hours"));
     }
 
 }

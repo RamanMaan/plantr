@@ -5,10 +5,10 @@ package comp3350.plantr.application;
  */
 
 public class Constants {
-	final static public String NAME = "Name";
-	final static public String DESCRIPTION = "Description";
-	final static public String PLANT_DESCRIPTOR = "It's a(n)";
-	final static public String PLANT_DIFFICULTY_TEXT = "It has a(n) %s difficulty to take care of";
+	final static public String PLANT_DESCRIPTOR = "Description: ";
+	final static public String PLANT_DIFFICULTY_TEXT = "Difficulty: %s";
+	final static public String PLANTVIEW_OPTIMALTEMPS = "Optimal Temperature: %s - %s";
+	public final static String PLANTVIEW_WATERINGFREQ = "Water Frequency: Every %d %s";
 	final static public String ALOE = "Aloe";
 	final static public String ANTHURIUM = "Anthurium";
 	final static public String ASPARAGUS_FERN = "Asparagus fern";
