@@ -27,8 +27,14 @@ public class Temperature {
 		return min._degrees <= this._degrees && this._degrees <= max._degrees;
 	}
 
-	public boolean equals(Temperature other) {
-		return this._degrees == other._degrees;
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof Temperature && this._degrees == ((Temperature) other)._degrees;
+	}
+
+	@Override
+	public String toString() {
+		return _degrees + "\u00b0C";
 	}
 
 	private float celsiusToFahrenheit(float degrees) {
