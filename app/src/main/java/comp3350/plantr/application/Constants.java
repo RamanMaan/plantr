@@ -1,7 +1,9 @@
 package comp3350.plantr.application;
 
 /**
- * Created by Keaton MacLeod on 6/1/2017.
+ * 6/1/2017
+ * Keaton MacLeod
+ * Class Purpose: Contains string constants for application
  */
 
 public class Constants {

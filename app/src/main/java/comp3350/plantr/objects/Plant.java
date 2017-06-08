@@ -7,7 +7,6 @@ import comp3350.plantr.business.Difficulty;
 /**
  * Created: 5/28/2017
  * Raman Maan
- *
  * Purpose: This class defines a Plant object
  */
 

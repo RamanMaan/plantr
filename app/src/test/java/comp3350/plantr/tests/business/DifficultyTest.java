@@ -2,14 +2,16 @@ package comp3350.plantr.tests.business;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import comp3350.plantr.application.DatabaseAccess;
 import comp3350.plantr.business.Difficulty;
 import comp3350.plantr.objects.DifficultyType;
 import comp3350.plantr.objects.Plant;
 import comp3350.plantr.objects.Temperature;
 import comp3350.plantr.objects.TemperatureRange;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 
 /**

@@ -6,9 +6,9 @@ import comp3350.plantr.objects.Temperature;
 import comp3350.plantr.objects.TemperatureRange;
 
 /**
- * Created by Michael on 04/06/2017.
- * 
- * Purpose: This is a way of measuring the difficulty of taking care of a Plant
+ * 6/4/2017
+ * Michael Ramsay
+ * Class Purpose: This is a way of measuring the difficulty of taking care of a Plant
  */
 
 public class Difficulty {
