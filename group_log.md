@@ -21,9 +21,9 @@
   - possibly add Kotlin (must discuss with Bristow)
 ---
 ### Keaton - 5/26/2017
-- Researched possible database implementations
-- Found out that SQLite is integrated into Android Studo
-- Wrote code to create a "PLANT" table with: ID, NAME, DESCRIPTION columns as a sample table
+- Researched possible database implementations.
+- Found out that SQLite is integrated into Android Studio.
+- Wrote code to create a "PLANT" table with: ID, NAME, DESCRIPTION columns as a sample table.
 - Pushed changes so others can review and discuss if this is a possible database implementation we want to pursue for development.
 - Will implement generic CRUD operations for the sample table if this is the implementation we choose.
 ---
@@ -35,3 +35,17 @@
 - Iteration focus discussed.
 - Everyone claimed an issue.
 ---
+
+### Keaton - 5/31/2017
+- Added a stub database class to perform basic creation of plants as JSONObjects to be used as test data.
+- Added a stub database interface to allow abstraction from implementation details.
+- Created a stub database test class that tests the current methods in the stub database.
+- Added testCompile 'org.json:json:20140107' to build.gradle file to allow JSON objects within Unit Tests.
+
+### Keaton - 6/01/2017
+- Refactored stub database functions with more accurate sample test data so they can be used more robustly throughout development
+- Refactored stub database tests to model these changes
+- Created a class and interface for the "PlantLookup" page of the application
+- Implemented a function to lookup a plant by name from the stub database
+- Created a PlantLookupTest class to test current and future functions in the PlantLookup class
+- Created a "Constants" class under application for constants that will be used across the entire applcation
