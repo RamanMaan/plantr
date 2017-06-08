@@ -18,9 +18,9 @@ public class StubDatabase implements DatabaseInterface {
 
     public StubDatabase() {
         plants = new ArrayList<Plant>(Arrays.asList(
-            new Plant(1, Constants.ALOE, Constants.PLANT_DESCRIPTOR + " " + Constants.ALOE , "aloe", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-        	new Plant(2, Constants.ANTHURIUM, Constants.PLANT_DESCRIPTOR + " " + Constants.ANTHURIUM , "anthurium", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-        	new Plant(3, Constants.ASPARAGUS_FERN, Constants.PLANT_DESCRIPTOR + " " + Constants.ASPARAGUS_FERN , "asparagus_fern", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+            new Plant(1, Constants.ALOE, Constants.PLANT_DESCRIPTOR + " " + Constants.ALOE , "aloe", new TemperatureRange(new Temperature(21), new Temperature(23)), 170),
+        	new Plant(2, Constants.ANTHURIUM, Constants.PLANT_DESCRIPTOR + " " + Constants.ANTHURIUM , "anthurium", new TemperatureRange(new Temperature(21), new Temperature(23)), 50),
+        	new Plant(3, Constants.ASPARAGUS_FERN, Constants.PLANT_DESCRIPTOR + " " + Constants.ASPARAGUS_FERN , "asparagus_fern", new TemperatureRange(new Temperature(21), new Temperature(30)), 1),
         	new Plant(4, Constants.PEACE_LILY, Constants.PLANT_DESCRIPTOR + " " + Constants.PEACE_LILY , "peace_lily",new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
         	new Plant(5, Constants.PEPEROMIA, Constants.PLANT_DESCRIPTOR + " " + Constants.PEPEROMIA , "peperomia", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
         	new Plant(6, Constants.SNAKE_PLANT, Constants.PLANT_DESCRIPTOR + " " + Constants.SNAKE_PLANT , "snake_plant", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),

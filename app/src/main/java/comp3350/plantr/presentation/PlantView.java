@@ -6,8 +6,11 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 import comp3350.plantr.R;
 import comp3350.plantr.application.DatabaseAccess;
+import comp3350.plantr.application.Constants;
 import comp3350.plantr.objects.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
@@ -22,7 +25,7 @@ public class PlantView extends AppCompatActivity {
         DatabaseInterface db;
         Plant plant;
         ImageView plantImage;
-        TextView plantTitle, plantDesc;
+        TextView plantTitle, plantDesc, plantDifficulty;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plant_view);
@@ -37,10 +40,12 @@ public class PlantView extends AppCompatActivity {
         plantImage = (ImageView) findViewById(R.id.plantImageView);
         plantTitle = (TextView) findViewById(R.id.plantViewTitle);
         plantDesc = (TextView) findViewById(R.id.plantViewDescription);
+        plantDifficulty = (TextView) findViewById(R.id.plantViewDifficulty);
 
         plantImage.setImageResource(getResources().getIdentifier("@drawable/"+plant.getPlantImg(), null, this.getPackageName()));
         plantTitle.setText(plant.getPlantName());
         plantDesc.setText(plant.getPlantDesc());
+        plantDifficulty.setText(String.format(Constants.PLANT_DIFFICULTY_TEXT, plant.getDifficulty()));
     }
 
 }
