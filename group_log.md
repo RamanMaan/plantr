@@ -96,6 +96,10 @@
 - refactored current database to exclude singleton instance
 - added ability to view different types of plants
 ---
+### Kevin - 06/07/2017
+- Implemented simple GUI for displaying plant information
+- Implemented list view for all the plants in the stub db
+---
 ### Raman - 06/07/2017
 - Refactored difficulty algorithm handling so it's not an object, rather it's an alogorithm that assigns a plant a difficulty
 - Added to the Difficulty Tests range
