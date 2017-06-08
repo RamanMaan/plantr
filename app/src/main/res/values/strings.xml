@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">plantr</string>
+    <string name="plantID">plantID</string>
 </resources>
