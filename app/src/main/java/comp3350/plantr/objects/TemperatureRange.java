@@ -10,23 +10,27 @@ import java.util.Locale;
  */
 
 public class TemperatureRange {
-	private Temperature _min;
-	private Temperature _max;
+	private Temperature _lower;
+	private Temperature _upper;
 
-	public TemperatureRange(Temperature min, Temperature max) {
-		_min = min;
-		_max = max;
+	public TemperatureRange(Temperature lower, Temperature upper) {
+		_lower = lower;
+		_upper = upper;
 	}
 
-	public boolean inRange(Temperature t) {
-		return t.inRange(_min, _max);
+	public Temperature getLowerTemp() {
+		return _lower;
+	}
+
+	public Temperature getUpperTemp() {
+		return _upper;
 	}
 
 	public double getMean(){
-		return (_min.getTemp() + _max.getTemp())/2;
+		return (_lower.getTemp() + _upper.getTemp())/2;
 	}
 
 	public String toString() {
-		return String.format(Locale.CANADA, "{min: %.1fC, max: %.1fF}", _min.getTemp(), _max.getTemp());
+		return String.format(Locale.CANADA, "{min: %.1fC, max: %.1fF}", _lower.getTemp(), _upper.getTemp());
 	}
 }
