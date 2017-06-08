@@ -114,3 +114,5 @@
 ### Michael -  06/07/2017
 - Code review of #19
 ---
+### Austin - 06/07/2017
+- Added PlantTest.java and added PlantTest.java in the test runner in AllTests.java
