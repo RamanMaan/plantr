@@ -3,12 +3,14 @@ package comp3350.plantr.persistence;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by Keaton MacLeod on 5/25/2017.
  *
- * This code is a guideline for how we will create our tables in the next Iteration
- * for all the records we will store in our Persistance layer.
+ * This is some sample code that uses the SQLite Database built into Android Android
+ * that we can use to get started on making our tables for plantr if we choose to go
+ * with SQLite!
  */
 
 public class TableManager extends SQLiteOpenHelper {

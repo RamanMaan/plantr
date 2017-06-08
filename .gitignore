@@ -54,18 +54,8 @@ freeline.py
 freeline/
 freeline_project_description.json
 
-# IDEA Settings Folder
-.idea/*
-
-# IDEA - Exceptions
-!/.idea/vcs.xml
-!/.idea/fileTemplates/
-!/.idea/inspectionProfiles/
-!/.idea/scopes/
-!/.idea/codeStyleSettings.xml
-!/.idea/encodings.xml
-!/.idea/copyright/
-!/.idea/compiler.xml
+# Idea Settings Folder
+.idea/
 
 # OS Crap
 .DS_Store
