@@ -99,4 +99,11 @@
 ### Raman - 06/07/2017
 - Refactored difficulty algorithm handling so it's not an object, rather it's an alogorithm that assigns a plant a difficulty
 - Added to the Difficulty Tests range
+- Completed [DT3-I1](https://github.com/Raman-Maan/plantr/issues/3) (this time for realsies)
+  - Added the missing UI elements
+- Refactored code to enforce project code styling
+- Updated existing tests
+- Organized project, removed temp files, cleared dead code
+- Created final README
+- Merged iteration into master
 ---
