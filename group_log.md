@@ -111,3 +111,6 @@
 - Created final README
 - Merged iteration into master
 ---
+### Michael -  06/07/2017
+- Code review of #19
+---
