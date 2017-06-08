@@ -3,7 +3,6 @@ package comp3350.plantr.objects;
 /**
  * Created: 5/28/2017
  * Raman Maan
- *
  * Purpose: This class holds a temperature in Celsius
  */
 
@@ -38,6 +37,6 @@ public class Temperature {
 	}
 
 	private float celsiusToFahrenheit(float degrees) {
-		return (9f/5f) * degrees + 32;
+		return (9f / 5f) * degrees + 32;
 	}
 }

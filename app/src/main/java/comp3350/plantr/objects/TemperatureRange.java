@@ -5,7 +5,6 @@ import java.util.Locale;
 /**
  * 6/4/2017
  * Raman Maan
- *
  * Purpose: Holds a range of temperatures as a max and min value
  */
 
@@ -26,8 +25,8 @@ public class TemperatureRange {
 		return _upper;
 	}
 
-	public double getMean(){
-		return (_lower.getTemp() + _upper.getTemp())/2;
+	public double getMean() {
+		return (_lower.getTemp() + _upper.getTemp()) / 2;
 	}
 
 	public String toString() {

@@ -18,12 +18,12 @@ import comp3350.plantr.objects.Plant;
 
 public class PlantListAdapter extends ArrayAdapter<Plant> {
 
-	public PlantListAdapter(Context context, ArrayList<Plant> plants){
+	public PlantListAdapter(Context context, ArrayList<Plant> plants) {
 		super(context, 0, plants);
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent){
+	public View getView(int position, View convertView, ViewGroup parent) {
 		// Get the data item for this position
 		Plant plant = getItem(position);
 		// Check if an existing view is being reused, otherwise inflate the view

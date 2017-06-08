@@ -6,7 +6,6 @@ import comp3350.plantr.persistence.StubDatabase;
 /**
  * 6/6/2017
  * Raman Maan
- *
  * Purpose: This class is the service manager for the Database
  */
 

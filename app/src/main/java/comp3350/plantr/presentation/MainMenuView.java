@@ -14,7 +14,7 @@ import comp3350.plantr.R;
  * Created by KevinD on 6/5/2017.
  */
 
-public class MainMenuView extends AppCompatActivity{
+public class MainMenuView extends AppCompatActivity {
 
 	private static final String TAG = "MainMenuView";
 
@@ -33,9 +33,9 @@ public class MainMenuView extends AppCompatActivity{
 
 		btn = (Button) findViewById(R.id.viewPlantsButton);
 
-		btn.setOnClickListener(new View.OnClickListener(){
+		btn.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v){
+			public void onClick(View v) {
 				startActivity(new Intent(MainMenuView.this, PlantListView.class));
 			}
 		});
