@@ -28,3 +28,5 @@ The [project log](group_log.md) is located in the root directory
     + This can be observed by clicking on any plant in our list of plants
 + We can list all the plants in the database
     + These plants can then be clicked to bring up the plant detailed view
+
+    These are changes to demonstarte a pull request

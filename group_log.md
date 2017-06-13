@@ -27,6 +27,15 @@
 - Pushed changes so others can review and discuss if this is a possible database implementation we want to pursue for development.
 - Will implement generic CRUD operations for the sample table if this is the implementation we choose.
 ---
+### Raman - 5/28/2017
+- Added dev tasks to issue tracker
+- Assigned myself [DT3-I1](https://github.com/Raman-Maan/plantr/issues/3)
+- Added project consistent coding standards to git for easier control
+- Got a basic CLI working using the sample project as a guide
+- Created a Plant object holding the information required for [DT3-I1](https://github.com/Raman-Maan/plantr/issues/3) and [DT4-I1](https://github.com/Raman-Maan/plantr/issues/4)
+- Added a temperature object - need to discuss where we'll keep "helper" classes
+- Created a Database interface and an empty database stub for this iteration
+---
 ### Group Discussion - 5/30/2017
 - Discussed architecture of project.
 - Heavy DB work for next iteration (lots of functionality depends on the DB).
@@ -34,14 +43,20 @@
 - GUI design discussed.
 - Iteration focus discussed.
 - Everyone claimed an issue.
+- We identified our workflow:
+  - iteration will be the branch with all the information of our current iteration. 
+  - We do feature branches off Iteration and do dev work in those
+  - When complete we merge iteration into our branch and conduct a CR through slack
+  - After an changes need to be made we merge our feature branch into Iteration
+  - Any bugfixes go directly into Iteration
+  - Once the iteration is complete we merge it into master
 ---
-
 ### Keaton - 5/31/2017
 - Added a stub database class to perform basic creation of plants as JSONObjects to be used as test data.
 - Added a stub database interface to allow abstraction from implementation details.
 - Created a stub database test class that tests the current methods in the stub database.
 - Added testCompile 'org.json:json:20140107' to build.gradle file to allow JSON objects within Unit Tests.
-
+---
 ### Keaton - 6/01/2017
 - Refactored stub database functions with more accurate sample test data so they can be used more robustly throughout development
 - Refactored stub database tests to model these changes
@@ -49,3 +64,55 @@
 - Implemented a function to lookup a plant by name from the stub database
 - Created a PlantLookupTest class to test current and future functions in the PlantLookup class
 - Created a "Constants" class under application for constants that will be used across the entire applcation
+- Reviewed current Iteration branch and removed code that would be replaced by the newly added changes for the StubDatabase
+- Reworked current StubDatabase functions to use ArrayLists to store records
+- Reworked tests for the StubDatabase functions to use ArrayLists
+- Implemented a Singleton pattern for the database
+---
+### Group Discussion - 6/04/2017
+- Discussed project state
+- Stub database overhaul
+- Discussed requirements + implementation of GUI for plant view
+- Distributed remaining high priority tasks
+---
+### Raman - 6/04/2017
+- Completed [DT3-I1](https://github.com/Raman-Maan/plantr/issues/3)
+  - Waiting on Kevin to complete GUI portion
+- Added an AllTests.java file to organize tests
+- Code reviewed #16
+---
+### Keaton - 6/06/2017
+- Revised all PlantLookup Class / Interface functions to use different code structure (ArrayLists)
+- Refactored build.gradle file since we will not be using JSONObjects
+- Removed unnecessary code from main
+---
+### Michael - 06/06/2017
+- Created a Difficulty class that represents how difficult it is to take care of a Plant
+- Finished [DT5-I1](https://github.com/Raman-Maan/plantr/issues/5)
+---
+### Raman - 06/06/2017
+- Re-added the database service manager
+  - any database calls should just call it's open method instead of calling the database specifically
+- refactored current database to exclude singleton instance
+- added ability to view different types of plants
+---
+### Kevin - 06/07/2017
+- Implemented simple GUI for displaying plant information
+- Implemented list view for all the plants in the stub db
+---
+### Raman - 06/07/2017
+- Refactored difficulty algorithm handling so it's not an object, rather it's an alogorithm that assigns a plant a difficulty
+- Added to the Difficulty Tests range
+- Completed [DT3-I1](https://github.com/Raman-Maan/plantr/issues/3) (this time for realsies)
+  - Added the missing UI elements
+- Refactored code to enforce project code styling
+- Updated existing tests
+- Organized project, removed temp files, cleared dead code
+- Created final README
+- Merged iteration into master
+---
+### Michael -  06/07/2017
+- Code review of #19
+---
+### Austin - 06/07/2017
+- Added PlantTest.java and added PlantTest.java in the test runner in AllTests.java
