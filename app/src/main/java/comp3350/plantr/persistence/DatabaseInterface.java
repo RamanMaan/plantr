@@ -2,7 +2,7 @@ package comp3350.plantr.persistence;
 
 import java.util.ArrayList;
 
-import comp3350.plantr.objects.Plant;
+import comp3350.plantr.business.objects.Plant;
 
 /**
  * 5/30/2017

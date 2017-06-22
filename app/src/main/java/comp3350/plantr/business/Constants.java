@@ -1,4 +1,4 @@
-package comp3350.plantr.application;
+package comp3350.plantr.business;
 
 /**
  * 6/1/2017

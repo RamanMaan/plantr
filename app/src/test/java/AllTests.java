@@ -1,10 +1,10 @@
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-import comp3350.plantr.tests.application.DatabaseAccessTest;
+import comp3350.plantr.tests.business.DatabaseAccessTest;
 import comp3350.plantr.tests.business.DifficultyTest;
-import comp3350.plantr.tests.objects.PlantTest;
-import comp3350.plantr.tests.objects.TemperatureTest;
+import comp3350.plantr.tests.business.objects.PlantTest;
+import comp3350.plantr.tests.business.objects.TemperatureTest;
 import comp3350.plantr.tests.persistence.StubDatabaseTest;
 
 /**

@@ -1,8 +1,8 @@
-package comp3350.plantr.tests.objects;
+package comp3350.plantr.tests.business.objects;
 
 import org.junit.Test;
 
-import comp3350.plantr.objects.Temperature;
+import comp3350.plantr.business.objects.Temperature;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;

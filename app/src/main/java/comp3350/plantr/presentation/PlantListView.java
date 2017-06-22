@@ -12,8 +12,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import comp3350.plantr.R;
-import comp3350.plantr.application.DatabaseAccess;
-import comp3350.plantr.objects.Plant;
+import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.objects.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
 
 /**

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import comp3350.plantr.R;
-import comp3350.plantr.objects.Plant;
+import comp3350.plantr.business.objects.Plant;
 
 /**
  * Created by KevinD on 6/6/2017.

@@ -1,4 +1,4 @@
-package comp3350.plantr.application;
+package comp3350.plantr.business;
 
 import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
