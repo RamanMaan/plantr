@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
@@ -38,7 +38,7 @@ public class PlantListView extends AppCompatActivity {
 		//initialize the database
 		db = DatabaseAccess.open();
 
-		ArrayList<Plant> plantList = db.getAllPlants();
+		List<Plant> plantList = db.getAllPlants();
 		PlantListAdapter adapter = new PlantListAdapter(this, plantList);
 
 		list.setAdapter(adapter);
