@@ -116,3 +116,26 @@
 ---
 ### Austin - 06/07/2017
 - Added PlantTest.java and added PlantTest.java in the test runner in AllTests.java
+---
+### Group Meeting - 06/13/2017
+- Met together as a group to discuss our after iteration thoughts
+- Branch naming scheme
+    - We were all over the place with the last iteration and have decided the following to be our naming scheme
+    - INITIALS/US##/X-Description
+    - ex) RM/US12/DT23-PlantDetailView
+    - ex2) RM/DE31-FixingStubInterface
+    - ex3) RM/US12/DE45-BetterWaterFreqPrint
+- Workflow
+    - we changed our workflow slightly to accomodate pull requests to be:
+    1. Create a feature branch off Iteration and begin development
+        - this includes Dev Tasks and defects
+    2. When development is completed, pull Iteration branch into feature branch and resolve conflicts there
+    3. Open a pull request and have it reviewed by whoever is available
+    4. Once Iteration is complete, we will merge it into master.
+- We also decided we will be moving over to a 3-tier architecture of business, persistence, and presentation
+---
+### Raman - 06/22/2017
+- Moved files over to 3-tier architecture
+- Removed Constants.java and moved over to built in Android Resource manager
+- Changed database to return List instead of ArrayList as suggested by Franklin
+---
