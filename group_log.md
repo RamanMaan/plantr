@@ -139,3 +139,9 @@
 - Removed Constants.java and moved over to built in Android Resource manager
 - Changed database to return List instead of ArrayList as suggested by Franklin
 ---
+### Raman - 06/23/2017
+- Introduced a 4th data model package
+- Added more substance to database unit tests
+- Updated code styles to force braces
+- Update project-management on GitHub
+---
