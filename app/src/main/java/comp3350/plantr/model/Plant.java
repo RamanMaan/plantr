@@ -75,7 +75,6 @@ public class Plant {
 	}
 
 	public String toString() {
-		return String.format("{id : %d, name : %s, desc : %s, optimalTemp : %s, hardiness : %d, wateringFreq : %d}"
-				, _plantID, _plantName, _plantDesc, _optimalTemp, _difficulty, _wateringPeriod);
+		return "{id : " + _plantID + ", name : " + _plantName + "}";
 	}
 }
