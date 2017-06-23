@@ -1,7 +1,5 @@
 package comp3350.plantr.business.objects;
 
-import java.util.Locale;
-
 import comp3350.plantr.business.Difficulty;
 
 /**
@@ -77,7 +75,7 @@ public class Plant {
 	}
 
 	public String toString() {
-		return String.format(Locale.CANADA, "{id : %d, name : %s, desc : %s, optimalTemp : %s, hardiness : %d, wateringFreq : %d}"
+		return String.format("{id : %d, name : %s, desc : %s, optimalTemp : %s, hardiness : %d, wateringFreq : %d}"
 				, _plantID, _plantName, _plantDesc, _optimalTemp, _difficulty, _wateringPeriod);
 	}
 }

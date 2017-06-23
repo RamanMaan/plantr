@@ -47,7 +47,7 @@ public class PlantListView extends AppCompatActivity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Intent intent = new Intent(PlantListView.this, PlantView.class);
 				//store the plant ID with the intent to display
-				intent.putExtra(getString(R.string.plantID), position + 1);
+				intent.putExtra(getString(R.string.plant_id), position + 1);
 				startActivity(intent);
 			}
 		});

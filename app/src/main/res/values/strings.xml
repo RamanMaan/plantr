@@ -1,4 +1,13 @@
 <resources>
+    <!-- the below should be in another xml, perhaps an intent.xml?-->
+    <string name="plant_id">plantID</string>
+
+    <!-- Application Wide Text -->
     <string name="app_name">plantr</string>
-    <string name="plantID">plantID</string>
+
+    <!-- PlantView Text -->
+    <string formatted="false" name="plantview_desc_prefix">Description: %s</string>
+    <string formatted="false" name="plantview_difficulty">Difficulty: %s</string>
+    <string formatted="false" name="plantview_optimal_temps">Optimal Temperature: %s\u00b0C - %s\u00b0C</string>
+    <string formatted="false" name="plantview_watering_freq">Watering Frequency: %d times per %s</string>
 </resources>

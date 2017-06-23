@@ -3,7 +3,6 @@ package comp3350.plantr.persistence;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import comp3350.plantr.business.Constants;
 import comp3350.plantr.business.objects.Plant;
 import comp3350.plantr.business.objects.Temperature;
 import comp3350.plantr.business.objects.TemperatureRange;
@@ -19,14 +18,14 @@ public class StubDatabase implements DatabaseInterface {
 
 	public StubDatabase() {
 		plants = new ArrayList<Plant>(Arrays.asList(
-				new Plant(1, Constants.ALOE, Constants.PLANT_DESCRIPTOR + " " + Constants.ALOE, "aloe", new TemperatureRange(new Temperature(21), new Temperature(23)), 170),
-				new Plant(2, Constants.ANTHURIUM, Constants.PLANT_DESCRIPTOR + " " + Constants.ANTHURIUM, "anthurium", new TemperatureRange(new Temperature(21), new Temperature(23)), 50),
-				new Plant(3, Constants.ASPARAGUS_FERN, Constants.PLANT_DESCRIPTOR + " " + Constants.ASPARAGUS_FERN, "asparagus_fern", new TemperatureRange(new Temperature(21), new Temperature(30)), 1),
-				new Plant(4, Constants.PEACE_LILY, Constants.PLANT_DESCRIPTOR + " " + Constants.PEACE_LILY, "peace_lily", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(5, Constants.PEPEROMIA, Constants.PLANT_DESCRIPTOR + " " + Constants.PEPEROMIA, "peperomia", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(6, Constants.SNAKE_PLANT, Constants.PLANT_DESCRIPTOR + " " + Constants.SNAKE_PLANT, "snake_plant", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(7, Constants.DRACAENA, Constants.PLANT_DESCRIPTOR + " " + Constants.DRACAENA, "dracaena", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(8, Constants.PHILODENDRON, Constants.PLANT_DESCRIPTOR + " " + Constants.PHILODENDRON, "philodendron", new TemperatureRange(new Temperature(21), new Temperature(23)), 1)
+				new Plant(1, "Aloe", "Aloe", "aloe", new TemperatureRange(new Temperature(21), new Temperature(23)), 170),
+				new Plant(2, "Anthurium", "Anthurium", "anthurium", new TemperatureRange(new Temperature(21), new Temperature(23)), 50),
+				new Plant(3, "Asparagus fern", "Asparagus fern", "asparagus_fern", new TemperatureRange(new Temperature(21), new Temperature(30)), 1),
+				new Plant(4, "Peace lily", "Peace lily", "peace_lily", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+				new Plant(5, "Peperomia", "Peperomia", "peperomia", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+				new Plant(6, "Snake Plant", "Snake Plant", "snake_plant", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+				new Plant(7, "Dracaena", "Dracaena", "dracaena", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
+				new Plant(8, "Philodendron", "Philodendron", "philodendron", new TemperatureRange(new Temperature(21), new Temperature(23)), 1)
 		));
 
 	}//Constructor
