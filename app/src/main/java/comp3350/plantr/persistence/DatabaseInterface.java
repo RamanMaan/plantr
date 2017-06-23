@@ -1,6 +1,6 @@
 package comp3350.plantr.persistence;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import comp3350.plantr.business.objects.Plant;
 
@@ -17,5 +17,5 @@ public interface DatabaseInterface {
 
 	public Plant getPlant(String name); //Return a Plant Object by name
 
-	public ArrayList<Plant> getAllPlants(); //Return an ArrayList of all Plant Objects
+	public List<Plant> getAllPlants(); //Return an ArrayList of all Plant Objects
 }//StudDatabaseInterface

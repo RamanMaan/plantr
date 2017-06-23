@@ -2,6 +2,7 @@ package comp3350.plantr.persistence;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import comp3350.plantr.business.objects.Plant;
 import comp3350.plantr.business.objects.Temperature;
@@ -57,7 +58,7 @@ public class StubDatabase implements DatabaseInterface {
 
 	//Return an ArrayList of all Plant Objects
 	@Override
-	public ArrayList<Plant> getAllPlants() {
+	public List<Plant> getAllPlants() {
 		return plants;
 	}//getAllPlants
 
