@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import comp3350.plantr.business.objects.Plant;
+import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
 

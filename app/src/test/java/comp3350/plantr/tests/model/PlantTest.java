@@ -1,10 +1,10 @@
-package comp3350.plantr.tests.business.objects;
+package comp3350.plantr.tests.model;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import comp3350.plantr.business.objects.Plant;
-import comp3350.plantr.business.objects.Temperature;
-import comp3350.plantr.business.objects.TemperatureRange;
+import comp3350.plantr.model.Plant;
+import comp3350.plantr.model.Temperature;
+import comp3350.plantr.model.TemperatureRange;
 
 /**
  * Created by Austin on 2017-06-06.

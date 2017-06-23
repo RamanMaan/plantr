@@ -4,10 +4,10 @@ import org.junit.Test;
 
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.business.Difficulty;
-import comp3350.plantr.business.objects.DifficultyType;
-import comp3350.plantr.business.objects.Plant;
-import comp3350.plantr.business.objects.Temperature;
-import comp3350.plantr.business.objects.TemperatureRange;
+import comp3350.plantr.model.DifficultyType;
+import comp3350.plantr.model.Plant;
+import comp3350.plantr.model.Temperature;
+import comp3350.plantr.model.TemperatureRange;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;

@@ -3,8 +3,8 @@ import org.junit.runners.Suite;
 
 import comp3350.plantr.tests.business.DatabaseAccessTest;
 import comp3350.plantr.tests.business.DifficultyTest;
-import comp3350.plantr.tests.business.objects.PlantTest;
-import comp3350.plantr.tests.business.objects.TemperatureTest;
+import comp3350.plantr.tests.model.PlantTest;
+import comp3350.plantr.tests.model.TemperatureTest;
 import comp3350.plantr.tests.persistence.StubDatabaseTest;
 
 /**

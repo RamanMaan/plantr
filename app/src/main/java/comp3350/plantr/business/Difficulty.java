@@ -1,9 +1,9 @@
 package comp3350.plantr.business;
 
-import comp3350.plantr.business.objects.DifficultyType;
-import comp3350.plantr.business.objects.Plant;
-import comp3350.plantr.business.objects.Temperature;
-import comp3350.plantr.business.objects.TemperatureRange;
+import comp3350.plantr.model.DifficultyType;
+import comp3350.plantr.model.Plant;
+import comp3350.plantr.model.Temperature;
+import comp3350.plantr.model.TemperatureRange;
 
 /**
  * 6/4/2017

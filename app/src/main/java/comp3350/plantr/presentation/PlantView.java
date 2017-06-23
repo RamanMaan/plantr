@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
-import comp3350.plantr.business.objects.Plant;
+import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
 
 public class PlantView extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package comp3350.plantr.business.objects;
+package comp3350.plantr.model;
 
 import comp3350.plantr.business.Difficulty;
 
