@@ -116,6 +116,7 @@
 ---
 ### Austin - 06/07/2017
 - Added PlantTest.java and added PlantTest.java in the test runner in AllTests.java
+---
 ### Group Discussion - 06/25/17
 - Discussed user stories and developer tasks
 - Designed paper prototype for basic UI and user navigation
