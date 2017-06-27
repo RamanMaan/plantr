@@ -43,7 +43,6 @@ public class PlantListView extends AppCompatActivity{
 
 		//initialize the database
 		db = DatabaseAccess.open();
-
 		ArrayList<Plant> plantList = db.getAllPlants();
 		PlantListAdapter adapter = new PlantListAdapter(this, plantList);
 
