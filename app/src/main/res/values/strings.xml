@@ -19,4 +19,7 @@
     <string name="compostbinview_title">Compost Bin</string>
     <string name="gardenview_title">My Garden</string>
     <string name="plantipediaview_title">Plantipedia</string>
+    <string name="plantipediaview_view_plants_button">View plants</string>
+    <string name="navheader_firstname_lastname">Default User</string>
+    <string name="navheader_username">defaultuser@email.com</string>
 </resources>
