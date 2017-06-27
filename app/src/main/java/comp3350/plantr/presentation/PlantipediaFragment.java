@@ -1,4 +1,4 @@
-package comp3350.plantr.presentation.fragments;
+package comp3350.plantr.presentation;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import comp3350.plantr.R;
-import comp3350.plantr.presentation.PlantListView;
 
 /**
  * Plantipedia view

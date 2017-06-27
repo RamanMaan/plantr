@@ -11,9 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import comp3350.plantr.R;
-import comp3350.plantr.presentation.fragments.CompostBinFragment;
-import comp3350.plantr.presentation.fragments.GardenFragment;
-import comp3350.plantr.presentation.fragments.PlantipediaFragment;
 
 public class MainActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {

@@ -2,8 +2,6 @@ package comp3350.plantr.model;
 
 import java.util.Locale;
 
-import comp3350.plantr.model.Temperature;
-
 /**
  * 6/4/2017
  * Raman Maan

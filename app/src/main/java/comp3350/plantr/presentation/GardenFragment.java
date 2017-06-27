@@ -1,4 +1,4 @@
-package comp3350.plantr.presentation.fragments;
+package comp3350.plantr.presentation;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,18 +10,20 @@ import android.view.ViewGroup;
 import comp3350.plantr.R;
 
 /**
- * To be removed if we decide not to have this showing until next iteration
- *
- * Compost Bin View Fragment
+ * The Garden View
+ * <p>
+ * Display the users Garden here
  */
 
-public class CompostBinFragment extends Fragment {
+public class GardenFragment extends Fragment {
 	View myView;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-		myView = inflater.inflate(R.layout.compost_bin_layout, container, false);
+		myView = inflater.inflate(R.layout.garden_layout, container, false);
+
+		//do the stuff here
 		return myView;
 	}
 
@@ -29,6 +31,6 @@ public class CompostBinFragment extends Fragment {
 	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		getActivity().setTitle(getString(R.string.compostbinview_title));
+		getActivity().setTitle(getString(R.string.gardenview_title));
 	}
 }
