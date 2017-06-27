@@ -22,7 +22,8 @@ public class PersonalPlantView extends AppCompatActivity {
 		DatabaseInterface db;
 		Plant plant;
 		ImageView plantImage;
-		TextView plantTitle, plantDesc;
+		TextView plantTitle, plantNotes;
+		TextView lastTimeWatered, nextWateringPeriod;
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_personal_plant_view);
@@ -34,13 +35,17 @@ public class PersonalPlantView extends AppCompatActivity {
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plantID), -1);
 		plant = db.getPlant(plantPosition);
 
-		plantImage = (ImageView) findViewById(R.id.plantImageView);
-		plantTitle = (TextView) findViewById(R.id.plantViewTitle);
-		plantDesc = (TextView) findViewById(R.id.plantViewDescription);
+		plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
+		plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
+		plantNotes = (TextView) findViewById(R.id.personalPlantViewNotes);
+		lastTimeWatered = (TextView) findViewById(R.id.personalPlantViewLastTimeWatered);
+		nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
 
 		plantImage.setImageResource(getResources().getIdentifier("@drawable/"+plant.getPlantImg(), null, this.getPackageName()));
-		plantTitle.setText(plant.getPlantName());
-		plantDesc.setText(plant.getPlantDesc());
+		plantTitle.setText("Benny");
+		lastTimeWatered.setText(getString(R.string.lastTimeWatered) + " mm/dd/yy");
+		nextWateringPeriod.setText(getString(R.string.nextWateringPeriod) + " mm/dd/yy");
+		plantNotes.setText("This is Benny! He's my first plant that I'm going to grow with the plantr application!");
 	}
 
 }
