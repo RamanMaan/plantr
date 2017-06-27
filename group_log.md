@@ -156,3 +156,11 @@
 - Planned GUI design
 - Created a paper prototype
 ---
+### Raman - 06/26/2017
+- Opened PR for completed dev task #47
+  - Added fragments and navigation drawer, leaving current activities in place but will be deleting them before iteration is over
+---
+### Raman - 06/27/2017
+- Added dev tasks created during meeting on sunday
+- Added priorities/costs to DUS, moved DUS #30 out of iteration as discussed with group
+---
