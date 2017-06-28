@@ -21,7 +21,7 @@ import comp3350.plantr.R;
 import comp3350.plantr.application.Main;
 //import comp3350.plantr.business.Services;
 
-//import static comp3350.plantr.business.DatabaseAccess.startUp;
+//import static comp3350.plantr.business.AccessPlants.startUp;
 
 public class MainActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {

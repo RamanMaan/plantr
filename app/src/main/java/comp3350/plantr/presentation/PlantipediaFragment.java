@@ -13,7 +13,7 @@ import android.widget.ListView;
 import java.util.List;
 
 import comp3350.plantr.R;
-import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.AccessPlants;
 import comp3350.plantr.model.Plant;
 
 /**
@@ -22,7 +22,7 @@ import comp3350.plantr.model.Plant;
 
 public class PlantipediaFragment extends Fragment {
 
-	private DatabaseAccess accessPlants;
+	private AccessPlants accessPlants;
 
 	public PlantipediaFragment() {
 		//required empty public constructor
@@ -35,7 +35,7 @@ public class PlantipediaFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		myView = inflater.inflate(R.layout.plantipedia_layout, container, false);
 
-		accessPlants = new DatabaseAccess();
+		accessPlants = new AccessPlants();
 
 		List<Plant> plantList = accessPlants.getPlants();
 		ListView listView = (ListView) myView.findViewById(R.id.plantipedia_listview);

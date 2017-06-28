@@ -7,15 +7,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import comp3350.plantr.R;
-import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.AccessPlants;
 import comp3350.plantr.model.Plant;
-import comp3350.plantr.persistence.DatabaseInterface;
 
 public class PlantView extends AppCompatActivity {
 
 	private static final String TAG = "PlantView"; // for logging purposes
 
-	private DatabaseAccess accessPlants;
+	private AccessPlants accessPlants;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +29,8 @@ public class PlantView extends AppCompatActivity {
 		Log.d(TAG, "onCreate: started.");
 
 		// initialize the database
-//		db = DatabaseAccess.open();
-		accessPlants = new DatabaseAccess();
+//		db = AccessPlants.open();
+		accessPlants = new AccessPlants();
 
 
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);

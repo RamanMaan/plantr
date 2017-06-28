@@ -7,16 +7,6 @@ public class Main
 	public static final String dbName = "PLANT";
 	private static String dbPathName = "database/PLANT";
 
-	public static void main(String[] args)
-	{
-		startUp();
-
-//		CLI.run();
-
-		shutDown();
-		System.out.println("All done");
-	}
-
 	public static void startUp()
 	{
 		Services.createDataAccess(dbName);

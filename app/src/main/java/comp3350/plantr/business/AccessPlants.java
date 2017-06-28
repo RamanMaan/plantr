@@ -15,22 +15,18 @@ import comp3350.plantr.persistence.StubDatabase;
  * Purpose: This class is the service manager for the Database
  */
 
-public class DatabaseAccess {
+public class AccessPlants {
 	private static DatabaseInterface _db = null;
-
-	public static final String dbName = "PLANT";
-	private static String dbPathName = "database/PLANT";
 
 	private DatabaseInterface dataAccess;
 	private List<Plant> plants;
 
-	public DatabaseAccess() {
+	public AccessPlants() {
 		dataAccess = Services.getDataAccess(Main.dbName);
 		plants = null;
 	}
 
 	public List<Plant> getPlants() {
-//		plants.clear();
 		return dataAccess.getAllPlants();
 	}
 
@@ -39,7 +35,7 @@ public class DatabaseAccess {
 	}
 
 	public static DatabaseInterface open() {
-		return _db == null ? new DataAccessObject(dbName) : _db;
+		return _db == null ? new DataAccessObject(Main.dbName) : _db;
 //		return _db == null ? new StubDatabase() : _db;
 	}
 }

@@ -19,7 +19,8 @@ public class StubDatabase implements DatabaseInterface {
 
 	private ArrayList<Plant> plants;
 
-	public StubDatabase() {
+	public StubDatabase(String dbName) {
+		this.dbName = dbName;
 		plants = new ArrayList<Plant>(Arrays.asList(
 				new Plant(0, "Aloe", "Aloe", "aloe", new TemperatureRange(new Temperature(21), new Temperature(23)), 170),
 				new Plant(1, "Anthurium", "Anthurium", "anthurium", new TemperatureRange(new Temperature(21), new Temperature(23)), 50),

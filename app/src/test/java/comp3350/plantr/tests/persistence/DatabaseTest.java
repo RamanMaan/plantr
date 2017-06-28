@@ -4,10 +4,9 @@ import org.junit.Test;
 
 import java.util.List;
 
-import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.AccessPlants;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
-import comp3350.plantr.persistence.StubDatabase;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -22,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 public class DatabaseTest {
 
 	//the database to test
-	private DatabaseInterface database = DatabaseAccess.open();
+	private DatabaseInterface database = AccessPlants.open();
 
 	@Test
 	public void getPlantById() {

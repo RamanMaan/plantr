@@ -2,7 +2,7 @@ package comp3350.plantr.tests.business;
 
 import org.junit.Test;
 
-import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.AccessPlants;
 import comp3350.plantr.business.Difficulty;
 import comp3350.plantr.model.DifficultyType;
 import comp3350.plantr.model.Plant;
@@ -30,7 +30,7 @@ public class DifficultyTest {
 		assertNull(Difficulty.calculateDifficulty(p));
 
 		//test an actual plant
-		p = DatabaseAccess.open().getAllPlants().get(0);
+		p = AccessPlants.open().getAllPlants().get(0);
 		assertNotNull(Difficulty.calculateDifficulty(p));
 	}
 

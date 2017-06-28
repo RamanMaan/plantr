@@ -20,7 +20,7 @@ import comp3350.plantr.model.TemperatureRange;
 public class DataAccessObject implements DatabaseInterface{
 
 
-	private Statement st1, st2;
+	private Statement st1;
 	private Connection c1;
 	private ResultSet rs1;
 
@@ -69,7 +69,7 @@ public class DataAccessObject implements DatabaseInterface{
 
 		String plantName, plantDesc, plantIMG;
 		Float minTempRange, maxTempRange;
-		int plantID, difficulty, wateringPeriod;
+		int plantID, wateringPeriod;
 
 		try
 		{
@@ -83,7 +83,6 @@ public class DataAccessObject implements DatabaseInterface{
 				plantIMG = rs1.getString("PlantIMG");
 				minTempRange = rs1.getFloat("MinTempRange");
 				maxTempRange = rs1.getFloat("MaxTempRange");
-//				difficulty = rs1.getInt("Difficulty");
 				wateringPeriod = rs1.getInt("MaxTempRange");
 
 				plant = new Plant(plantID, plantName, plantDesc, plantIMG, new TemperatureRange(new Temperature(minTempRange), new Temperature(maxTempRange)), wateringPeriod);
@@ -105,7 +104,7 @@ public class DataAccessObject implements DatabaseInterface{
 
 		String plantName, plantDesc, plantIMG;
 		Float minTempRange, maxTempRange;
-		int plantID, difficulty, wateringPeriod;
+		int plantID, wateringPeriod;
 
 		try
 		{
@@ -119,7 +118,6 @@ public class DataAccessObject implements DatabaseInterface{
 				plantIMG = rs1.getString("PlantIMG");
 				minTempRange = rs1.getFloat("MinTempRange");
 				maxTempRange = rs1.getFloat("MaxTempRange");
-				//				difficulty = rs1.getInt("Difficulty");
 				wateringPeriod = rs1.getInt("MaxTempRange");
 
 				plant = new Plant(plantID, plantName, plantDesc, plantIMG, new TemperatureRange(new Temperature(minTempRange), new Temperature(maxTempRange)), wateringPeriod);
@@ -141,7 +139,7 @@ public class DataAccessObject implements DatabaseInterface{
 
 		String plantName, plantDesc, plantIMG;
 		Float minTempRange, maxTempRange;
-		int plantID, difficulty, wateringPeriod;
+		int plantID, wateringPeriod;
 
 		List<Plant> plantsResult = new ArrayList<>();
 
@@ -157,7 +155,6 @@ public class DataAccessObject implements DatabaseInterface{
 				plantIMG = rs1.getString("PlantIMG");
 				minTempRange = rs1.getFloat("MinTempRange");
 				maxTempRange = rs1.getFloat("MaxTempRange");
-				//				difficulty = rs1.getInt("Difficulty");
 				wateringPeriod = rs1.getInt("MaxTempRange");
 
 				plant = new Plant(plantID, plantName, plantDesc, plantIMG, new TemperatureRange(new Temperature(minTempRange), new Temperature(maxTempRange)), wateringPeriod);
@@ -187,7 +184,8 @@ public class DataAccessObject implements DatabaseInterface{
 			}
 		} catch (Exception e) {
 			result = processSQLError(e);
-		}if (updateCount != 1) {
+		}
+		if (updateCount != 1) {
 			result = "Tuple not inserted correctly.";
 		}
 		return result;
