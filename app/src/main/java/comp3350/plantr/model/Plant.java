@@ -1,12 +1,10 @@
-package comp3350.plantr.objects;
+package comp3350.plantr.model;
 
-import android.media.Image;
-import java.util.Locale;
+import comp3350.plantr.business.Difficulty;
 
 /**
  * Created: 5/28/2017
  * Raman Maan
- *
  * Purpose: This class defines a Plant object
  */
 
@@ -17,7 +15,7 @@ public class Plant {
 	private String _plantImg;
 
 	private TemperatureRange _optimalTemp;
-	private Difficulty _difficulty;
+	private DifficultyType _difficulty;
 	private int _wateringPeriod;
 
 	public Plant(int id) {
@@ -36,7 +34,7 @@ public class Plant {
 		_plantDesc = desc;
 		_plantImg = img;
 		_optimalTemp = optimalTemp;
-		_difficulty = new Difficulty(optimalTemp, wateringPeriod); //this is a derived attribute
+		_difficulty = Difficulty.calculateDifficulty(optimalTemp, wateringPeriod); //this is a derived attribute
 		_wateringPeriod = wateringPeriod;
 	}
 
@@ -60,7 +58,7 @@ public class Plant {
 		return _optimalTemp;
 	}
 
-	public Difficulty getDifficulty() {
+	public DifficultyType getDifficulty() {
 		return _difficulty;
 	}
 
@@ -77,7 +75,6 @@ public class Plant {
 	}
 
 	public String toString() {
-		return String.format(Locale.CANADA, "{id : %d, name : %s, desc : %s, optimalTemp : %s, hardiness : %d, wateringFreq : %d}"
-				, _plantID, _plantName, _plantDesc, _optimalTemp, _difficulty, _wateringPeriod);
+		return "{id : " + _plantID + ", name : " + _plantName + "}";
 	}
 }

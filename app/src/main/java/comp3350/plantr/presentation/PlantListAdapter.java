@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import comp3350.plantr.R;
-import comp3350.plantr.objects.Plant;
+import comp3350.plantr.model.Plant;
 
 /**
  * Created by KevinD on 6/6/2017.
@@ -18,12 +18,12 @@ import comp3350.plantr.objects.Plant;
 
 public class PlantListAdapter extends ArrayAdapter<Plant> {
 
-	public PlantListAdapter(Context context, ArrayList<Plant> plants){
+	public PlantListAdapter(Context context, List<Plant> plants) {
 		super(context, 0, plants);
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent){
+	public View getView(int position, View convertView, ViewGroup parent) {
 		// Get the data item for this position
 		Plant plant = getItem(position);
 		// Check if an existing view is being reused, otherwise inflate the view

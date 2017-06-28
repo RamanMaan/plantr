@@ -17,8 +17,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import comp3350.plantr.R;
-import comp3350.plantr.application.DatabaseAccess;
-import comp3350.plantr.objects.Plant;
+import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
 
@@ -43,7 +43,7 @@ public class PlantListView extends AppCompatActivity{
 
 		//initialize the database
 		db = DatabaseAccess.open();
-		ArrayList<Plant> plantList = db.getAllPlants();
+		ArrayList<Plant> plantList = (ArrayList<Plant>) db.getAllPlants();
 		PlantListAdapter adapter = new PlantListAdapter(this, plantList);
 
 		list.setAdapter(adapter);

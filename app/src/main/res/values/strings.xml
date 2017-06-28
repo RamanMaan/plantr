@@ -1,6 +1,30 @@
 <resources>
-    <string name="app_name">plantr</string>
+    <!-- the below should be in another xml, perhaps an intent.xml?-->
     <string name="plantID">plantID</string>
+
+    <!-- Application Wide Text -->
+    <string name="app_name">plantr</string>
+
+    <!-- PlantView Text -->
+    <string name="plantview_desc_prefix" formatted="false">Description: %s</string>
+    <string name="plantview_difficulty" formatted="false">Difficulty: %s</string>
+    <string name="plantview_optimal_temps" formatted="false">Optimal Temperature: %s\u00b0C - %s\u00b0C</string>
+    <string name="plantview_watering_freq" formatted="false">Watering Frequency: %d times per %s</string>
+    <string name="title_activity_main">MainActivity</string>
+
     <string name="lastTimeWatered">Last Time Watered:</string>
     <string name="nextWateringPeriod">Next Watering Period:</string>
+    <string name="removeFromGarden">Remove From Garden</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="compostbinview_title">Compost Bin</string>
+    <string name="gardenview_title">My Garden</string>
+    <string name="plantipediaview_title">Plantipedia</string>
+    <string name="plantipediaview_view_plants_button">View plants</string>
+
+    <string name="navheader_firstname_lastname">Default User</string>
+    <string name="navheader_username">defaultuser@email.com</string>
 </resources>
