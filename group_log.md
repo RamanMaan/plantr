@@ -145,3 +145,22 @@
 - Updated code styles to force braces
 - Update project-management on GitHub
 ---
+### Raman - 06/24/2017
+- Created detailed user stories for iteration 2
+- Created some dev tasks
+---
+### Group Meeting - 06/25/2017
+- Assigned costs/priorities to DUSs and created remaining dev tasks
+- Assigned dev tasks to each other
+- Discussed new system architecture
+- Planned GUI design
+- Created a paper prototype
+---
+### Raman - 06/26/2017
+- Opened PR for completed dev task #47
+  - Added fragments and navigation drawer, leaving current activities in place but will be deleting them before iteration is over
+---
+### Raman - 06/27/2017
+- Added dev tasks created during meeting on sunday
+- Added priorities/costs to DUS, moved DUS #30 out of iteration as discussed with group
+---

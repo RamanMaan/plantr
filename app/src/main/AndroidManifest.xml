@@ -19,9 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.MainMenuView"/>
         <activity android:name=".presentation.PlantView"/>
-        <activity android:name=".presentation.PlantListView"/>
     </application>
 
 </manifest>

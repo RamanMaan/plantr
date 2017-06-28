@@ -7,15 +7,25 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ListView;
+
+import java.util.List;
 
 import comp3350.plantr.R;
+import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.model.Plant;
 
 /**
  * Plantipedia view
  */
 
 public class PlantipediaFragment extends Fragment {
+
+	public PlantipediaFragment() {
+		//required empty public constructor
+	}
+
 	View myView;
 
 	@Nullable
@@ -23,11 +33,19 @@ public class PlantipediaFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		myView = inflater.inflate(R.layout.plantipedia_layout, container, false);
 
-		Button btn = (Button) myView.findViewById(R.id.view_plants_button);
-		btn.setOnClickListener(new View.OnClickListener() {
+		List<Plant> plantList = DatabaseAccess.open().getAllPlants();
+		ListView listView = (ListView) myView.findViewById(R.id.plantipedia_listview);
+		PlantListAdapter listViewAdapter = new PlantListAdapter(getActivity(), R.layout.activity_plant_list_item, plantList);
+
+		listView.setAdapter(listViewAdapter);
+
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(getActivity(), PlantListView.class));
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(getActivity(), PlantView.class);
+				//store the plant ID with the intent to display
+				intent.putExtra(getString(R.string.plant_id), position);
+				startActivity(intent);
 			}
 		});
 
