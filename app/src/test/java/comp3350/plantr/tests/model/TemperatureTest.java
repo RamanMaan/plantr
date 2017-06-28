@@ -1,13 +1,16 @@
-package comp3350.plantr.tests.objects;
+package comp3350.plantr.tests.model;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
-import comp3350.plantr.objects.Temperature;
+
+import comp3350.plantr.model.Temperature;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * 6/4/2017
  * Raman Maan
- *
  * Purpose: Tests the Temperature object
  */
 
