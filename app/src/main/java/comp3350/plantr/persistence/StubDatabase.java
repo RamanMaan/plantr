@@ -35,6 +35,15 @@ public class StubDatabase implements DatabaseInterface {
 		));
 
 		_userGarden = new Garden();
+		ArrayList<PersonalPlant> stubPersonalPlants = new ArrayList<>(Arrays.asList(
+				new PersonalPlant(getPlant(0), "Vera the Aloe Vera"),
+				new PersonalPlant(getPlant(1), "Arthur the Anthurium"),
+				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern"),
+				new PersonalPlant(getPlant(3), "Reece the Peace Lily"),
+				new PersonalPlant(getPlant(4), "Pupper the Peperomia")
+		));
+
+		_userGarden.addPlants(stubPersonalPlants);
 
 	}//Constructor
 
