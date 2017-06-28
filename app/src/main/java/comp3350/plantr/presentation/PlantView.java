@@ -15,9 +15,12 @@ public class PlantView extends AppCompatActivity {
 
 	private static final String TAG = "PlantView"; // for logging purposes
 
+	private DatabaseAccess accessPlants;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		DatabaseInterface db;
+//		DatabaseInterface db;
+
 		Plant plant;
 		ImageView plantImage;
 		TextView plantTitle, plantDesc, plantDifficulty, plantOptimalTempRange, wateringFrequency;
@@ -27,10 +30,13 @@ public class PlantView extends AppCompatActivity {
 		Log.d(TAG, "onCreate: started.");
 
 		// initialize the database
-		db = DatabaseAccess.open();
+//		db = DatabaseAccess.open();
+		accessPlants = new DatabaseAccess();
+
 
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
-		plant = db.getPlant(plantPosition);
+//		plant = db.getPlant(plantPosition);
+		plant = accessPlants.getPlant(plantPosition);
 
 		plantImage = (ImageView) findViewById(R.id.plantImageView);
 		plantTitle = (TextView) findViewById(R.id.plantViewTitle);

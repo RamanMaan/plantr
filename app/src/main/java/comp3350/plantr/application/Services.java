@@ -1,13 +1,13 @@
-package comp3350.srsys.application;
+package comp3350.plantr.application;
 
-import comp3350.srsys.persistence.DataAccess;
-import comp3350.srsys.persistence.DataAccessObject;
+import comp3350.plantr.persistence.DatabaseInterface;
+import comp3350.plantr.persistence.DataAccessObject;
 
 public class Services
 {
-	private static DataAccess dataAccessService = null;
+	private static DatabaseInterface dataAccessService = null;
 
-	public static DataAccess createDataAccess(String dbName)
+	public static DatabaseInterface createDataAccess(String dbName)
 	{
 		if (dataAccessService == null)
 		{
@@ -17,7 +17,7 @@ public class Services
 		return dataAccessService;
 	}
 
-	public static DataAccess createDataAccess(DataAccess alternateDataAccessService)
+	public static DatabaseInterface createDataAccess(DatabaseInterface alternateDataAccessService)
 	{
 		if (dataAccessService == null)
 		{
@@ -27,7 +27,7 @@ public class Services
 		return dataAccessService;
 	}
 
-	public static DataAccess getDataAccess(String dbName)
+	public static DatabaseInterface getDataAccess(String dbName)
 	{
 		if (dataAccessService == null)
 		{

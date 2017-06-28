@@ -1,17 +1,17 @@
-package comp3350.srsys.application;
+package comp3350.plantr.application;
 
-import comp3350.srsys.presentation.CLI;
+//import comp3350.plantr.presentation.CLI;
 
 public class Main
 {
-	public static final String dbName = "SC";
-	private static String dbPathName = "database/SC";
+	public static final String dbName = "PLANT";
+	private static String dbPathName = "database/PLANT";
 
 	public static void main(String[] args)
 	{
 		startUp();
 
-		CLI.run();
+//		CLI.run();
 
 		shutDown();
 		System.out.println("All done");

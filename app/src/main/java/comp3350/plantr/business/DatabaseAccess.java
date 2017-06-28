@@ -1,7 +1,12 @@
 package comp3350.plantr.business;
 
+import java.util.List;
+
+import comp3350.plantr.application.Main;
+import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DataAccessObject;
 import comp3350.plantr.persistence.DatabaseInterface;
+import comp3350.plantr.application.Services;
 import comp3350.plantr.persistence.StubDatabase;
 
 /**
@@ -16,26 +21,21 @@ public class DatabaseAccess {
 	public static final String dbName = "PLANT";
 	private static String dbPathName = "database/PLANT";
 
-	public static void startUp()
-	{
-		Services.createDataAccess(dbName);
+	private DatabaseInterface dataAccess;
+	private List<Plant> plants;
+
+	public DatabaseAccess() {
+		dataAccess = Services.getDataAccess(Main.dbName);
+		plants = null;
 	}
 
-	public static void shutDown()
-	{
-		Services.closeDataAccess();
+	public List<Plant> getPlants() {
+//		plants.clear();
+		return dataAccess.getAllPlants();
 	}
 
-	public static String getDBPathName() {
-		if (dbPathName == null)
-			return dbName;
-		else
-			return dbPathName;
-	}
-
-	public static void setDBPathName(String pathName) {
-		System.out.println("Setting DB path to: " + pathName);
-		dbPathName = pathName;
+	public Plant getPlant(int ID) {
+		return dataAccess.getPlant(ID);
 	}
 
 	public static DatabaseInterface open() {

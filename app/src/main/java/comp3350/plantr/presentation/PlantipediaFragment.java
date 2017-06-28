@@ -22,6 +22,8 @@ import comp3350.plantr.model.Plant;
 
 public class PlantipediaFragment extends Fragment {
 
+	private DatabaseAccess accessPlants;
+
 	public PlantipediaFragment() {
 		//required empty public constructor
 	}
@@ -33,7 +35,9 @@ public class PlantipediaFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		myView = inflater.inflate(R.layout.plantipedia_layout, container, false);
 
-		List<Plant> plantList = DatabaseAccess.open().getAllPlants();
+		accessPlants = new DatabaseAccess();
+
+		List<Plant> plantList = accessPlants.getPlants();
 		ListView listView = (ListView) myView.findViewById(R.id.plantipedia_listview);
 		PlantListAdapter listViewAdapter = new PlantListAdapter(getActivity(), R.layout.activity_plant_list_item, plantList);
 
