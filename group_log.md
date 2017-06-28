@@ -126,3 +126,4 @@
 - Created the PersonalPlantView page
 - Created reuseable GUI elements for Dialouges 
 - Created reuseable GUI elements for Circular Buttons with Images
+- Code Reviewed DUS 39
