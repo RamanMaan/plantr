@@ -22,7 +22,6 @@
         <activity android:name=".presentation.MainMenuView"/>
         <activity android:name=".presentation.PlantView"/>
         <activity android:name=".presentation.PersonalPlantView"/>
-        <activity android:name=".presentation.PlantListView"/>
     </application>
 
 </manifest>
