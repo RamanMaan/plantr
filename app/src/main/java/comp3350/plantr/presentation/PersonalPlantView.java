@@ -18,6 +18,10 @@ import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
 
+/**
+ * Created by Keaton MacLeod on 6/6/2017.
+ */
+
 public class PersonalPlantView extends AppCompatActivity {
 
 	private static final String TAG = "PersonalPlantView"; // for logging purposes
