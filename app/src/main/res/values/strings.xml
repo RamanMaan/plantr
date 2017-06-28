@@ -1,6 +1,6 @@
 <resources>
     <!-- the below should be in another xml, perhaps an intent.xml?-->
-    <string name="plantID">plantID</string>
+    <!--<string name="plant_id">plantID</string>-->
 
     <!-- Application Wide Text -->
     <string name="app_name">plantr</string>
@@ -12,6 +12,11 @@
     <string name="plantview_watering_freq" formatted="false">Watering Frequency: %d times per %s</string>
     <string name="title_activity_main">MainActivity</string>
 
+    <string name="cancel">Cancel</string>
+    <string name="water">Water</string>
+    <string name="remove">Remove</string>
+    <string name="thisPlantWillBeRemoved">"This plant will be removed from your garden."</string>
+    <string name="removeThisPlant">"Remove this plant from your garden?"</string>
     <string name="lastTimeWatered">Last Time Watered:</string>
     <string name="nextWateringPeriod">Next Watering Period:</string>
     <string name="removeFromGarden">Remove From Garden</string>

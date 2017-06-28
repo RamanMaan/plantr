@@ -44,7 +44,7 @@ public class PersonalPlantView extends AppCompatActivity {
 		// initialize the stub database
 		db = DatabaseAccess.open();
 
-		int plantPosition = getIntent().getIntExtra(getString(R.string.plantID), -1);
+		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 		plant = db.getPlant(plantPosition);
 
 		plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
@@ -54,7 +54,7 @@ public class PersonalPlantView extends AppCompatActivity {
 		nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
 
 		plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getPlantImg(), null, this.getPackageName()));
-		plantTitle.setText("Benny");
+		plantTitle.setText(plant.getPlantName());
 		lastTimeWatered.setText(getString(R.string.lastTimeWatered) + " mm/dd/yy");
 		nextWateringPeriod.setText(getString(R.string.nextWateringPeriod) + "[x]days [y]hours");
 		plantNotes.setText("This is Benny! He's my first plant that I'm going to grow with the plantr application!");
@@ -70,14 +70,14 @@ public class PersonalPlantView extends AppCompatActivity {
 				builder.setMessage("The next time you will have to water <plant_name> is in <x> hours.");
 
 				//When the user has selected that they have watered their plant
-				builder.setPositiveButton("Water", new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						//TODO Computation for the next time the user waters their plant
 					}
 				});
 
-				builder.setNegativeButton("Cancel", null);
+				builder.setNegativeButton(getString(R.string.cancel), null);
 
 				//Set up the dialogue for the water plant button
 				AlertDialog waterPlantDialogue = builder.create();
@@ -92,10 +92,10 @@ public class PersonalPlantView extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-				builder.setTitle("Remove this plant from your garden?");
-				builder.setMessage("This plant will be removed from your garden and placed into the Compost Bin.");
+				builder.setTitle(getString(R.string.removeThisPlant));
+				builder.setMessage(getString(R.string.thisPlantWillBeRemoved));
 
-				builder.setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
@@ -103,7 +103,7 @@ public class PersonalPlantView extends AppCompatActivity {
 					}
 				});
 
-				builder.setNegativeButton("Cancel", null);
+				builder.setNegativeButton(getString(R.string.cancel), null);
 
 				AlertDialog removeFromGardenDialogue = builder.create();
 				removeFromGardenDialogue.show();

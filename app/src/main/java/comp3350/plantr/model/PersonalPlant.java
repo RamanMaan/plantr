@@ -15,19 +15,21 @@ public class PersonalPlant {
 	private Plant _plantType;
 	private String _plantName;
 	private int _personalPlantID;
+	private String _plantNotes;
 
 
-	public PersonalPlant(Plant plantType, String plantName){
+	public PersonalPlant(Plant plantType, String plantName, String plantNotes){
 		_plantType = plantType;
 		_plantName = plantName;
+		_plantNotes = plantNotes;
 		_personalPlantID = idCounter++;
 	}
 
-	public PersonalPlant(Plant plantType, String plantName, int id){
+	public PersonalPlant(Plant plantType, String plantName, String plantNotes, int id){
 		_plantType = plantType;
 		_plantName = plantName;
+		_plantNotes = plantNotes;
 		_personalPlantID = id;
-
 	}
 
 	public boolean equals(Object other){

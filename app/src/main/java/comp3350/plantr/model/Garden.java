@@ -22,7 +22,7 @@ public class Garden {
 
 	public boolean removePersonalPlantById(int ID){
 
-		return _plants.remove(new PersonalPlant(null, null, ID));
+		return _plants.remove(new PersonalPlant(null, null, null, ID));
 	}
 
 	public boolean removePersonalPlant(PersonalPlant entry){

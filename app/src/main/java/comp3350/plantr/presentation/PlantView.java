@@ -29,7 +29,7 @@ public class PlantView extends AppCompatActivity {
 		// initialize the database
 		db = DatabaseAccess.open();
 
-		int plantPosition = getIntent().getIntExtra(getString(R.string.plantID), -1);
+		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 		plant = db.getPlant(plantPosition);
 
 		plantImage = (ImageView) findViewById(R.id.plantImageView);
