@@ -1,33 +1,33 @@
-package comp3350.plantr.business;
+package comp3350.srsys.application;
 
-import comp3350.plantr.persistence.DataAccessObject;
-import comp3350.plantr.persistence.DatabaseInterface;
+import comp3350.srsys.persistence.DataAccess;
+import comp3350.srsys.persistence.DataAccessObject;
 
 public class Services
 {
-	private static DatabaseInterface dataAccessService = null;
+	private static DataAccess dataAccessService = null;
 
-	public static DatabaseInterface createDataAccess(String dbName)
+	public static DataAccess createDataAccess(String dbName)
 	{
 		if (dataAccessService == null)
 		{
 			dataAccessService = new DataAccessObject(dbName);
-			dataAccessService.open(DatabaseAccess.getDBPathName());
+			dataAccessService.open(Main.getDBPathName());
 		}
 		return dataAccessService;
 	}
 
-	public static DatabaseInterface createDataAccess(DatabaseInterface alternateDataAccessService)
+	public static DataAccess createDataAccess(DataAccess alternateDataAccessService)
 	{
 		if (dataAccessService == null)
 		{
 			dataAccessService = alternateDataAccessService;
-			dataAccessService.open(DatabaseAccess.getDBPathName());
+			dataAccessService.open(Main.getDBPathName());
 		}
 		return dataAccessService;
 	}
 
-	public static DatabaseInterface getDataAccess(String dbName)
+	public static DataAccess getDataAccess(String dbName)
 	{
 		if (dataAccessService == null)
 		{
