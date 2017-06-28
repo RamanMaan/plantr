@@ -16,22 +16,15 @@ import comp3350.plantr.model.TemperatureRange;
 
 public class PersonalPlantTest {
 
-	@Test
-	public void personalPlant_testCreate() {
-		Plant dummyPlant = new Plant(1);
-
-		PersonalPlant myPlant = new PersonalPlant(dummyPlant, "myTestPlant");
-
-		assertNotNull(myPlant);
-	}
 
 	@Test
 	public void personalPlant_testEquals(){
 
-		Plant dummyPlant = new Plant(1);
+		Plant dummyPlantOne = new Plant(1);
+		Plant dummyPlantTwo = new Plant(2);
 
 		PersonalPlant firstPlant = new PersonalPlant(null, "myTestPlant");
-		PersonalPlant secondPlant = new PersonalPlant(dummyPlant, "myTestPlant2");
+		PersonalPlant secondPlant = new PersonalPlant(dummyPlantOne, "myTestPlant2");
 
 		int first = firstPlant.getID();
 		int second = first+1;
@@ -44,5 +37,22 @@ public class PersonalPlantTest {
 		assertTrue(!secondPlant.equals(first));
 
 		assertNotEquals(firstPlant, secondPlant);
+
+		//same everything
+		firstPlant = new PersonalPlant(dummyPlantOne, "sameString");
+		secondPlant = new PersonalPlant(dummyPlantOne, "sameString", firstPlant.getID());
+
+		assertEquals(firstPlant,secondPlant);
+
+		//different ID, same plant and string though
+		firstPlant = new PersonalPlant(dummyPlantOne, "sameString");
+		secondPlant = new PersonalPlant(dummyPlantOne, "sameString");
+
+		assertNotEquals(firstPlant, secondPlant);
+
+		//different ID, different plant, same string
+		firstPlant = new PersonalPlant(dummyPlantOne, "I am a string");
+		secondPlant = new PersonalPlant(dummyPlantOne, "I am a string that is different");
+
 	}
 }

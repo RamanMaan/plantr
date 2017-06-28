@@ -23,7 +23,7 @@ public class PersonalPlant {
 		_personalPlantID = idCounter++;
 	}
 
-	PersonalPlant(Plant plantType, String plantName, int id){
+	public PersonalPlant(Plant plantType, String plantName, int id){
 		_plantType = plantType;
 		_plantName = plantName;
 		_personalPlantID = id;
@@ -35,10 +35,6 @@ public class PersonalPlant {
 
 		if(other instanceof PersonalPlant){ //comparing two PersonalPlants
 			isSame = ((PersonalPlant) other)._personalPlantID == this._personalPlantID;
-		}
-
-		if(other instanceof Integer){
-			isSame = ((Integer) other) == this._personalPlantID;
 		}
 
 		return isSame;

@@ -20,11 +20,14 @@ public class GardenTest {
 
 	private Garden myGarden;
 
-	@Test
-	public void garden_testCreate() {
-		myGarden = new Garden();
+	private ArrayList<PersonalPlant> generatePlantList(){
+		ArrayList<PersonalPlant> plantList = new ArrayList<>();
 
-		assertNotNull(myGarden);
+		for(int i = 0; i < 10; i++){
+			plantList.add(new PersonalPlant(null, null));
+		}
+
+		return plantList;
 	}
 
 	@Test
@@ -38,7 +41,7 @@ public class GardenTest {
 		assertTrue(myGarden.addPlant(plantOne));
 		assertTrue(myGarden.addPlant(plantTwo));
 
-		assertTrue(!myGarden.addPlant(null));
+		assertFalse(myGarden.addPlant(null));
 	}
 
 	@Test
@@ -46,15 +49,13 @@ public class GardenTest {
 
 		myGarden = new Garden();
 
-		ArrayList<PersonalPlant> plantList = new ArrayList<>();
+		ArrayList<PersonalPlant> plantList = generatePlantList();
 
-		for(int i = 0; i < 10; i++){
-			plantList.add(new PersonalPlant(null, null));
-		}
+		plantList.add(null);
 
 		assertTrue(myGarden.addPlants(plantList));
 
-		assertTrue(!myGarden.addPlants(null));
+		assertFalse(myGarden.addPlants(null));
 
 	}
 
@@ -65,11 +66,7 @@ public class GardenTest {
 		PersonalPlant plantOne = new PersonalPlant(null, null);
 		PersonalPlant plantTwo = new PersonalPlant(null, null);
 
-		ArrayList<PersonalPlant> plants = new ArrayList<>();
-
-		for(int i = 0; i< 10; i++){
-			plants.add(new PersonalPlant(null, null));
-		}
+		ArrayList<PersonalPlant> plants = generatePlantList();
 
 		myGarden.addPlants(plants);
 		myGarden.addPlant(plantOne);
@@ -79,21 +76,22 @@ public class GardenTest {
 		assertTrue(myGarden.removePersonalPlant(plantOne));
 
 		//ensuring it was deleted
-		assertTrue(!myGarden.removePersonalPlant(plantOne));
+		assertFalse(myGarden.removePersonalPlant(plantOne));
 
 		assertTrue(myGarden.removePersonalPlant(plantTwo));
-		assertTrue(!myGarden.removePersonalPlant(plantTwo));
+		assertFalse(myGarden.removePersonalPlant(plantTwo));
 
 		for(PersonalPlant plant: plants){
 			assertTrue(myGarden.removePersonalPlant(plant));
-			assertTrue(!myGarden.removePersonalPlant(plant));
+			assertFalse(myGarden.removePersonalPlant(plant));
 		}
+
+		assertFalse(myGarden.removePersonalPlant(null));
 	}
 
 	@Test
 	public void garden_testRemovePersonalPlantByID(){
 		myGarden = new Garden();
-
 
 		PersonalPlant plantOne = new PersonalPlant(null, null);
 		PersonalPlant plantTwo = new PersonalPlant(null, null);
@@ -101,11 +99,7 @@ public class GardenTest {
 		int plantIdOne = plantOne.getID();
 		int plantIdTwo = plantTwo.getID();
 
-		ArrayList<PersonalPlant> plants = new ArrayList<>();
-
-		for(int i = 0; i< 10; i++){
-			plants.add(new PersonalPlant(null, null));
-		}
+		ArrayList<PersonalPlant> plants = generatePlantList();
 
 		myGarden.addPlants(plants);
 		myGarden.addPlant(plantOne);
@@ -113,14 +107,19 @@ public class GardenTest {
 
 
 		assertTrue(myGarden.removePersonalPlantById(plantIdOne));
-		assertTrue(!myGarden.removePersonalPlantById(plantIdOne));
+		assertFalse(myGarden.removePersonalPlantById(plantIdOne));
 
 		assertTrue(myGarden.removePersonalPlantById(plantIdTwo));
-		assertTrue(!myGarden.removePersonalPlantById(plantIdTwo));
+		assertFalse(myGarden.removePersonalPlantById(plantIdTwo));
 
 		for(PersonalPlant plant : plants){
 			assertTrue(myGarden.removePersonalPlantById(plant.getID()));
-			assertTrue(!myGarden.removePersonalPlantById(plant.getID()));
+			assertFalse(myGarden.removePersonalPlantById(plant.getID()));
 		}
+
+		assertFalse(myGarden.removePersonalPlantById(-1));
+
+		assertFalse(myGarden.removePersonalPlantById(Integer.MAX_VALUE));
+		assertFalse(myGarden.removePersonalPlantById(Integer.MIN_VALUE));
 	}
 }

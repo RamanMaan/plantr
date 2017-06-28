@@ -2,6 +2,7 @@ package comp3350.plantr.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -42,13 +43,14 @@ public class Garden {
 		boolean success = false;
 
 		if(plants != null){
+			plants.removeAll(Collections.singleton(null));
 			success = _plants.addAll(plants);
 		}
 
 		return success;
 	}
 
-	List<PersonalPlant> getAllPlants(){
+	public List<PersonalPlant> getAllPlants(){
 		return _plants;
 	}
 
