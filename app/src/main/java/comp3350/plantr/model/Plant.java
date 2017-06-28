@@ -1,6 +1,4 @@
-package comp3350.plantr.objects;
-
-import java.util.Locale;
+package comp3350.plantr.model;
 
 import comp3350.plantr.business.Difficulty;
 
@@ -77,7 +75,6 @@ public class Plant {
 	}
 
 	public String toString() {
-		return String.format(Locale.CANADA, "{id : %d, name : %s, desc : %s, optimalTemp : %s, hardiness : %d, wateringFreq : %d}"
-				, _plantID, _plantName, _plantDesc, _optimalTemp, _difficulty, _wateringPeriod);
+		return "{id : " + _plantID + ", name : " + _plantName + "}";
 	}
 }

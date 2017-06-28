@@ -117,7 +117,50 @@
 ### Austin - 06/07/2017
 - Added PlantTest.java and added PlantTest.java in the test runner in AllTests.java
 ---
-### Group Discussion - 06/25/17
-- Discussed user stories and developer tasks
-- Designed paper prototype for basic UI and user navigation
-- Assigned developer tasks
+### Group Meeting - 06/13/2017
+- Met together as a group to discuss our after iteration thoughts
+- Branch naming scheme
+    - We were all over the place with the last iteration and have decided the following to be our naming scheme
+    - INITIALS/US##/X-Description
+    - ex) RM/US12/DT23-PlantDetailView
+    - ex2) RM/DE31-FixingStubInterface
+    - ex3) RM/US12/DE45-BetterWaterFreqPrint
+- Workflow
+    - we changed our workflow slightly to accomodate pull requests to be:
+    1. Create a feature branch off Iteration and begin development
+        - this includes Dev Tasks and defects
+    2. When development is completed, pull Iteration branch into feature branch and resolve conflicts there
+    3. Open a pull request and have it reviewed by whoever is available
+    4. Once Iteration is complete, we will merge it into master.
+- We also decided we will be moving over to a 3-tier architecture of business, persistence, and presentation
+---
+### Raman - 06/22/2017
+- Moved files over to 3-tier architecture
+- Removed Constants.java and moved over to built in Android Resource manager
+- Changed database to return List instead of ArrayList as suggested by Franklin
+---
+### Raman - 06/23/2017
+- Introduced a 4th data model package
+- Added more substance to database unit tests
+- Updated code styles to force braces
+- Update project-management on GitHub
+---
+### Raman - 06/24/2017
+- Created detailed user stories for iteration 2
+- Created some dev tasks
+---
+### Group Meeting - 06/25/2017
+- Assigned costs/priorities to DUSs and created remaining dev tasks
+- Assigned dev tasks to each other
+- Discussed new system architecture
+- Planned GUI design
+- Created a paper prototype
+---
+### Raman - 06/26/2017
+- Opened PR for completed dev task #47
+  - Added fragments and navigation drawer, leaving current activities in place but will be deleting them before iteration is over
+---
+### Raman - 06/27/2017
+- Added dev tasks created during meeting on sunday
+- Added priorities/costs to DUS, moved DUS #30 out of iteration as discussed with group
+---

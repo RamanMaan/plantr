@@ -1,8 +1,11 @@
 package comp3350.plantr.persistence;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-import comp3350.plantr.objects.Plant;
+import comp3350.plantr.model.Garden;
+import comp3350.plantr.model.PersonalPlant;
+import comp3350.plantr.model.Plant;
 
 /**
  * 5/30/2017
@@ -11,11 +14,15 @@ import comp3350.plantr.objects.Plant;
  */
 
 public interface DatabaseInterface {
-	public DatabaseInterface open(); //Return an instance of the database
+	DatabaseInterface open(); //Return an instance of the database
 
-	public Plant getPlant(int id); //Return a Plant Object by id
+	Plant getPlant(int id); //Return a Plant Object by id
 
-	public Plant getPlant(String name); //Return a Plant Object by name
+	Plant getPlant(String name); //Return a Plant Object by name
 
-	public ArrayList<Plant> getAllPlants(); //Return an ArrayList of all Plant Objects
+	List<Plant> getAllPlants(); //Return an ArrayList of all Plant Objects
+
+	PersonalPlant getPersonalPlantByID(int ID); //Return a PersonalPlant by Id,
+
+	Collection<PersonalPlant> getAllPersonalPlants();
 }//StudDatabaseInterface
