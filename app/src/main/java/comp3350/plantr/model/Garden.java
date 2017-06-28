@@ -1,6 +1,7 @@
 package comp3350.plantr.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -18,8 +19,33 @@ public class Garden {
 		_plants = new ArrayList<>();
 	}
 
-	public void addPlant(PersonalPlant plant){
-		_plants.add(plant);
+	public boolean removePersonalPlantById(int ID){
+
+		return _plants.remove(new PersonalPlant(null, null, ID));
+	}
+
+	public boolean removePersonalPlant(PersonalPlant entry){
+		return _plants.remove(entry);
+	}
+
+	public boolean addPlant(PersonalPlant plant){
+		boolean success = false;
+
+		if(plant != null) {
+			success = _plants.add(plant);
+		}
+
+		return success;
+	}
+
+	public boolean addPlants(Collection<PersonalPlant> plants){
+		boolean success = false;
+
+		if(plants != null){
+			success = _plants.addAll(plants);
+		}
+
+		return success;
 	}
 
 	List<PersonalPlant> getAllPlants(){

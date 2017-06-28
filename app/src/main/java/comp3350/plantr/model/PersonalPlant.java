@@ -10,18 +10,46 @@ import java.util.Date;
 
 public class PersonalPlant {
 
-	private static long idCounter = 0;
+	private static int idCounter = 0;
 
 	private Plant _plantType;
 	private String _plantName;
-	private long personalPlantID;
+	private int _personalPlantID;
 
 
 	public PersonalPlant(Plant plantType, String plantName){
 		_plantType = plantType;
 		_plantName = plantName;
-		personalPlantID = idCounter++;
+		_personalPlantID = idCounter++;
 	}
 
+	PersonalPlant(Plant plantType, String plantName, int id){
+		_plantType = plantType;
+		_plantName = plantName;
+		_personalPlantID = id;
+
+	}
+
+	public boolean equals(Object other){
+		boolean isSame = false;
+
+		if(other instanceof PersonalPlant){ //comparing two PersonalPlants
+			isSame = ((PersonalPlant) other)._personalPlantID == this._personalPlantID;
+		}
+
+		if(other instanceof Integer){
+			isSame = ((Integer) other) == this._personalPlantID;
+		}
+
+		return isSame;
+	}
+
+	public boolean equals(int compareID){
+		return _personalPlantID == compareID;
+	}
+
+	public int getID(){
+		return _personalPlantID;
+	}
 
 }
