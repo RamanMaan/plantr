@@ -100,7 +100,40 @@ public class DataAccessObject implements DatabaseInterface{
 	}
 
 	//Return a Plant Object by name
-//	public Plant getPlant(String name){}
+	public Plant getPlant(String name){
+		Plant plant = null;
+
+		String plantName, plantDesc, plantIMG;
+		Float minTempRange, maxTempRange;
+		int plantID, difficulty, wateringPeriod;
+
+		try
+		{
+			cmdString = "Select * from Plants where PlantName=" + name;
+			rs1 = st1.executeQuery(cmdString);
+
+			while (rs1.next()){
+				plantID = rs1.getInt("PlantID");
+				plantName = rs1.getString("PlantName");
+				plantDesc = rs1.getString("PlantDesc");
+				plantIMG = rs1.getString("PlantIMG");
+				minTempRange = rs1.getFloat("MinTempRange");
+				maxTempRange = rs1.getFloat("MaxTempRange");
+				//				difficulty = rs1.getInt("Difficulty");
+				wateringPeriod = rs1.getInt("MaxTempRange");
+
+				plant = new Plant(plantID, plantName, plantDesc, plantIMG, new TemperatureRange(new Temperature(minTempRange), new Temperature(maxTempRange)), wateringPeriod);
+			}
+
+			rs1.close();
+		}
+		catch (Exception e)
+		{
+			processSQLError(e);
+		}
+
+		return plant;
+	}
 
 	//Return an ArrayList of all Plant Objects
 	public List<Plant> getAllPlants(){

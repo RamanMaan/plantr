@@ -17,7 +17,7 @@ public interface DatabaseInterface {
 
 	Plant getPlant(int id); //Return a Plant Object by id
 
-//	Plant getPlant(String name); //Return a Plant Object by name
+	Plant getPlant(String name); //Return a Plant Object by name
 
 	List<Plant> getAllPlants(); //Return an ArrayList of all Plant Objects
 }//StudDatabaseInterface
