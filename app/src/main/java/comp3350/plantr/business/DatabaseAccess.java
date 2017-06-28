@@ -1,5 +1,6 @@
 package comp3350.plantr.business;
 
+import comp3350.plantr.persistence.DataAccessObject;
 import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
 
@@ -13,6 +14,7 @@ public class DatabaseAccess {
 	private static DatabaseInterface _db = null;
 
 	public static DatabaseInterface open() {
-		return _db == null ? new StubDatabase() : _db;
+		return _db == null ? new DataAccessObject() : _db;
+//		return _db == null ? new StubDatabase() : _db;
 	}
 }

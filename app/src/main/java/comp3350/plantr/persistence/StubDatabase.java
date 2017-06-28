@@ -14,6 +14,9 @@ import comp3350.plantr.model.TemperatureRange;
 
 public class StubDatabase implements DatabaseInterface {
 
+	private String dbName;
+	private String dbType = "stub";
+
 	private ArrayList<Plant> plants;
 
 	public StubDatabase() {
@@ -30,22 +33,28 @@ public class StubDatabase implements DatabaseInterface {
 
 	}//Constructor
 
+	public void close()
+	{
+		System.out.println("Closed " +dbType +" database " +dbName);
+	}
+
+
 	@Override
-	public DatabaseInterface open() {
-		return this;
+	public void open(String string) {
+		//
 	}
 
 	//Return a Plant Object
-//	@Override
-//	public Plant getPlant(int id) {
-//		Plant plant = null;
-//		for (int a = 0; a < plants.size() && plant == null; a++) {
-//			if (plants.get(a).getPlantID() == id) {
-//				plant = plants.get(a);
-//			}
-//		}
-//		return plant;
-//	}//getPlant
+	@Override
+	public Plant getPlant(int id) {
+		Plant plant = null;
+		for (int a = 0; a < plants.size() && plant == null; a++) {
+			if (plants.get(a).getPlantID() == id) {
+				plant = plants.get(a);
+			}
+		}
+		return plant;
+	}//getPlant
 
 	public Plant getPlant(String name) {
 		if (name == null) {
