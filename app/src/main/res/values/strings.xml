@@ -1,7 +1,4 @@
 <resources>
-    <!-- the below should be in another xml, perhaps an intent.xml?-->
-    <string name="plant_id">plantID</string>
-
     <!-- Application Wide Text -->
     <string name="app_name">plantr</string>
 
