@@ -4,10 +4,14 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.List;
@@ -34,9 +38,11 @@ public class PlantipediaFragment extends Fragment {
 		myView = inflater.inflate(R.layout.plantipedia_layout, container, false);
 
 		List<Plant> plantList = DatabaseAccess.open().getAllPlants();
-		ListView listView = (ListView) myView.findViewById(R.id.plantipedia_listview);
-		PlantListAdapter listViewAdapter = new PlantListAdapter(getActivity(), R.layout.activity_plant_list_item, plantList);
+		EditText search = (EditText) myView.findViewById(R.id.plantipedia_searchbar);
+		final ListView listView = (ListView) myView.findViewById(R.id.plantipedia_listview);
+		final PlantListAdapter listViewAdapter = new PlantListAdapter(getActivity(), R.layout.activity_plant_list_item, plantList);
 
+		listView.setTextFilterEnabled(true);
 		listView.setAdapter(listViewAdapter);
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -47,6 +53,20 @@ public class PlantipediaFragment extends Fragment {
 				intent.putExtra(getString(R.string.plant_id), position);
 				startActivity(intent);
 			}
+		});
+
+		search.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				listViewAdapter.getFilter().filter(s);
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {}
 		});
 
 		return myView;
