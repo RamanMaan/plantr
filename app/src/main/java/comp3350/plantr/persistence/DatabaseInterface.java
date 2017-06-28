@@ -11,11 +11,13 @@ import comp3350.plantr.model.Plant;
  */
 
 public interface DatabaseInterface {
-	public DatabaseInterface open(); //Return an instance of the database
+	void open(String string); //Return an instance of the database
 
-	public Plant getPlant(int id); //Return a Plant Object by id
+	void close(); //Return an instance of the database
 
-	public Plant getPlant(String name); //Return a Plant Object by name
+	Plant getPlant(int id); //Return a Plant Object by id
 
-	public List<Plant> getAllPlants(); //Return an ArrayList of all Plant Objects
+	Plant getPlant(String name); //Return a Plant Object by name
+
+	List<Plant> getAllPlants(); //Return an ArrayList of all Plant Objects
 }//StudDatabaseInterface

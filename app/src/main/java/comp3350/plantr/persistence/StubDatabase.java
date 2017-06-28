@@ -14,6 +14,9 @@ import comp3350.plantr.model.TemperatureRange;
 
 public class StubDatabase implements DatabaseInterface {
 
+	private String dbName;
+	private String dbType = "stub";
+
 	private ArrayList<Plant> plants;
 
 	public StubDatabase() {
@@ -30,9 +33,15 @@ public class StubDatabase implements DatabaseInterface {
 
 	}//Constructor
 
+	public void close()
+	{
+		System.out.println("Closed " +dbType +" database " +dbName);
+	}
+
+
 	@Override
-	public DatabaseInterface open() {
-		return this;
+	public void open(String string) {
+		//
 	}
 
 	//Return a Plant Object
