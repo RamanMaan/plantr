@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLWarning;
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,12 +27,12 @@ public class DataAccessObject implements DatabaseInterface{
 	private String dbName;
 	private String dbType;
 
-	private Plant plant;
-
 	private String cmdString;
-	private int updateCount;
-	private String result;
-	private static String EOF = "  ";
+
+	public DataAccessObject(String dbName)
+	{
+		this.dbName = dbName;
+	}
 
 	public void open(String dbPath) {
 		String url;
@@ -44,8 +43,6 @@ public class DataAccessObject implements DatabaseInterface{
 			url = "jdbc:hsqldb:file:" + dbPath; // stored on disk mode
 			c1 = DriverManager.getConnection(url, "SA", "");
 			st1 = c1.createStatement();
-//			st2 = c1.createStatement();
-//			st3 = c1.createStatement();
 
 		} catch (Exception e) {
 			processSQLError(e);
@@ -104,7 +101,6 @@ public class DataAccessObject implements DatabaseInterface{
 
 	//Return a Plant Object by name
 //	public Plant getPlant(String name){}
-
 
 	//Return an ArrayList of all Plant Objects
 	public List<Plant> getAllPlants(){
