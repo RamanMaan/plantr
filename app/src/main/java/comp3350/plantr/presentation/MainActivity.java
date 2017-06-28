@@ -62,9 +62,6 @@ public class MainActivity extends AppCompatActivity
 			case R.id.nav_plantipedia_layout:
 				fragment = new PlantipediaFragment();
 				break;
-			case R.id.nav_compost_bin_layout:
-				fragment = new CompostBinFragment();
-				break;
 		}
 
 		if (fragment != null) {
