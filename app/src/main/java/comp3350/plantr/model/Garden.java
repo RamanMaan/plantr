@@ -29,6 +29,19 @@ public class Garden {
 		return _plants.remove(entry);
 	}
 
+	public PersonalPlant getPersonalPlantById(int ID){
+		PersonalPlant returnPlant = null;
+
+		int index = _plants.indexOf(new PersonalPlant(null, null, ID));
+
+		//found in Garden
+		if(index != -1){
+			returnPlant = _plants.get(index);
+		}
+
+		return returnPlant;
+	}
+
 	public boolean addPlant(PersonalPlant plant){
 		boolean success = false;
 
