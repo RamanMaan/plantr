@@ -35,8 +35,8 @@ public class GardenTest {
 
 		myGarden = new Garden();
 
-		PersonalPlant plantOne = new PersonalPlant(null,null);
-		PersonalPlant plantTwo = new PersonalPlant(null,null);
+		PersonalPlant plantOne = new PersonalPlant(null, null);
+		PersonalPlant plantTwo = new PersonalPlant(null, null);
 
 		assertTrue(myGarden.addPlant(plantOne));
 		assertTrue(myGarden.addPlant(plantTwo));

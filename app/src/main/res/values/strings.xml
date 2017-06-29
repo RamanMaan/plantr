@@ -1,4 +1,7 @@
 <resources>
+    <!-- the below should be in another xml, perhaps an intent.xml?-->
+    <!--<string name="plant_id">plantID</string>-->
+
     <!-- Application Wide Text -->
     <string name="app_name">plantr</string>
 
@@ -9,6 +12,19 @@
     <string name="plantview_watering_freq" formatted="false">Watering Frequency: %d times per %s</string>
     <string name="title_activity_main">MainActivity</string>
 
+    <string name="cancel">Cancel</string>
+    <string name="water">Water</string>
+    <string name="waterYourPlant">Water&#160;</string>
+    <string name="remove">Remove</string>
+    <string name="questionMark">"?"</string>
+    <string name="theNextWateringPeriodWillBeIn">The next watering period will be in&#160;</string>
+
+    <string name="thisPlantWillBeRemoved">"This plant will be removed from your garden."</string>
+    <string name="removeThisPlant">"Remove this plant from your garden?"</string>
+    <string name="lastTimeWatered">Last Time Watered:</string>
+    <string name="nextWateringPeriod">Next Watering Period:</string>
+    <string name="removeFromGarden">Remove From Garden</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -16,6 +32,7 @@
     <string name="gardenview_title">My Garden</string>
     <string name="plantipediaview_title">Plantipedia</string>
     <string name="plantipediaview_view_plants_button">View plants</string>
+
     <string name="navheader_firstname_lastname">Default User</string>
     <string name="navheader_username">defaultuser@email.com</string>
     <string name="add_to_garden">Add to Garden</string>
