@@ -62,7 +62,5 @@ public class PlantTest {
 		wateringFreq = 48;
 		p = new Plant(0, "Bob", "A test Plant", null, tempRange, wateringFreq);
 		assertTrue(p.getDifficulty() == DifficultyType.HARD);
-
-
 	}
 }
