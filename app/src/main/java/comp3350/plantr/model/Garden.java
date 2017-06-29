@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-
 /**
  * Created by Michael on 27/06/2017.
  *
