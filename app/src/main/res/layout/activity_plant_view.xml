@@ -76,7 +76,7 @@
         app:layout_constraintVertical_chainStyle="packed"/>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/addPersonalPlantButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"

@@ -39,8 +39,8 @@ public class PersonalPlantListAdapter extends ArrayAdapter<PersonalPlant> {
 		TextView plantType = (TextView) convertView.findViewById(R.id.plantlist_text);
 		ImageView plantImg = (ImageView) convertView.findViewById(R.id.plantlist_icon);
 		// Populate the data into the template view using the data object
-		plantName.setText(pPlant.getName());
-		plantType.setText(pPlant.getType().getPlantName());
+		plantName.setText(pPlant.getName() + " (" + pPlant.getType().getPlantName() + ")");
+		//plantType.setText(pPlant.getType().getPlantName());
 		plantImg.setImageResource(context.getResources().getIdentifier("@drawable/" + pPlant.getType().getPlantImg(), null, context.getPackageName()));
 
 		// Return the completed view to render on screen

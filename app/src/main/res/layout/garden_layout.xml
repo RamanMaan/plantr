@@ -19,21 +19,6 @@
         android:layout_alignParentRight="true"
         android:src="@android:drawable/ic_input_add"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addPlantButton"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="5dp"
-        app:backgroundTint="@android:color/holo_blue_dark"
-        app:borderWidth="0dp"
-        app:elevation="5dp"
-        app:rippleColor="@color/cardview_dark_background"
-        app:srcCompat="@android:drawable/ic_input_add"/>
-
     <ListView
         android:id="@+id/garden_view"
         android:layout_width="match_parent"
