@@ -10,6 +10,8 @@ import comp3350.plantr.persistence.StubDatabase;
  */
 
 public class DatabaseAccess {
+	public static final String dbName = "PLANT";
+	private static String dbPathName = "database/PLANT";
 	private static DatabaseInterface _db = null;
 
 	public static DatabaseInterface open() {
@@ -26,5 +28,10 @@ public class DatabaseAccess {
 		}
 
 		_db = null;
+	}
+
+	public static void setDBPathName(String pathName) {
+		System.out.println("Setting DB path to: " + pathName);
+		dbPathName = pathName;
 	}
 }
