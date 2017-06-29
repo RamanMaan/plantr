@@ -15,20 +15,18 @@ public class PersonalPlant {
 	private Plant _plantType;
 	private String _plantName;
 	private int _personalPlantID;
-	private String _plantNotes;
+	private String _personalPlantImg;
 
 
-	public PersonalPlant(Plant plantType, String plantName, String plantNotes){
+	public PersonalPlant(Plant plantType, String plantName){
 		_plantType = plantType;
 		_plantName = plantName;
-		_plantNotes = plantNotes;
 		_personalPlantID = idCounter++;
 	}
 
-	public PersonalPlant(Plant plantType, String plantName, String plantNotes, int id){
+	public PersonalPlant(Plant plantType, String plantName, int id){
 		_plantType = plantType;
 		_plantName = plantName;
-		_plantNotes = plantNotes;
 		_personalPlantID = id;
 	}
 
@@ -49,5 +47,9 @@ public class PersonalPlant {
 	public int getID(){
 		return _personalPlantID;
 	}
+
+	public String getPersonalPlantName() {return _plantName;}
+	public Plant getPersonalPlantType() {return _plantType;}
+	public String get_personalPlantImg() {return _personalPlantImg;}
 
 }

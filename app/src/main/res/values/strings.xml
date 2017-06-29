@@ -14,7 +14,11 @@
 
     <string name="cancel">Cancel</string>
     <string name="water">Water</string>
+    <string name="waterYourPlant">Water&#160;</string>
     <string name="remove">Remove</string>
+    <string name="questionMark">"?"</string>
+    <string name="theNextWateringPeriodWillBeIn">The next watering period will be in&#160;</string>
+
     <string name="thisPlantWillBeRemoved">"This plant will be removed from your garden."</string>
     <string name="removeThisPlant">"Remove this plant from your garden?"</string>
     <string name="lastTimeWatered">Last Time Watered:</string>

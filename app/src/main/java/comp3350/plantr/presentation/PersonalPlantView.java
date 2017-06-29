@@ -30,9 +30,9 @@ public class PersonalPlantView extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		DatabaseInterface db;
-		Plant plant;
+		final PersonalPlant plant;
 		ImageButton waterPlant;
-		final Button removeFromGarden;
+		Button removeFromGarden;
 		ImageView plantImage;
 		TextView plantTitle, plantNotes;
 		TextView lastTimeWatered, nextWateringPeriod;
@@ -45,19 +45,24 @@ public class PersonalPlantView extends AppCompatActivity {
 		db = DatabaseAccess.open();
 
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
-		plant = db.getPlant(plantPosition);
+		plant = db.getPersonalPlantByID(plantPosition);
 
 		plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
 		plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
-		plantNotes = (TextView) findViewById(R.id.personalPlantViewNotes);
 		lastTimeWatered = (TextView) findViewById(R.id.personalPlantViewLastTimeWatered);
 		nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
 
-		plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getPlantImg(), null, this.getPackageName()));
-		plantTitle.setText(plant.getPlantName());
+		//If the user has their own picture, use it
+		if (plant.get_personalPlantImg() != null)
+			plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.get_personalPlantImg(), null, this.getPackageName()));
+
+		//Otherwise use the default pictured stored in the database
+		else
+			plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getPersonalPlantType().getPlantImg(), null, this.getPackageName()));
+
+		plantTitle.setText(plant.getPersonalPlantName());
 		lastTimeWatered.setText(getString(R.string.lastTimeWatered) + " mm/dd/yy");
 		nextWateringPeriod.setText(getString(R.string.nextWateringPeriod) + "[x]days [y]hours");
-		plantNotes.setText("This is Benny! He's my first plant that I'm going to grow with the plantr application!");
 
 		//The watering can button and its associated Listener
 		waterPlant = (ImageButton) findViewById(R.id.waterPersonalPlant);
@@ -66,8 +71,8 @@ public class PersonalPlantView extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-				builder.setTitle("Water your plant?");
-				builder.setMessage("The next time you will have to water <plant_name> is in <x> hours.");
+				builder.setTitle(getString(R.string.waterYourPlant) + plant.getPersonalPlantName() + getString(R.string.questionMark));
+				builder.setMessage(getString(R.string.theNextWateringPeriodWillBeIn) + "[x] days, [y] hours.");
 
 				//When the user has selected that they have watered their plant
 				builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
