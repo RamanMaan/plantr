@@ -1,9 +1,9 @@
 package comp3350.plantr.presentation;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +11,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.model.PersonalPlant;
-import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
-import comp3350.plantr.persistence.StubDatabase;
 
 /**
  * Created by Keaton MacLeod on 6/6/2017.
@@ -34,8 +35,7 @@ public class PersonalPlantView extends AppCompatActivity {
 		ImageButton waterPlant;
 		Button removeFromGarden;
 		ImageView plantImage;
-		TextView plantTitle, plantNotes;
-		TextView lastTimeWatered, nextWateringPeriod;
+		TextView plantTitle, lastTimeWatered, nextWateringPeriod;
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_personal_plant_view);
@@ -53,8 +53,11 @@ public class PersonalPlantView extends AppCompatActivity {
 		plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getType().getPlantImg(), null, this.getPackageName()));
 
 		plantTitle.setText(plant.getName());
-		lastTimeWatered.setText(getString(R.string.lastTimeWatered) + " mm/dd/yy");
-		nextWateringPeriod.setText(getString(R.string.nextWateringPeriod) + "[x]days [y]hours");
+		lastTimeWatered.setText(getString(R.string.lastTimeWatered) + DateFormat.getDateInstance().format(plant.getLastWatered()));
+
+		//calculate the next watering date
+
+		nextWateringPeriod.setText(getString(R.string.nextWateringPeriod) + DateFormat.getDateInstance().format(plant.getNextWatering()));
 
 		//The watering can button and its associated Listener
 		waterPlant = (ImageButton) findViewById(R.id.waterPersonalPlant);
@@ -64,13 +67,13 @@ public class PersonalPlantView extends AppCompatActivity {
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
 				builder.setTitle(getString(R.string.waterYourPlant) + plant.getName() + getString(R.string.questionMark));
-				builder.setMessage(getString(R.string.theNextWateringPeriodWillBeIn) + "[x] days, [y] hours.");
+				builder.setMessage(getString(R.string.theNextWateringPeriodWillBeIn) + DateFormat.getDateInstance().format(plant.getNextWatering()));
 
 				//When the user has selected that they have watered their plant
 				builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						//TODO Computation for the next time the user waters their plant
+						plant.setLastWatered(new Date());
 					}
 				});
 
@@ -94,8 +97,7 @@ public class PersonalPlantView extends AppCompatActivity {
 
 				builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
 					@Override
-					public void onClick(DialogInterface dialog, int which)
-					{
+					public void onClick(DialogInterface dialog, int which) {
 						//TODO Remove the plant from the Garden
 					}
 				});
