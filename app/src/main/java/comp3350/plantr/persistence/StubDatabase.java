@@ -23,41 +23,72 @@ public class StubDatabase implements DatabaseInterface {
 	private Garden _userGarden;
 
 	public StubDatabase() {
-		plants = new ArrayList<>(Arrays.asList(
-				new Plant(0, "Aloe", "Aloe", "aloe", new TemperatureRange(new Temperature(21), new Temperature(23)), 170),
-				new Plant(1, "Anthurium", "Anthurium", "anthurium", new TemperatureRange(new Temperature(21), new Temperature(23)), 50),
-				new Plant(2, "Asparagus fern", "Asparagus fern", "asparagus_fern", new TemperatureRange(new Temperature(21), new Temperature(30)), 1),
-				new Plant(3, "Peace lily", "Peace lily", "peace_lily", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(4, "Peperomia", "Peperomia", "peperomia", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(5, "Snake Plant", "Snake Plant", "snake_plant", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(6, "Dracaena", "Dracaena", "dracaena", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(7, "Philodendron", "Philodendron", "philodendron", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(8, "Aloe", "Aloe", "aloe", new TemperatureRange(new Temperature(21), new Temperature(23)), 170),
-				new Plant(9, "Anthurium", "Anthurium", "anthurium", new TemperatureRange(new Temperature(21), new Temperature(23)), 50),
-				new Plant(10, "Asparagus fern", "Asparagus fern", "asparagus_fern", new TemperatureRange(new Temperature(21), new Temperature(30)), 1),
-				new Plant(11, "Peace lily", "Peace lily", "peace_lily", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(12, "Peperomia", "Peperomia", "peperomia", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(13, "Snake Plant", "Snake Plant", "snake_plant", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(14, "Dracaena", "Dracaena", "dracaena", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(15, "Philodendron", "Philodendron", "philodendron", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(16, "Philodendron", "Philodendron", "philodendron", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(17, "Aloe", "Aloe", "aloe", new TemperatureRange(new Temperature(21), new Temperature(23)), 170),
-				new Plant(18, "Anthurium", "Anthurium", "anthurium", new TemperatureRange(new Temperature(21), new Temperature(23)), 50),
-				new Plant(19, "Asparagus fern", "Asparagus fern", "asparagus_fern", new TemperatureRange(new Temperature(21), new Temperature(30)), 1),
-				new Plant(20, "Peace lily", "Peace lily", "peace_lily", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(21, "Peperomia", "Peperomia", "peperomia", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(22, "Snake Plant", "Snake Plant", "snake_plant", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(23, "Dracaena", "Dracaena", "dracaena", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(24, "Philodendron", "Philodendron", "philodendron", new TemperatureRange(new Temperature(21), new Temperature(23)), 1)
+		plants = new ArrayList<Plant>(Arrays.asList(
+				new Plant.PlantBuilder(0)
+						.name("Aloe")
+						.desc("An Aloe!! Whew Lad")
+						.img("aloe")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(170)
+						.make(),
+				new Plant.PlantBuilder(1)
+						.name("Anthurium")
+						.desc("An Anthurium!! Woah man")
+						.img("anthurium")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(50)
+						.make(),
+				new Plant.PlantBuilder(2)
+						.name("Asparagus fern")
+						.desc("An Asparagus fern!! Waddup!")
+						.img("asparagus_fern")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(75)
+						.make(),
+				new Plant.PlantBuilder(3)
+						.name("Peace lily")
+						.desc("An Peace lily!! Soul crushing")
+						.img("peace_lily")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(35)
+						.make(),
+				new Plant.PlantBuilder(4)
+						.name("Peperomia")
+						.desc("An Peperomia!! Not to be confused with pepperoni")
+						.img("peperomia")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(80)
+						.make(),
+				new Plant.PlantBuilder(5)
+						.name("Snake Plant")
+						.desc("An Snake Plant!! Oh lawd")
+						.img("snake_plant")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(50)
+						.make(),
+				new Plant.PlantBuilder(6)
+						.name("Dracaena")
+						.desc("An Dracaena!! Oh jeez")
+						.img("dracaena")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(50)
+						.make(),
+				new Plant.PlantBuilder(7)
+						.name("Philodendron")
+						.desc("An Philodendron!! They've trapped me in this factory typing text send help")
+						.img("philodendron")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(50)
+						.make()
 		));
 
 		_userGarden = new Garden();
 		ArrayList<PersonalPlant> stubPersonalPlants = new ArrayList<>(Arrays.asList(
-				new PersonalPlant(getPlant(0), "Vera the Aloe Vera"),
-				new PersonalPlant(getPlant(1), "Arthur the Anthurium"),
-				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern"),
-				new PersonalPlant(getPlant(3), "Reece the Peace Lily"),
-				new PersonalPlant(getPlant(4), "Pupper the Peperomia")
+				new PersonalPlant(getPlant(0), "Vera the Aloe Vera", 0),
+				new PersonalPlant(getPlant(1), "Arthur the Anthurium", 1),
+				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern", 2),
+				new PersonalPlant(getPlant(3), "Reece the Peace Lily", 3),
+				new PersonalPlant(getPlant(4), "Pupper the Peperomia", 4)
 		));
 
 		_userGarden.addPlants(stubPersonalPlants);

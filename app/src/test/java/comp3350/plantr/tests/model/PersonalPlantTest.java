@@ -23,8 +23,8 @@ public class PersonalPlantTest {
 		Plant dummyPlantOne = new Plant(1);
 		Plant dummyPlantTwo = new Plant(2);
 
-		PersonalPlant firstPlant = new PersonalPlant(null, "myTestPlant");
-		PersonalPlant secondPlant = new PersonalPlant(dummyPlantOne, "myTestPlant2");
+		PersonalPlant firstPlant = new PersonalPlant(null, "myTestPlant", 0);
+		PersonalPlant secondPlant = new PersonalPlant(dummyPlantOne, "myTestPlant2", 1);
 
 		int first = firstPlant.getID();
 		int second = first+1;
@@ -39,20 +39,20 @@ public class PersonalPlantTest {
 		assertNotEquals(firstPlant, secondPlant);
 
 		//same everything
-		firstPlant = new PersonalPlant(dummyPlantOne, "sameString");
+		firstPlant = new PersonalPlant(dummyPlantOne, "sameString", 0);
 		secondPlant = new PersonalPlant(dummyPlantOne, "sameString", firstPlant.getID());
 
 		assertEquals(firstPlant,secondPlant);
 
 		//different ID, same plant and string though
-		firstPlant = new PersonalPlant(dummyPlantOne, "sameString");
-		secondPlant = new PersonalPlant(dummyPlantOne, "sameString");
+		firstPlant = new PersonalPlant(dummyPlantOne, "sameString", 0);
+		secondPlant = new PersonalPlant(dummyPlantOne, "sameString", 1);
 
 		assertNotEquals(firstPlant, secondPlant);
 
 		//different ID, different plant, same string
-		firstPlant = new PersonalPlant(dummyPlantOne, "I am a string");
-		secondPlant = new PersonalPlant(dummyPlantOne, "I am a string that is different");
+		firstPlant = new PersonalPlant(dummyPlantOne, "I am a string", 0);
+		secondPlant = new PersonalPlant(dummyPlantOne, "I am a string that is different", 1);
 
 	}
 }

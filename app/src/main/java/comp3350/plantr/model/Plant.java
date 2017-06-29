@@ -26,7 +26,7 @@ public class Plant {
 		_wateringPeriod = -1;
 	}
 
-	public Plant(int id, String name, String desc, String img, TemperatureRange optimalTemp, int wateringPeriod) {
+	private Plant(int id, String name, String desc, String img, TemperatureRange optimalTemp, int wateringPeriod) {
 		_plantID = id;
 		_plantName = name;
 		_plantDesc = desc;
@@ -103,5 +103,52 @@ public class Plant {
 		double weightedAverage = Math.min(Math.max((tempWeight * temperatureDifficulty) + (wateringWeight * wateringDifficulty), 0), levels); //weighted average of the difficulty of temperature and watering. Kept in the bound 0-3
 
 		return DifficultyType.getType((int) weightedAverage);
+	}
+
+	public static final class PlantBuilder {
+		private int id;
+		private String name;
+		private String desc;
+		private String img;
+		private TemperatureRange optimalTemp;
+		private int wateringPeriod;
+
+		public PlantBuilder(int id) {
+			this.id = id;
+		}
+
+		public PlantBuilder name(String name) {
+			this.name = name;
+			return this;
+		}
+
+		public PlantBuilder desc(String desc) {
+			this.desc = desc;
+			return this;
+		}
+
+		public PlantBuilder img(String img) {
+			this.img = img;
+			return this;
+		}
+
+		public PlantBuilder tempRange(Temperature min, Temperature max) {
+			this.optimalTemp = new TemperatureRange(min, max);
+			return this;
+		}
+
+		public PlantBuilder tempRange(TemperatureRange range) {
+			this.optimalTemp = range;
+			return this;
+		}
+
+		public PlantBuilder wateringPeriod(int period) {
+			this.wateringPeriod = period;
+			return this;
+		}
+
+		public Plant make() {
+			return new Plant(id, name, desc, img, optimalTemp, wateringPeriod);
+		}
 	}
 }
