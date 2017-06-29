@@ -10,18 +10,18 @@ import java.util.Date;
 
 public class PersonalPlant {
 
-	private static int idCounter = 0;
+	//private static int idCounter = 0;
 
 	private Plant _plantType;
 	private String _plantName;
 	private int _personalPlantID;
 
 
-	public PersonalPlant(Plant plantType, String plantName){
-		_plantType = plantType;
-		_plantName = plantName;
-		_personalPlantID = idCounter++;
-	}
+//	public PersonalPlant(Plant plantType, String plantName){
+//		_plantType = plantType;
+//		_plantName = plantName;
+//		_personalPlantID = idCounter++;
+//	}
 
 	public PersonalPlant(Plant plantType, String plantName, int id){
 		_plantType = plantType;
