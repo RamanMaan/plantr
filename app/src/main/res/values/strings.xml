@@ -6,7 +6,7 @@
     <string name="plantview_desc_prefix" formatted="false">Description: %s</string>
     <string name="plantview_difficulty" formatted="false">Difficulty: %s</string>
     <string name="plantview_optimal_temps" formatted="false">Optimal Temperature: %s\u00b0C - %s\u00b0C</string>
-    <string name="plantview_watering_freq" formatted="false">Watering Frequency: %d times per %s</string>
+    <string name="plantview_watering_freq" formatted="false">Watering Frequency: Every %d %s</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
