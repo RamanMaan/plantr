@@ -242,7 +242,7 @@ public class DataAccessObject implements DatabaseInterface {
 				personalPlantName = rs2.getString("PersonalPlantName");
 				plantType = rs2.getInt("PlantID");
 
-				plant = new PersonalPlant(getPlant(plantType), personalPlantName);
+				plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID);
 				plantsResult.add(plant);
 			}
 
