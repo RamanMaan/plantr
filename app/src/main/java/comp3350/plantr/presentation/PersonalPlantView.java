@@ -53,14 +53,14 @@ public class PersonalPlantView extends AppCompatActivity {
 		nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
 
 		//If the user has their own picture, use it
-		if (plant.get_personalPlantImg() != null)
-			plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.get_personalPlantImg(), null, this.getPackageName()));
+		//if (plant.get_personalPlantImg() != null)
+		//	plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.get_personalPlantImg(), null, this.getPackageName()));
 
 		//Otherwise use the default pictured stored in the database
-		else
-			plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getPersonalPlantType().getPlantImg(), null, this.getPackageName()));
+		//else
+		//	plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getPersonalPlantType().getPlantImg(), null, this.getPackageName()));
 
-		plantTitle.setText(plant.getPersonalPlantName());
+		plantTitle.setText(plant.getName());
 		lastTimeWatered.setText(getString(R.string.lastTimeWatered) + " mm/dd/yy");
 		nextWateringPeriod.setText(getString(R.string.nextWateringPeriod) + "[x]days [y]hours");
 
@@ -71,7 +71,7 @@ public class PersonalPlantView extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-				builder.setTitle(getString(R.string.waterYourPlant) + plant.getPersonalPlantName() + getString(R.string.questionMark));
+				builder.setTitle(getString(R.string.waterYourPlant) + plant.getName() + getString(R.string.questionMark));
 				builder.setMessage(getString(R.string.theNextWateringPeriodWillBeIn) + "[x] days, [y] hours.");
 
 				//When the user has selected that they have watered their plant

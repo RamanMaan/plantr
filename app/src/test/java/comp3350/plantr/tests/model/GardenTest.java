@@ -122,4 +122,14 @@ public class GardenTest {
 		assertFalse(myGarden.removePersonalPlantById(Integer.MAX_VALUE));
 		assertFalse(myGarden.removePersonalPlantById(Integer.MIN_VALUE));
 	}
+
+	@Test
+	public void test_getPersonalPlantByID(){
+		PersonalPlant p;
+		p = myGarden.getPersonalPlantById(0);
+		assertNotNull(p);
+		assertEquals(0,p.getID());
+		assertNotEquals(1, p.getID());
+		System.out.println(p.getName());
+	}
 }
