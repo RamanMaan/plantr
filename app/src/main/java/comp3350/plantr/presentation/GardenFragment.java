@@ -15,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.List;
-
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.model.Garden;
@@ -37,7 +36,6 @@ public class GardenFragment extends Fragment {
 
 	View myView;
 	private Garden myGarden;
-	private FloatingActionButton addButton;
 
 	@Nullable
 	@Override
@@ -47,39 +45,20 @@ public class GardenFragment extends Fragment {
 		//do the stuff here
 		myGarden = new Garden();
 		myGarden.addPlants(DatabaseAccess.open().getAllPersonalPlants());
-		DatabaseInterface db = DatabaseAccess.open();
-		addButton = (FloatingActionButton) myView.findViewById(R.id.addPlantButton);
 		ListView listView = (ListView) myView.findViewById(R.id.garden_view);
-		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, (List<PersonalPlant>) myGarden.getAllPlants());
+		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, myGarden.getAllPlants());
 
 		listView.setAdapter(listViewAdapter);
 
-		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		/*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(getActivity(), PersonalPlantView.class);
+				Intent intent = new Intent(getActivity(), PlantView.class); //need to change PlantView.class to PersonalPlantView.class when keaton commits his stuff.
+				//store the plant ID with the intent to display
 				intent.putExtra(getString(R.string.plant_id), position);
 				startActivity(intent);
 			}
-		});
-
-		addButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				//on click, take to modified plantipedia view to add plants to their garden
-				Fragment fragment = new PlantipediaFragment();
-				if (fragment != null) {
-					getFragmentManager().beginTransaction()
-							.replace(R.id.content_frame, fragment)
-							.commit();
-				}
-				DrawerLayout drawer = (DrawerLayout) myView.findViewById(R.id.drawer_layout);
-				drawer.closeDrawer(GravityCompat.START);
-			}
-
-
-		});
-
+		});*/
 
 		return myView;
 	}
