@@ -50,15 +50,15 @@ public class GardenFragment extends Fragment {
 
 		listView.setAdapter(listViewAdapter);
 
-		/*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(getActivity(), PlantView.class); //need to change PlantView.class to PersonalPlantView.class when keaton commits his stuff.
+				Intent intent = new Intent(getActivity(), PersonalPlantView.class);
 				//store the plant ID with the intent to display
 				intent.putExtra(getString(R.string.plant_id), position);
 				startActivity(intent);
 			}
-		});*/
+		});
 
 		return myView;
 	}
