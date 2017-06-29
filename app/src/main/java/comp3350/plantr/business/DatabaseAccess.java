@@ -1,5 +1,6 @@
 package comp3350.plantr.business;
 
+import comp3350.plantr.persistence.DataAccessObject;
 import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
 
@@ -16,7 +17,7 @@ public class DatabaseAccess {
 
 	public static DatabaseInterface open() {
 		if (_db == null) {
-			_db = new StubDatabase();
+			_db = new DataAccessObject(dbName);
 		}
 
 		return _db;
@@ -28,6 +29,10 @@ public class DatabaseAccess {
 		}
 
 		_db = null;
+	}
+
+	public static String getDBPathName() {
+		return dbPathName;
 	}
 
 	public static void setDBPathName(String pathName) {

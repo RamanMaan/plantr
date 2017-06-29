@@ -26,7 +26,7 @@ public interface DatabaseInterface {
 
 	PersonalPlant getPersonalPlantByID(int ID); //Return a PersonalPlant by Id,
 
-	Collection<PersonalPlant> getAllPersonalPlants();
+	List<PersonalPlant> getAllPersonalPlants();
 
-	public boolean addPersonalPlantToGarden(PersonalPlant plant);
+	void addPersonalPlantToGarden(PersonalPlant plant);
 }//StudDatabaseInterface

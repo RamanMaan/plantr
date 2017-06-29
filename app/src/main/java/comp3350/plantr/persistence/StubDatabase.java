@@ -88,11 +88,11 @@ public class StubDatabase implements DatabaseInterface {
 
 		_userGarden = new Garden();
 		ArrayList<PersonalPlant> stubPersonalPlants = new ArrayList<>(Arrays.asList(
-				new PersonalPlant(getPlant(0), "Vera the Aloe Vera"),
-				new PersonalPlant(getPlant(1), "Arthur the Anthurium"),
-				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern"),
-				new PersonalPlant(getPlant(3), "Reece the Peace Lily"),
-				new PersonalPlant(getPlant(4), "Pupper the Peperomia")
+				new PersonalPlant(getPlant(0), "Vera the Aloe Vera", 0),
+				new PersonalPlant(getPlant(1), "Arthur the Anthurium", 1),
+				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern", 2),
+				new PersonalPlant(getPlant(3), "Reece the Peace Lily", 3),
+				new PersonalPlant(getPlant(4), "Pupper the Peperomia", 4)
 		));
 
 		_userGarden.addPlants(stubPersonalPlants);
@@ -144,13 +144,13 @@ public class StubDatabase implements DatabaseInterface {
 	}
 
 	@Override
-	public Collection<PersonalPlant> getAllPersonalPlants(){
+	public List<PersonalPlant> getAllPersonalPlants(){
 		return _userGarden.getAllPlants();
 	}
 
 	@Override
-	public boolean addPersonalPlantToGarden(PersonalPlant plant) {
-		return _userGarden.addPlant(plant);
+	public void addPersonalPlantToGarden(PersonalPlant plant) {
+		_userGarden.addPlant(plant);
 	}
 
 }//StubDatabase
