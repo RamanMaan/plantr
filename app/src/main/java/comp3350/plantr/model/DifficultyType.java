@@ -1,4 +1,4 @@
-package comp3350.plantr.objects;
+package comp3350.plantr.model;
 
 /**
  * 5/28/2017

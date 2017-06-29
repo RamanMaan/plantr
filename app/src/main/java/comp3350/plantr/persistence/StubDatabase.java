@@ -2,32 +2,100 @@ package comp3350.plantr.persistence;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
-import comp3350.plantr.application.Constants;
-import comp3350.plantr.objects.Plant;
-import comp3350.plantr.objects.Temperature;
-import comp3350.plantr.objects.TemperatureRange;
+import comp3350.plantr.model.Garden;
+import comp3350.plantr.model.PersonalPlant;
+import comp3350.plantr.model.Plant;
+import comp3350.plantr.model.Temperature;
+import comp3350.plantr.model.TemperatureRange;
 
 /**
  * Created by Keaton MacLeod on 5/30/2017.
+ *
+ * Stub Database, used to mimick the behavior of a real database
  */
 
 public class StubDatabase implements DatabaseInterface {
 
-	//No Image, Temperature, Hardiness or Watering Frequency: Default Values Assigned Currently
 	private ArrayList<Plant> plants;
+	private Garden _userGarden;
+
+	public void close(){
+		//
+	}
 
 	public StubDatabase() {
 		plants = new ArrayList<Plant>(Arrays.asList(
-				new Plant(1, Constants.ALOE, Constants.PLANT_DESCRIPTOR + " " + Constants.ALOE, "aloe", new TemperatureRange(new Temperature(21), new Temperature(23)), 170),
-				new Plant(2, Constants.ANTHURIUM, Constants.PLANT_DESCRIPTOR + " " + Constants.ANTHURIUM, "anthurium", new TemperatureRange(new Temperature(21), new Temperature(23)), 50),
-				new Plant(3, Constants.ASPARAGUS_FERN, Constants.PLANT_DESCRIPTOR + " " + Constants.ASPARAGUS_FERN, "asparagus_fern", new TemperatureRange(new Temperature(21), new Temperature(30)), 1),
-				new Plant(4, Constants.PEACE_LILY, Constants.PLANT_DESCRIPTOR + " " + Constants.PEACE_LILY, "peace_lily", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(5, Constants.PEPEROMIA, Constants.PLANT_DESCRIPTOR + " " + Constants.PEPEROMIA, "peperomia", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(6, Constants.SNAKE_PLANT, Constants.PLANT_DESCRIPTOR + " " + Constants.SNAKE_PLANT, "snake_plant", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(7, Constants.DRACAENA, Constants.PLANT_DESCRIPTOR + " " + Constants.DRACAENA, "dracaena", new TemperatureRange(new Temperature(21), new Temperature(23)), 1),
-				new Plant(8, Constants.PHILODENDRON, Constants.PLANT_DESCRIPTOR + " " + Constants.PHILODENDRON, "philodendron", new TemperatureRange(new Temperature(21), new Temperature(23)), 1)
+				new Plant.PlantBuilder(0)
+						.name("Aloe")
+						.desc("An Aloe!! Whew Lad")
+						.img("aloe")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(170)
+						.make(),
+				new Plant.PlantBuilder(1)
+						.name("Anthurium")
+						.desc("An Anthurium!! Woah man")
+						.img("anthurium")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(50)
+						.make(),
+				new Plant.PlantBuilder(2)
+						.name("Asparagus fern")
+						.desc("An Asparagus fern!! Waddup!")
+						.img("asparagus_fern")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(75)
+						.make(),
+				new Plant.PlantBuilder(3)
+						.name("Peace lily")
+						.desc("An Peace lily!! Soul crushing")
+						.img("peace_lily")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(35)
+						.make(),
+				new Plant.PlantBuilder(4)
+						.name("Peperomia")
+						.desc("An Peperomia!! Not to be confused with pepperoni")
+						.img("peperomia")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(80)
+						.make(),
+				new Plant.PlantBuilder(5)
+						.name("Snake Plant")
+						.desc("An Snake Plant!! Oh lawd")
+						.img("snake_plant")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(50)
+						.make(),
+				new Plant.PlantBuilder(6)
+						.name("Dracaena")
+						.desc("An Dracaena!! Oh jeez")
+						.img("dracaena")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(50)
+						.make(),
+				new Plant.PlantBuilder(7)
+						.name("Philodendron")
+						.desc("An Philodendron!! They've trapped me in this factory typing text send help")
+						.img("philodendron")
+						.tempRange(new Temperature(21), new Temperature(23))
+						.wateringPeriod(50)
+						.make()
 		));
+
+		_userGarden = new Garden();
+		ArrayList<PersonalPlant> stubPersonalPlants = new ArrayList<>(Arrays.asList(
+				new PersonalPlant(getPlant(0), "Vera the Aloe Vera", 0),
+				new PersonalPlant(getPlant(1), "Arthur the Anthurium", 1),
+				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern", 2),
+				new PersonalPlant(getPlant(3), "Reece the Peace Lily", 3),
+				new PersonalPlant(getPlant(4), "Pupper the Peperomia", 4)
+		));
+
+		_userGarden.addPlants(stubPersonalPlants);
 
 	}//Constructor
 
@@ -41,25 +109,48 @@ public class StubDatabase implements DatabaseInterface {
 	public Plant getPlant(int id) {
 		Plant plant = null;
 		for (int a = 0; a < plants.size() && plant == null; a++) {
-			if (plants.get(a).getPlantID() == id)
+			if (plants.get(a).getPlantID() == id) {
 				plant = plants.get(a);
+			}
 		}
 		return plant;
 	}//getPlant
 
 	public Plant getPlant(String name) {
-		Plant plant = null;
-		for (int a = 0; a < plants.size() && plant == null; a++) {
-			if (plants.get(a).getPlantName().toLowerCase().equals(name.toLowerCase()))
-				plant = plants.get(a);
+		if (name == null) {
+			return null;
 		}
-		return plant;
+
+		Plant p;
+		for (int a = 0; a < plants.size(); a++) {
+			p = plants.get(a);
+			if (p.getPlantName().compareToIgnoreCase(name) == 0) {
+				return p;
+			}
+		}
+
+		return null;
 	}//getPlant
 
 	//Return an ArrayList of all Plant Objects
 	@Override
-	public ArrayList<Plant> getAllPlants() {
+	public List<Plant> getAllPlants() {
 		return plants;
 	}//getAllPlants
+
+	@Override
+	public PersonalPlant getPersonalPlantByID(int ID){
+		return _userGarden.getPersonalPlantById(ID);
+	}
+
+	@Override
+	public List<PersonalPlant> getAllPersonalPlants(){
+		return _userGarden.getAllPlants();
+	}
+
+	@Override
+	public void addPersonalPlantToGarden(PersonalPlant plant) {
+		_userGarden.addPlant(plant);
+	}
 
 }//StubDatabase

@@ -1,4 +1,4 @@
-package comp3350.plantr.objects;
+package comp3350.plantr.model;
 
 /**
  * Created: 5/28/2017
@@ -33,7 +33,7 @@ public class Temperature {
 
 	@Override
 	public String toString() {
-		return _degrees + "\u00b0C";
+		return Float.toString(_degrees);
 	}
 
 	private float celsiusToFahrenheit(float degrees) {
