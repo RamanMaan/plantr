@@ -6,16 +6,10 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_garden_layout"
-            android:icon="@drawable/ic_menu_camera"
             android:title="Garden"/>
         <item
             android:id="@+id/nav_plantipedia_layout"
-            android:icon="@drawable/ic_menu_camera"
             android:title="Plantipedia"/>
-        <item
-            android:id="@+id/nav_compost_bin_layout"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Compost Bin"/>
     </group>
 
 </menu>

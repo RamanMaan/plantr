@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.SQLWarning;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import comp3350.plantr.model.DifficultyType;
+import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.model.Temperature;
 import comp3350.plantr.model.TemperatureRange;
@@ -20,9 +22,9 @@ import comp3350.plantr.model.TemperatureRange;
 public class DataAccessObject implements DatabaseInterface{
 
 
-	private Statement st1;
+	private Statement st1, st2;
 	private Connection c1;
-	private ResultSet rs1;
+	private ResultSet rs1, rs2;
 
 	private String dbName;
 	private String dbType;
@@ -43,6 +45,7 @@ public class DataAccessObject implements DatabaseInterface{
 			url = "jdbc:hsqldb:file:" + dbPath; // stored on disk mode
 			c1 = DriverManager.getConnection(url, "SA", "");
 			st1 = c1.createStatement();
+			st2 = c1.createStatement();
 
 		} catch (Exception e) {
 			processSQLError(e);
@@ -64,7 +67,6 @@ public class DataAccessObject implements DatabaseInterface{
 
 	//Return a Plant Object by id
 	public Plant getPlant(int id){
-
 		Plant plant = null;
 
 		String plantName, plantDesc, plantIMG;
@@ -143,8 +145,7 @@ public class DataAccessObject implements DatabaseInterface{
 
 		List<Plant> plantsResult = new ArrayList<>();
 
-		try
-		{
+		try {
 			cmdString = "Select * from PLANTS";
 			rs1 = st1.executeQuery(cmdString);
 
@@ -171,25 +172,86 @@ public class DataAccessObject implements DatabaseInterface{
 		return plantsResult;
 	}
 
+	//Add a plant to the garden
+	public void addPersonalPlant(PersonalPlant personalPlant){
+		String values;
 
-	public String checkWarning(Statement st, int updateCount) {
-		String result;
-
-		result = null;
 		try {
-			SQLWarning warning = st.getWarnings();
-			if (warning != null)
-			{
-				result = warning.getMessage();
-			}
-		} catch (Exception e) {
-			result = processSQLError(e);
+			values = personalPlant.getID()
+					+", '" +personalPlant.getName()
+					+"', '" +personalPlant.getType().getPlantID()
+					+"'";
+			cmdString = "Insert into Garden " +" Values(" +values +")";
+			st1.executeUpdate(cmdString);
 		}
-		if (updateCount != 1) {
-			result = "Tuple not inserted correctly.";
+		catch (Exception e)
+		{
+			processSQLError(e);
 		}
-		return result;
 	}
+
+	//Return a PersonalPlant by Id
+	public PersonalPlant getPersonalPlantByID(int ID){
+		PersonalPlant plant = null;
+
+		String personalPlantName;
+		int personalPlantID, plantType;
+
+		try
+		{
+			cmdString = "Select * from Garden where PersonalPlantID=" + ID;
+			rs1 = st1.executeQuery(cmdString);
+
+			while (rs1.next()){
+				personalPlantID = rs1.getInt("PersonalPlantID");
+				personalPlantName = rs1.getString("PlantName");
+				plantType = rs1.getInt("PlantType");
+
+				plant = new PersonalPlant( getPlant(plantType), personalPlantName, personalPlantID);
+			}
+
+			rs1.close();
+		}
+		catch (Exception e)
+		{
+			processSQLError(e);
+		}
+
+		return plant;
+	}
+
+	//Return a list of all PersonalPlants
+	public List<PersonalPlant> getAllPersonalPlants(){
+
+		List<PersonalPlant> plantsResult = new ArrayList<>();
+		PersonalPlant plant;
+		String personalPlantName;
+		int personalPlantID, plantType;
+
+		try
+		{
+			cmdString = "Select * from Garden";
+			rs2 = st2.executeQuery(cmdString);
+
+			while (rs2.next()){
+				personalPlantID = rs2.getInt("PersonalPlantID");
+				personalPlantName = rs2.getString("PlantName");
+				plantType = rs2.getInt("PlantType");
+
+				plant = new PersonalPlant( getPlant(plantType), personalPlantName, personalPlantID);
+				plantsResult.add(plant);
+			}
+
+			rs2.close();
+		}
+		catch (Exception e)
+		{
+			processSQLError(e);
+		}
+
+		return plantsResult;
+	}
+
 
 	public String processSQLError(Exception e) {
 		String result = "*** SQL Error: " + e.getMessage();

@@ -1,4 +1,4 @@
-package comp3350.plantr.application;
+package comp3350.plantr.business;
 
 import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.DataAccessObject;
@@ -12,6 +12,7 @@ public class Services
 	{
 		if (dataAccessService == null)
 		{
+//			dataAccessService = new StubDatabase(dbName);
 			dataAccessService = new DataAccessObject(dbName);
 			dataAccessService.open(Main.getDBPathName());
 		}

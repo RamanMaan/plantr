@@ -2,12 +2,9 @@ package comp3350.plantr.business;
 
 import java.util.List;
 
-import comp3350.plantr.application.Main;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DataAccessObject;
 import comp3350.plantr.persistence.DatabaseInterface;
-import comp3350.plantr.application.Services;
-import comp3350.plantr.persistence.StubDatabase;
 
 /**
  * 6/6/2017

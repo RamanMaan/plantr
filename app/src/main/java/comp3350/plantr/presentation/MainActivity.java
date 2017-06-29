@@ -18,8 +18,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import comp3350.plantr.R;
-import comp3350.plantr.application.Main;
-//import comp3350.plantr.business.Services;
+import comp3350.plantr.business.Main;
+import comp3350.plantr.business.Services;
 
 //import static comp3350.plantr.business.AccessPlants.startUp;
 
@@ -84,9 +84,6 @@ public class MainActivity extends AppCompatActivity
 				break;
 			case R.id.nav_plantipedia_layout:
 				fragment = new PlantipediaFragment();
-				break;
-			case R.id.nav_compost_bin_layout:
-				fragment = new CompostBinFragment();
 				break;
 		}
 

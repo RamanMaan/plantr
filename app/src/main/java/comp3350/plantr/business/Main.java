@@ -1,6 +1,8 @@
-package comp3350.plantr.application;
+package comp3350.plantr.business;
 
 //import comp3350.plantr.presentation.CLI;
+
+import comp3350.plantr.business.Services;
 
 public class Main
 {
