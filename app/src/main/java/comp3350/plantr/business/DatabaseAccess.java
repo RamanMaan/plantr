@@ -13,6 +13,10 @@ public class DatabaseAccess {
 	private static DatabaseInterface _db = null;
 
 	public static DatabaseInterface open() {
-		return _db == null ? new StubDatabase() : _db;
+		if(_db == null) {
+			_db = new StubDatabase();
+		}
+
+		return _db;
 	}
 }
