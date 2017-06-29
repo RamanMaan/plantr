@@ -14,11 +14,14 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import java.util.List;
+
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.model.Garden;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
+import comp3350.plantr.persistence.DatabaseInterface;
 
 /**
  * The Garden View
@@ -43,22 +46,24 @@ public class GardenFragment extends Fragment {
 
 		//do the stuff here
 		myGarden = new Garden();
-		myGarden.addPlant(DatabaseAccess.open().getPersonalPlantByID(0));
+		myGarden.addPlants(DatabaseAccess.open().getAllPersonalPlants());
+		DatabaseInterface db = DatabaseAccess.open();
 		addButton = (FloatingActionButton) myView.findViewById(R.id.addPlantButton);
 		ListView listView = (ListView) myView.findViewById(R.id.garden_view);
-		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, myGarden.getAllPlants());
+		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, (List<PersonalPlant>) db.getAllPersonalPlants());
 
 		listView.setAdapter(listViewAdapter);
 
-		/*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(getActivity(), PlantView.class); //need to change PlantView.class to PersonalPlantView.class when keaton commits his stuff.
+				System.out.println("PLANT POSITION HERE: " + position);
+				Intent intent = new Intent(getActivity(), PersonalPlantView.class); //need to change PlantView.class to PersonalPlantView.class when keaton commits his stuff.
 				//store the plant ID with the intent to display
 				intent.putExtra(getString(R.string.plant_id), position);
 				startActivity(intent);
 			}
-		});*/
+		});
 
 		addButton.setOnClickListener(new View.OnClickListener() {
 			@Override
