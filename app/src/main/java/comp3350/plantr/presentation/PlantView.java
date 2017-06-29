@@ -40,13 +40,13 @@ public class PlantView extends AppCompatActivity {
 		setContentView(R.layout.activity_plant_view);
 		Log.d(TAG, "onCreate: started.");
 
-		// initialize the database
-		db = DatabaseAccess.open();
 		addToGarden = (Button) findViewById(R.id.addPersonalPlantButton);//initialize button
 		final android.content.Context context = this;
 
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
-		final Plant plant = db.getPlant(plantPosition);
+
+		final Plant plant = DatabaseAccess.open().getPlant(plantPosition);
+		DatabaseAccess.close();
 
 		plantImage = (ImageView) findViewById(R.id.plantImageView);
 		plantTitle = (TextView) findViewById(R.id.plantViewTitle);
@@ -85,8 +85,8 @@ public class PlantView extends AppCompatActivity {
 					public void onClick(DialogInterface dialog, int which) {
 						text = userInput.getText().toString();
 						p = new PersonalPlant(plant, text);
-						db.addPersonalPlantToGarden(p);
-
+						DatabaseAccess.open().addPersonalPlantToGarden(p);
+						DatabaseAccess.close();
 					}
 				});
 
