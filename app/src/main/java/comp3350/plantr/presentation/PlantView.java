@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import comp3350.plantr.R;
@@ -25,6 +26,8 @@ public class PlantView extends AppCompatActivity {
 	private Button addToGarden = null;
 	private String text = "";
 	private AlertDialog.Builder ADBuilder = null;
+	private PersonalPlant p = null;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,40 +68,40 @@ public class PlantView extends AppCompatActivity {
 			@Override
 			public void onClick(View view) {
 				//initialize alert dialog box:
-				ADBuilder = new AlertDialog.Builder(context);
-				buildAlertDialog(context);
+				ADBuilder = new AlertDialog.Builder(view.getContext());
+				ADBuilder.setTitle("Enter a name for your plant:");
+				final EditText userInput = new EditText(view.getContext());
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+						LinearLayout.LayoutParams.MATCH_PARENT,
+						LinearLayout.LayoutParams.MATCH_PARENT);
+				userInput.setLayoutParams(lp);
+
+				userInput.setInputType(InputType.TYPE_CLASS_TEXT);
+				ADBuilder.setView(userInput);
+
+				//set buttons
+				ADBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						text = userInput.getText().toString();
+						p = new PersonalPlant(plant, text);
+						db.addPersonalPlantToGarden(p);
+
+					}
+				});
+
+				ADBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				});
 
 				ADBuilder.show();
 
-				PersonalPlant p = new PersonalPlant(plant, text);
-				db.addPersonalPlantToGarden(p);
-
 			}
 		});
 	}
 
-
-	private void buildAlertDialog(android.content.Context context) {
-		ADBuilder.setTitle("Enter a name for your plant:");
-		final EditText userInput = new EditText(context);
-		userInput.setInputType(InputType.TYPE_CLASS_TEXT);
-		ADBuilder.setView(userInput);
-
-		//set buttons
-		ADBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				text = userInput.getText().toString();
-			}
-		});
-
-		ADBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				dialog.cancel();
-			}
-		});
-
-	}
 
 }
