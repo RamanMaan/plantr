@@ -42,9 +42,10 @@ public class GardenFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		myView = inflater.inflate(R.layout.garden_layout, container, false);
 
-		//do the stuff here
 		myGarden = new Garden();
 		myGarden.addPlants(DatabaseAccess.open().getAllPersonalPlants());
+		DatabaseAccess.close();
+
 		ListView listView = (ListView) myView.findViewById(R.id.garden_view);
 		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, myGarden.getAllPlants());
 
