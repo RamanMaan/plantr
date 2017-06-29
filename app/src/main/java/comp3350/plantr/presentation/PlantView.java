@@ -70,7 +70,7 @@ public class PlantView extends AppCompatActivity {
 
 				ADBuilder.show();
 
-				PersonalPlant p = new PersonalPlant(plant, text, 0);
+				PersonalPlant p = new PersonalPlant(plant, text);
 				db.addPersonalPlantToGarden(p);
 
 			}

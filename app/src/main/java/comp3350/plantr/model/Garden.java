@@ -20,8 +20,13 @@ public class Garden {
 	}
 
 	public boolean removePersonalPlantById(int ID){
-
-		return _plants.remove(new PersonalPlant(null, null, ID));
+		for(int i = 0; i < _plants.size(); i++) {
+			if(_plants.get(i).getID() == ID) {
+				_plants.remove(i);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean removePersonalPlant(PersonalPlant entry){
@@ -29,16 +34,12 @@ public class Garden {
 	}
 
 	public PersonalPlant getPersonalPlantById(int ID){
-		PersonalPlant returnPlant = null;
-
-		int index = _plants.indexOf(new PersonalPlant(null, null, ID));
-
-		//found in Garden
-		if(index != -1){
-			returnPlant = _plants.get(index);
+		for(int i = 0; i < _plants.size(); i++) {
+			if(_plants.get(i).getID() == ID) {
+				return _plants.get(i);
+			}
 		}
-
-		return returnPlant;
+		return null;
 	}
 
 	public boolean addPlant(PersonalPlant plant){

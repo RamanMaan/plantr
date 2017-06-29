@@ -16,10 +16,13 @@ public class PersonalPlant {
 	private int _personalPlantID;
 	private Date _lastWatered;
 
-	public PersonalPlant(Plant plantType, String plantName, int id) {
+	private static int idCtr = 0;
+
+	public PersonalPlant(Plant plantType, String plantName) {
 		_plantType = plantType;
 		_plantName = plantName;
-		_personalPlantID = id;
+		_personalPlantID = idCtr;
+		idCtr++;
 		_lastWatered = new Date();
 	}
 
