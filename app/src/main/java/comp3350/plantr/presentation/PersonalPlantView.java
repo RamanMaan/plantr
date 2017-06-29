@@ -43,26 +43,14 @@ public class PersonalPlantView extends AppCompatActivity {
 
 		// initialize the stub database
 		db = DatabaseAccess.open();
-
-		System.out.println("IN DATABASE: " + db.getAllPersonalPlants());
-		System.out.println("ID 1: " + db.getPersonalPlantByID(1));
-
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 		plant = db.getPersonalPlantByID(plantPosition);
-
 
 		plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
 		plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
 		lastTimeWatered = (TextView) findViewById(R.id.personalPlantViewLastTimeWatered);
 		nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
-
-		//If the user has their own picture, use it
-		//if (plant.get_personalPlantImg() != null)
-		//	plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.get_personalPlantImg(), null, this.getPackageName()));
-
-		//Otherwise use the default pictured stored in the database
-		//else
-		//	plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getPersonalPlantType().getPlantImg(), null, this.getPackageName()));
+		plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getType().getPlantImg(), null, this.getPackageName()));
 
 		plantTitle.setText(plant.getName());
 		lastTimeWatered.setText(getString(R.string.lastTimeWatered) + " mm/dd/yy");
@@ -108,7 +96,7 @@ public class PersonalPlantView extends AppCompatActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which)
 					{
-
+						//TODO Remove the plant from the Garden
 					}
 				});
 

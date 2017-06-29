@@ -50,16 +50,14 @@ public class GardenFragment extends Fragment {
 		DatabaseInterface db = DatabaseAccess.open();
 		addButton = (FloatingActionButton) myView.findViewById(R.id.addPlantButton);
 		ListView listView = (ListView) myView.findViewById(R.id.garden_view);
-		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, (List<PersonalPlant>) db.getAllPersonalPlants());
+		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, (List<PersonalPlant>) myGarden.getAllPlants());
 
 		listView.setAdapter(listViewAdapter);
 
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				System.out.println("PLANT POSITION HERE: " + position);
-				Intent intent = new Intent(getActivity(), PersonalPlantView.class); //need to change PlantView.class to PersonalPlantView.class when keaton commits his stuff.
-				//store the plant ID with the intent to display
+				Intent intent = new Intent(getActivity(), PersonalPlantView.class);
 				intent.putExtra(getString(R.string.plant_id), position);
 				startActivity(intent);
 			}
