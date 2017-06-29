@@ -22,6 +22,10 @@ public class StubDatabase implements DatabaseInterface {
 	private ArrayList<Plant> plants;
 	private Garden _userGarden;
 
+	public void close(){
+		//
+	}
+
 	public StubDatabase() {
 		plants = new ArrayList<Plant>(Arrays.asList(
 				new Plant.PlantBuilder(0)
