@@ -17,7 +17,7 @@ public class DatabaseAccess {
 
 	public static DatabaseInterface open() {
 		if (_db == null) {
-			_db = new DataAccessObject(dbName);
+			_db = new StubDatabase();
 			_db.open();
 		}
 
