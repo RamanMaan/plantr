@@ -16,6 +16,8 @@ import comp3350.plantr.model.Plant;
 public interface DatabaseInterface {
 	DatabaseInterface open(); //Return an instance of the database
 
+	void close();//Closes connection with the database
+
 	Plant getPlant(int id); //Return a Plant Object by id
 
 	Plant getPlant(String name); //Return a Plant Object by name

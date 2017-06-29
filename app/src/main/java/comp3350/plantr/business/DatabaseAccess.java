@@ -19,4 +19,12 @@ public class DatabaseAccess {
 
 		return _db;
 	}
+
+	public static void close() {
+		if(_db != null) {
+			_db.close();
+		}
+
+		_db = null;
+	}
 }
