@@ -47,10 +47,22 @@ public class PlantTest {
 		Plant p = new Plant(0, "Bob", "A test Plant", null, tempRange, wateringFreq);
 		assertNull(p.getDifficulty());
 
+		tempRange = new TemperatureRange(new Temperature(21), new Temperature(24));
+		wateringFreq = 170;
+		p = new Plant(0, "Bob", "A test Plant", null, tempRange, wateringFreq);
+		assertTrue(p.getDifficulty() == DifficultyType.EASY);
+
+		tempRange = new TemperatureRange(new Temperature(24), new Temperature(27));
+		wateringFreq = 170;
+		p = new Plant(0, "Bob", "A test Plant", null, tempRange, wateringFreq);
+		assertTrue(p.getDifficulty() == DifficultyType.MEDIUM);
+
 		//test if parameters are valid
 		tempRange = new TemperatureRange(new Temperature(21), new Temperature(24));
 		wateringFreq = 48;
 		p = new Plant(0, "Bob", "A test Plant", null, tempRange, wateringFreq);
 		assertTrue(p.getDifficulty() == DifficultyType.HARD);
+
+
 	}
 }
