@@ -145,6 +145,8 @@ public class StubDatabase implements DatabaseInterface {
 	}
 
 	@Override
-	public boolean addPersonalPlantToGarden(PersonalPlant plant) { return _userGarden.addPlant(plant); }
+	public boolean addPersonalPlantToGarden(PersonalPlant plant) {
+		return _userGarden.addPlant(plant);
+	}
 
 }//StubDatabase

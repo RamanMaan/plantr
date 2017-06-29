@@ -29,7 +29,6 @@ public class PlantView extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		final DatabaseInterface db;
-		Plant plant;
 		ImageView plantImage;
 		TextView plantTitle, plantDesc, plantDifficulty, plantOptimalTempRange, wateringFrequency;
 
@@ -44,7 +43,7 @@ public class PlantView extends AppCompatActivity {
 		final android.content.Context context = this;
 
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
-		plant = db.getPlant(plantPosition);
+		final Plant plant = db.getPlant(plantPosition);
 
 		plantImage = (ImageView) findViewById(R.id.plantImageView);
 		plantTitle = (TextView) findViewById(R.id.plantViewTitle);
@@ -71,8 +70,8 @@ public class PlantView extends AppCompatActivity {
 
 				ADBuilder.show();
 
-				PersonalPlant plant = new PersonalPlant(new Plant(0), text, 0);
-				db.addPersonalPlantToGarden(plant);
+				PersonalPlant p = new PersonalPlant(plant, text, 0);
+				db.addPersonalPlantToGarden(p);
 
 			}
 		});
