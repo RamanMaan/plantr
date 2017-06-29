@@ -15,7 +15,6 @@ public class PersonalPlant {
 	private Plant _plantType;
 	private String _plantName;
 	private int _personalPlantID;
-	private String _personalPlantImg;
 
 
 	public PersonalPlant(Plant plantType, String plantName){
@@ -28,6 +27,7 @@ public class PersonalPlant {
 		_plantType = plantType;
 		_plantName = plantName;
 		_personalPlantID = id;
+
 	}
 
 	public boolean equals(Object other){
@@ -48,8 +48,8 @@ public class PersonalPlant {
 		return _personalPlantID;
 	}
 
-	public String getPersonalPlantName() {return _plantName;}
-	public Plant getPersonalPlantType() {return _plantType;}
-	public String get_personalPlantImg() {return _personalPlantImg;}
+	public String getName() { return _plantName; }
+
+	public Plant getType() { return _plantType; }
 
 }
