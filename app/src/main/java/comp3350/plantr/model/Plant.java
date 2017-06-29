@@ -1,7 +1,5 @@
 package comp3350.plantr.model;
 
-import comp3350.plantr.business.Difficulty;
-
 /**
  * Created: 5/28/2017
  * Raman Maan
@@ -34,7 +32,7 @@ public class Plant {
 		_plantDesc = desc;
 		_plantImg = img;
 		_optimalTemp = optimalTemp;
-		_difficulty = Difficulty.calculateDifficulty(optimalTemp, wateringPeriod); //this is a derived attribute
+		_difficulty = calculateDifficulty(optimalTemp, wateringPeriod); //this is a derived attribute
 		_wateringPeriod = wateringPeriod;
 	}
 
@@ -76,5 +74,34 @@ public class Plant {
 
 	public String toString() {
 		return "{id : " + _plantID + ", name : " + _plantName + "}";
+	}
+
+	//This is a way of measuring the difficulty of taking care of a Plant
+	private DifficultyType calculateDifficulty(TemperatureRange optimalTemp, int wateringPeriod){
+		final int levels = DifficultyType.values().length;
+		final double tempSlope = 0.1;
+		final double wateringSlopeConstant = (levels - 1.0) / levels; //so that at point weeks = 1, the watering difficulty also = 1
+		final Temperature roomTemp = new Temperature(21);
+		final int day = 24; // hours in a day
+		final int week = day * 7; // hours in a week.
+		final double tempWeight = 0.6; //the weight we apply to temperature
+		final double wateringWeight = 1 - tempWeight; //the weight we apply to watering frequency
+
+		if (optimalTemp == null || wateringPeriod < 0) {
+			return null;
+		}
+
+		//if the watering period is less than 2 days, it's automatically max difficulty
+		if (wateringPeriod <= day * 2) {
+			return DifficultyType.HARD;
+		}
+
+		double temperatureDifficulty = -levels * Math.exp(-tempSlope * Math.pow(optimalTemp.getMean() - roomTemp.getTemp(), 2)) + levels; //a reverse bell curve centered on room temp
+
+		double wateringDifficulty = Math.max(-((levels * (wateringPeriod - 1)) / week) * wateringSlopeConstant + levels, 0);//linear decrease in difficulty as time between watering increases. Anything > 1 week is considered "easy"
+
+		double weightedAverage = Math.min(Math.max((tempWeight * temperatureDifficulty) + (wateringWeight * wateringDifficulty), 0), levels); //weighted average of the difficulty of temperature and watering. Kept in the bound 0-3
+
+		return DifficultyType.getType((int) weightedAverage);
 	}
 }
