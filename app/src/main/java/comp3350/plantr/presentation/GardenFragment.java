@@ -44,7 +44,7 @@ public class GardenFragment extends Fragment {
 
 		myGarden = new Garden();
 		myGarden.addPlants(DatabaseAccess.open().getAllPersonalPlants());
-		DatabaseAccess.close();
+
 
 		ListView listView = (ListView) myView.findViewById(R.id.garden_view);
 		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, myGarden.getAllPlants());

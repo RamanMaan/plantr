@@ -46,7 +46,6 @@ public class PlantView extends AppCompatActivity {
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
 		final Plant plant = DatabaseAccess.open().getPlant(plantPosition);
-		DatabaseAccess.close();
 
 		plantImage = (ImageView) findViewById(R.id.plantImageView);
 		plantTitle = (TextView) findViewById(R.id.plantViewTitle);
@@ -86,7 +85,6 @@ public class PlantView extends AppCompatActivity {
 						text = userInput.getText().toString();
 						p = new PersonalPlant(plant, text);
 						DatabaseAccess.open().addPersonalPlantToGarden(p);
-						DatabaseAccess.close();
 					}
 				});
 

@@ -39,7 +39,6 @@ public class PlantipediaFragment extends Fragment {
 		myView = inflater.inflate(R.layout.plantipedia_layout, container, false);
 
 		List<Plant> plantList = DatabaseAccess.open().getAllPlants();
-		DatabaseAccess.close();
 
 		EditText search = (EditText) myView.findViewById(R.id.plantipedia_searchbar);
 		final ListView listView = (ListView) myView.findViewById(R.id.plantipedia_listview);

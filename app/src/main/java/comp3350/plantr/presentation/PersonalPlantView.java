@@ -44,7 +44,6 @@ public class PersonalPlantView extends AppCompatActivity {
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 		// initialize the stub database
 		plant = DatabaseAccess.open().getPersonalPlantByID(plantPosition);
-		DatabaseAccess.close();
 
 		plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
 		plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
