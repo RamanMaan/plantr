@@ -48,4 +48,8 @@ public class PersonalPlant {
 		return _personalPlantID;
 	}
 
+	public String getName() { return _plantName; }
+
+	public Plant getType() { return _plantType; }
+
 }
