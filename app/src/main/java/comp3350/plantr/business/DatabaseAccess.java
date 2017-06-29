@@ -15,7 +15,7 @@ public class DatabaseAccess {
 	private static DatabaseInterface _db = null;
 
 	public static DatabaseInterface open() {
-		if(_db == null) {
+		if (_db == null) {
 			_db = new StubDatabase();
 		}
 
@@ -23,7 +23,7 @@ public class DatabaseAccess {
 	}
 
 	public static void close() {
-		if(_db != null) {
+		if (_db != null) {
 			_db.close();
 		}
 
