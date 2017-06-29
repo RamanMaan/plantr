@@ -23,8 +23,8 @@ public class GardenTest {
 	private ArrayList<PersonalPlant> generatePlantList(){
 		ArrayList<PersonalPlant> plantList = new ArrayList<>();
 
-		for(int i = 0; i < 10; i++){
-			plantList.add(new PersonalPlant(null, null));
+		for(int i = 2; i < 12; i++){
+			plantList.add(new PersonalPlant(null, null, i));
 		}
 
 		return plantList;
@@ -35,8 +35,8 @@ public class GardenTest {
 
 		myGarden = new Garden();
 
-		PersonalPlant plantOne = new PersonalPlant(null, null);
-		PersonalPlant plantTwo = new PersonalPlant(null, null);
+		PersonalPlant plantOne = new PersonalPlant(null, null, 0);
+		PersonalPlant plantTwo = new PersonalPlant(null, null, 1);
 
 		assertTrue(myGarden.addPlant(plantOne));
 		assertTrue(myGarden.addPlant(plantTwo));
@@ -63,8 +63,8 @@ public class GardenTest {
 	public void garden_testRemovePersonalPlant(){
 		myGarden = new Garden();
 
-		PersonalPlant plantOne = new PersonalPlant(null, null);
-		PersonalPlant plantTwo = new PersonalPlant(null, null);
+		PersonalPlant plantOne = new PersonalPlant(null, null, 0);
+		PersonalPlant plantTwo = new PersonalPlant(null, null, 1);
 
 		ArrayList<PersonalPlant> plants = generatePlantList();
 
@@ -93,8 +93,8 @@ public class GardenTest {
 	public void garden_testRemovePersonalPlantByID(){
 		myGarden = new Garden();
 
-		PersonalPlant plantOne = new PersonalPlant(null, null);
-		PersonalPlant plantTwo = new PersonalPlant(null, null);
+		PersonalPlant plantOne = new PersonalPlant(null, null, 0);
+		PersonalPlant plantTwo = new PersonalPlant(null, null, 1);
 
 		int plantIdOne = plantOne.getID();
 		int plantIdTwo = plantTwo.getID();
