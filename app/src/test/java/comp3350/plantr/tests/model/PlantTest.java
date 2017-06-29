@@ -73,7 +73,5 @@ public class PlantTest {
 				.wateringPeriod(wateringFreq)
 				.make();
 		assertTrue(p.getDifficulty() == DifficultyType.HARD);
-
-
 	}
 }
