@@ -42,7 +42,7 @@ public class PlantipediaFragment extends Fragment {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(getActivity(), PersonalPlantView.class);
+				Intent intent = new Intent(getActivity(), PlantView.class);
 				//store the plant ID with the intent to display
 				intent.putExtra(getString(R.string.plant_id), position);
 				startActivity(intent);
