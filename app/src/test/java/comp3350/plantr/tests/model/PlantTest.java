@@ -27,6 +27,7 @@ public class PlantTest {
 		//test an actual plant
 		p = DatabaseAccess.open().getAllPlants().get(0);
 		assertNotNull(p.getDifficulty());
+		DatabaseAccess.close();
 	}
 
 	@Test

@@ -17,5 +17,7 @@ public class DatabaseAccessTest {
 
 		DatabaseInterface db2 = DatabaseAccess.open();
 		assertTrue(db.getAllPlants().equals(db2.getAllPlants()));
+
+		DatabaseAccess.close();
 	}
 }

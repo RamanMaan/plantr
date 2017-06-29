@@ -19,6 +19,7 @@ import java.util.List;
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.model.Plant;
+import comp3350.plantr.persistence.DatabaseInterface;
 
 /**
  * Plantipedia view
@@ -38,6 +39,7 @@ public class PlantipediaFragment extends Fragment {
 		myView = inflater.inflate(R.layout.plantipedia_layout, container, false);
 
 		List<Plant> plantList = DatabaseAccess.open().getAllPlants();
+
 		EditText search = (EditText) myView.findViewById(R.id.plantipedia_searchbar);
 		final ListView listView = (ListView) myView.findViewById(R.id.plantipedia_listview);
 		final PlantListAdapter listViewAdapter = new PlantListAdapter(getActivity(), R.layout.activity_plant_list_item, plantList);
