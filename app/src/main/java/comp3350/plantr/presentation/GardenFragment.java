@@ -14,8 +14,12 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
+import java.util.List;
+
 import comp3350.plantr.R;
+import comp3350.plantr.business.AccessGarden;
 import comp3350.plantr.business.AccessPlants;
+import comp3350.plantr.business.Main;
 import comp3350.plantr.model.Garden;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
@@ -27,6 +31,8 @@ import comp3350.plantr.model.Plant;
  */
 
 public class GardenFragment extends Fragment {
+
+	private AccessGarden accessGarden;
 
 	public GardenFragment() {
 		//required Empty constructor
@@ -41,12 +47,17 @@ public class GardenFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		myView = inflater.inflate(R.layout.garden_layout, container, false);
 
+		accessGarden = new AccessGarden();
+
+		List<PersonalPlant> plants = accessGarden.getPlants();
+
 		//do the stuff here
-		myGarden = new Garden();
-		myGarden.addPlant(AccessPlants.open().getPersonalPlantByID(0));
+//		myGarden = new Garden();
+//		myGarden.addPlant(AccessGarden.open().getPersonalPlantByID(0));
 		addButton = (FloatingActionButton) myView.findViewById(R.id.addPlantButton);
 		ListView listView = (ListView) myView.findViewById(R.id.garden_view);
-		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, myGarden.getAllPlants());
+//		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, myGarden.getAllPlants());
+		PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(getActivity(), R.layout.activity_plant_list_item, plants);
 
 		listView.setAdapter(listViewAdapter);
 

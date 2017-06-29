@@ -146,7 +146,7 @@ public class DataAccessObject implements DatabaseInterface{
 		List<Plant> plantsResult = new ArrayList<>();
 
 		try {
-			cmdString = "Select * from PLANTS";
+			cmdString = "Select * from Plants";
 			rs1 = st1.executeQuery(cmdString);
 
 			while (rs1.next()){
@@ -235,8 +235,8 @@ public class DataAccessObject implements DatabaseInterface{
 
 			while (rs2.next()){
 				personalPlantID = rs2.getInt("PersonalPlantID");
-				personalPlantName = rs2.getString("PlantName");
-				plantType = rs2.getInt("PlantType");
+				personalPlantName = rs2.getString("PersonalPlantName");
+				plantType = rs2.getInt("PlantID");
 
 				plant = new PersonalPlant( getPlant(plantType), personalPlantName, personalPlantID);
 				plantsResult.add(plant);
