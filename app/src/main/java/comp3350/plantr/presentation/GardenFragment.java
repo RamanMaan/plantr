@@ -4,22 +4,15 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
-import java.util.List;
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.model.Garden;
-import comp3350.plantr.model.PersonalPlant;
-import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
 
 /**
