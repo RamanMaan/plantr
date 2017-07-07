@@ -22,8 +22,9 @@ import static org.junit.Assert.assertTrue;
 public class DatabaseTest {
 
 	@Test
-	public void getPlantById() {
-		DatabaseInterface database = DatabaseAccess.open();
+	public void getPlantById() throws Exception {
+		DatabaseAccess.openStub();
+		DatabaseInterface database = DatabaseAccess.getDatabaseAccess();
 
 		//test plant with existing id
 		Plant plant = database.getPlant(1);
@@ -36,13 +37,12 @@ public class DatabaseTest {
 		//test plant with out of bounds id
 		Plant outOfBoundsP = database.getPlant(Integer.MAX_VALUE);
 		assertNull(outOfBoundsP);
-
-		DatabaseAccess.close();
 	}//getPlant
 
 	@Test
-	public void getPlantByName() {
-		DatabaseInterface database = DatabaseAccess.open();
+	public void getPlantByName() throws Exception {
+		DatabaseAccess.openStub();
+		DatabaseInterface database = DatabaseAccess.getDatabaseAccess();
 
 		//test plant with existing name
 		Plant aloe = database.getPlant("aloe");
@@ -59,13 +59,12 @@ public class DatabaseTest {
 		//test plant with non-existing name
 		Plant outOfBoundsP = database.getPlant("string_to_fail_test");
 		assertNull(outOfBoundsP);
-
-		DatabaseAccess.close();
 	}//getPlant
 
 	@Test
-	public void getAllPlants() {
-		DatabaseInterface database = DatabaseAccess.open();
+	public void getAllPlants() throws Exception {
+		DatabaseAccess.openStub();
+		DatabaseInterface database = DatabaseAccess.getDatabaseAccess();
 
 		List<Plant> plants = database.getAllPlants();
 		for (int a = 0; a < plants.size(); a++) {
@@ -76,8 +75,6 @@ public class DatabaseTest {
 			Plant p = database.getPlant(i);
 			assertTrue(p.equals(plants.get(i)));
 		}
-
-		DatabaseAccess.close();
 	}//getAllPlants
 
 }//StubDatabaseTest

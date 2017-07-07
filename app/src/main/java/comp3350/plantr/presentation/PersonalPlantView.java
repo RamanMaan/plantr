@@ -11,11 +11,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.Date;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.persistence.DatabaseInterface;
 
@@ -29,9 +31,8 @@ public class PersonalPlantView extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
 		DatabaseInterface db;
-		final PersonalPlant plant;
+		PersonalPlant plant = null;
 		ImageButton waterPlant;
 		Button removeFromGarden;
 		ImageView plantImage;
@@ -42,8 +43,14 @@ public class PersonalPlantView extends AppCompatActivity {
 		Log.d(TAG, "onCreate: started.");
 
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
-		// initialize the stub database
-		plant = DatabaseAccess.open().getPersonalPlantByID(plantPosition);
+
+		try {
+			plant = DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantPosition);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (DatabaseStartFailureException e) {
+			e.printStackTrace();
+		}
 
 		plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
 		plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
@@ -60,19 +67,20 @@ public class PersonalPlantView extends AppCompatActivity {
 
 		//The watering can button and its associated Listener
 		waterPlant = (ImageButton) findViewById(R.id.waterPersonalPlant);
+		final PersonalPlant finalPlant = plant;
 		waterPlant.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-				builder.setTitle(getString(R.string.waterYourPlant) + plant.getName() + getString(R.string.questionMark));
-				builder.setMessage(getString(R.string.theNextWateringPeriodWillBeIn) + DateFormat.getDateInstance().format(plant.getNextWatering()));
+				builder.setTitle(getString(R.string.waterYourPlant) + finalPlant.getName() + getString(R.string.questionMark));
+				builder.setMessage(getString(R.string.theNextWateringPeriodWillBeIn) + DateFormat.getDateInstance().format(finalPlant.getNextWatering()));
 
 				//When the user has selected that they have watered their plant
 				builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						plant.setLastWatered(new Date());
+						finalPlant.setLastWatered(new Date());
 					}
 				});
 

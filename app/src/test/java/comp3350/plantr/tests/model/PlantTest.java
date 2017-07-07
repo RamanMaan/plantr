@@ -8,6 +8,7 @@ import comp3350.plantr.model.DifficultyType;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.model.Temperature;
 import comp3350.plantr.model.TemperatureRange;
+import comp3350.plantr.persistence.DatabaseInterface;
 
 /**
  * Created by Austin on 2017-06-06.
@@ -18,16 +19,16 @@ import comp3350.plantr.model.TemperatureRange;
 public class PlantTest {
 
 	@Test
-	public void plant_testPlantDifficultyNull() {
-
+	public void plant_testPlantDifficultyNull() throws Exception {
+		DatabaseAccess.openStub();
+		DatabaseInterface database = DatabaseAccess.getDatabaseAccess();
 		//test if plant parameters are invalid
 		Plant p = new Plant(0);
 		assertNull(p.getDifficulty());
 
 		//test an actual plant
-		p = DatabaseAccess.open().getAllPlants().get(0);
+		p = database.getAllPlants().get(0);
 		assertNotNull(p.getDifficulty());
-		DatabaseAccess.close();
 	}
 
 	@Test

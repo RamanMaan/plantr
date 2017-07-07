@@ -13,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.sql.SQLException;
+
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
@@ -31,7 +34,6 @@ public class PlantView extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		final DatabaseInterface db;
 		ImageView plantImage;
 		TextView plantTitle, plantDesc, plantDifficulty, plantOptimalTempRange, wateringFrequency;
 
@@ -45,24 +47,37 @@ public class PlantView extends AppCompatActivity {
 
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
-		final Plant plant = DatabaseAccess.open().getPlant(plantPosition);
+		DatabaseInterface db;
+		Plant plant = null;
+		try {
+			db = DatabaseAccess.getDatabaseAccess();
+			plant = db.getPlant(plantPosition);
 
-		plantImage = (ImageView) findViewById(R.id.plantImageView);
-		plantTitle = (TextView) findViewById(R.id.plantViewTitle);
-		plantDesc = (TextView) findViewById(R.id.plantViewDescription);
-		plantDifficulty = (TextView) findViewById(R.id.plantViewDifficulty);
-		plantOptimalTempRange = (TextView) findViewById(R.id.plantview_optimalTemperatures);
-		wateringFrequency = (TextView) findViewById(R.id.plantview_wateringFrequency);
+			plantImage = (ImageView) findViewById(R.id.plantImageView);
+			plantTitle = (TextView) findViewById(R.id.plantViewTitle);
+			plantDesc = (TextView) findViewById(R.id.plantViewDescription);
+			plantDifficulty = (TextView) findViewById(R.id.plantViewDifficulty);
+			plantOptimalTempRange = (TextView) findViewById(R.id.plantview_optimalTemperatures);
+			wateringFrequency = (TextView) findViewById(R.id.plantview_wateringFrequency);
 
-		plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getPlantImg(), null, this.getPackageName()));
-		plantTitle.setText(plant.getPlantName());
-		plantDesc.setText(plant.getPlantDesc());
-		plantDifficulty.setText(String.format(getString(R.string.plantview_difficulty), plant.getDifficulty()));
-		plantOptimalTempRange.setText(String.format(getString(R.string.plantview_optimal_temps), plant.getOptimalTemp().getLowerTemp(), plant.getOptimalTemp().getUpperTemp()));
-		wateringFrequency.setText(String.format(getString(R.string.plantview_watering_freq), plant.getWateringFreq(), "day"));
+			plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getPlantImg(), null, this.getPackageName()));
+			plantTitle.setText(plant.getPlantName());
+			plantDesc.setText(plant.getPlantDesc());
+			plantDifficulty.setText(String.format(getString(R.string.plantview_difficulty), plant.getDifficulty()));
+			plantOptimalTempRange.setText(String.format(getString(R.string.plantview_optimal_temps), plant.getOptimalTemp().getLowerTemp(), plant.getOptimalTemp().getUpperTemp()));
+			wateringFrequency.setText(String.format(getString(R.string.plantview_watering_freq), plant.getWateringFreq(), "day"));
 
+			//TODO make exception more specific
+		} catch (SQLException e) {
+			System.out.println("Database issue in PlantView");
+			e.printStackTrace();
+		} catch (DatabaseStartFailureException e) {
+			//TODO add more exception handling here, print a toast maybe
+			e.printStackTrace();
+		}
 
 		//on button click, add to Garden
+		final Plant finalPlant = plant;
 		addToGarden.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -83,8 +98,14 @@ public class PlantView extends AppCompatActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						text = userInput.getText().toString();
-						p = new PersonalPlant(plant, text);
-						DatabaseAccess.open().addPersonalPlantToGarden(p);
+						p = new PersonalPlant(finalPlant, text, -1);
+						try {
+							DatabaseAccess.getDatabaseAccess().addPersonalPlantToGarden(p);
+						} catch (SQLException e) {
+							e.printStackTrace();
+						} catch (DatabaseStartFailureException e) {
+							e.printStackTrace();
+						}
 					}
 				});
 
