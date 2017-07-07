@@ -31,7 +31,6 @@ public class PlantView extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		final DatabaseInterface db;
 		ImageView plantImage;
 		TextView plantTitle, plantDesc, plantDifficulty, plantOptimalTempRange, wateringFrequency;
 
@@ -45,22 +44,32 @@ public class PlantView extends AppCompatActivity {
 
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
-		final Plant plant = DatabaseAccess.open().getPlant(plantPosition);
+		DatabaseInterface db;
+		final Plant plant;
+		try {
+			db = DatabaseAccess.open();
+			plant = db.getPlant(plantPosition);
+			db.close();
 
-		plantImage = (ImageView) findViewById(R.id.plantImageView);
-		plantTitle = (TextView) findViewById(R.id.plantViewTitle);
-		plantDesc = (TextView) findViewById(R.id.plantViewDescription);
-		plantDifficulty = (TextView) findViewById(R.id.plantViewDifficulty);
-		plantOptimalTempRange = (TextView) findViewById(R.id.plantview_optimalTemperatures);
-		wateringFrequency = (TextView) findViewById(R.id.plantview_wateringFrequency);
+			plantImage = (ImageView) findViewById(R.id.plantImageView);
+			plantTitle = (TextView) findViewById(R.id.plantViewTitle);
+			plantDesc = (TextView) findViewById(R.id.plantViewDescription);
+			plantDifficulty = (TextView) findViewById(R.id.plantViewDifficulty);
+			plantOptimalTempRange = (TextView) findViewById(R.id.plantview_optimalTemperatures);
+			wateringFrequency = (TextView) findViewById(R.id.plantview_wateringFrequency);
 
-		plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getPlantImg(), null, this.getPackageName()));
-		plantTitle.setText(plant.getPlantName());
-		plantDesc.setText(plant.getPlantDesc());
-		plantDifficulty.setText(String.format(getString(R.string.plantview_difficulty), plant.getDifficulty()));
-		plantOptimalTempRange.setText(String.format(getString(R.string.plantview_optimal_temps), plant.getOptimalTemp().getLowerTemp(), plant.getOptimalTemp().getUpperTemp()));
-		wateringFrequency.setText(String.format(getString(R.string.plantview_watering_freq), plant.getWateringFreq(), "day"));
+			plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getPlantImg(), null, this.getPackageName()));
+			plantTitle.setText(plant.getPlantName());
+			plantDesc.setText(plant.getPlantDesc());
+			plantDifficulty.setText(String.format(getString(R.string.plantview_difficulty), plant.getDifficulty()));
+			plantOptimalTempRange.setText(String.format(getString(R.string.plantview_optimal_temps), plant.getOptimalTemp().getLowerTemp(), plant.getOptimalTemp().getUpperTemp()));
+			wateringFrequency.setText(String.format(getString(R.string.plantview_watering_freq), plant.getWateringFreq(), "day"));
 
+			//TODO make exception more specific
+		} catch (Exception e) {
+			System.out.println("Database issue in PlantView");
+			e.printStackTrace();
+		}
 
 		//on button click, add to Garden
 		addToGarden.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +92,8 @@ public class PlantView extends AppCompatActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						text = userInput.getText().toString();
-						p = new PersonalPlant(plant, text);
-						DatabaseAccess.open().addPersonalPlantToGarden(p);
+						//p = new PersonalPlant(plant, text);
+						//DatabaseAccess.open().addPersonalPlantToGarden(p);
 					}
 				});
 
