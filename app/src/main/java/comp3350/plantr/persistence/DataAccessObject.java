@@ -84,7 +84,7 @@ public class DataAccessObject implements DatabaseInterface {
 				wateringPeriod = rs1.getInt("MaxTempRange");
 
 				//				plant = new Plant(plantID, plantName, plantDesc, plantIMG, new TemperatureRange(new Temperature(minTempRange), new Temperature(maxTempRange)), wateringPeriod);
-				new Plant.PlantBuilder(plantID)
+				plant = new Plant.PlantBuilder(plantID)
 						.name(plantName)
 						.desc(plantDesc)
 						.img(plantIMG)
