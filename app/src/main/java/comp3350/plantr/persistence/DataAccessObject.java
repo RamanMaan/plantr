@@ -184,8 +184,8 @@ public class DataAccessObject implements DatabaseInterface {
 
 		while (rs1.next()) {
 			personalPlantID = rs1.getInt("PersonalPlantID");
-			personalPlantName = rs1.getString("PlantName");
-			plantType = rs1.getInt("PlantType");
+			personalPlantName = rs1.getString("PERSONALPLANTNAME");
+			plantType = rs1.getInt("PLANTID");
 
 			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID);
 		}

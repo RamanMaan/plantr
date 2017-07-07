@@ -1,10 +1,12 @@
 package comp3350.plantr.model;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 
 /**
  * Created by Michael on 27/06/2017.
@@ -42,7 +44,12 @@ public class PersonalPlant {
 	}
 
 	private boolean idNotUnique(int ID) {
-		List<PersonalPlant> list = DatabaseAccess.open().getAllPersonalPlants();
+		List<PersonalPlant> list = null;
+		try {
+			list = DatabaseAccess.getDatabaseAccess().getAllPersonalPlants();
+		} catch (DatabaseStartFailureException | SQLException e) {
+			e.printStackTrace();
+		}
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).getID() == ID) {
 				return true;
