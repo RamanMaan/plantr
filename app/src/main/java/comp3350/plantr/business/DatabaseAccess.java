@@ -27,10 +27,14 @@ public class DatabaseAccess {
 
 	public static void open() throws DatabaseStartFailureException {
 		if(_db == null) {
-			//_db = new StubDatabase();
 			_db = new DataAccessObject(dbName);
 			_db.open(dbPathName);
 		}
+	}
+
+	public static void openStub() throws DatabaseStartFailureException {
+		_db = new StubDatabase();
+		_db.open(dbPathName);
 	}
 
 	public static DatabaseInterface getDatabaseAccess() throws DatabaseStartFailureException {
