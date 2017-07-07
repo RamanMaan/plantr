@@ -13,8 +13,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.sql.SQLException;
+
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
@@ -47,9 +50,8 @@ public class PlantView extends AppCompatActivity {
 		DatabaseInterface db;
 		final Plant plant;
 		try {
-			db = DatabaseAccess.open();
+			db = DatabaseAccess.getDatabaseAccess();
 			plant = db.getPlant(plantPosition);
-			db.close();
 
 			plantImage = (ImageView) findViewById(R.id.plantImageView);
 			plantTitle = (TextView) findViewById(R.id.plantViewTitle);
@@ -66,8 +68,11 @@ public class PlantView extends AppCompatActivity {
 			wateringFrequency.setText(String.format(getString(R.string.plantview_watering_freq), plant.getWateringFreq(), "day"));
 
 			//TODO make exception more specific
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			System.out.println("Database issue in PlantView");
+			e.printStackTrace();
+		} catch (DatabaseStartFailureException e) {
+			//TODO add more exception handling here, print a toast maybe
 			e.printStackTrace();
 		}
 

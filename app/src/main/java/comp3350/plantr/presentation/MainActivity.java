@@ -19,6 +19,8 @@ import java.io.InputStreamReader;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseCloseFailureException;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 
 public class MainActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,9 +49,12 @@ public class MainActivity extends AppCompatActivity
 			displayFragment(R.id.nav_garden_layout);
 
 			//TODO make exception more specific
-		} catch (Exception e) {
+		} catch (DatabaseStartFailureException e) {
 			//TODO should make a toast to print msg
 			System.out.println("Database failed during open");
+			e.printStackTrace();
+		} catch (Exception e) {
+			//TODO add better handling
 			e.printStackTrace();
 		}
 	}
@@ -58,7 +63,13 @@ public class MainActivity extends AppCompatActivity
 	protected void onDestroy() {
 		super.onDestroy();
 
-		DatabaseAccess.close();
+		try {
+			DatabaseAccess.close();
+		} catch (DatabaseCloseFailureException e) {
+			//TODO add better handling
+			System.out.println("Failure during database close.");
+			e.printStackTrace();
+		}
 	}
 
 	@Override

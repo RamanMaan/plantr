@@ -14,10 +14,12 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
 
@@ -38,7 +40,12 @@ public class PlantipediaFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		myView = inflater.inflate(R.layout.plantipedia_layout, container, false);
 
-		List<Plant> plantList = DatabaseAccess.open().getAllPlants();
+		List<Plant> plantList = null;
+		try {
+			plantList = DatabaseAccess.getDatabaseAccess().getAllPlants();
+		} catch (DatabaseStartFailureException | SQLException e) {
+			e.printStackTrace();
+		}
 
 		EditText search = (EditText) myView.findViewById(R.id.plantipedia_searchbar);
 		final ListView listView = (ListView) myView.findViewById(R.id.plantipedia_listview);

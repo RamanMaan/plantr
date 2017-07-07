@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.Garden;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
@@ -22,11 +23,8 @@ public class StubDatabase implements DatabaseInterface {
 	private ArrayList<Plant> plants;
 	private Garden _userGarden;
 
-	public void close(){
-		//
-	}
-
-	public StubDatabase() {
+	@Override
+	public void open(String dbPath) {
 		plants = new ArrayList<Plant>(Arrays.asList(
 				new Plant.PlantBuilder(0)
 						.name("Aloe")
@@ -96,12 +94,11 @@ public class StubDatabase implements DatabaseInterface {
 		));
 
 		_userGarden.addPlants(stubPersonalPlants);
-
-	}//Constructor
+	}
 
 	@Override
-	public DatabaseInterface open() {
-		return this;
+	public void close(){
+		System.out.println("Closed Stub Database");
 	}
 
 	//Return a Plant Object
@@ -116,6 +113,7 @@ public class StubDatabase implements DatabaseInterface {
 		return plant;
 	}//getPlant
 
+	@Override
 	public Plant getPlant(String name) {
 		if (name == null) {
 			return null;
