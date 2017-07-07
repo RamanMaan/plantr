@@ -48,7 +48,7 @@ public class PlantView extends AppCompatActivity {
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
 		DatabaseInterface db;
-		final Plant plant;
+		Plant plant = null;
 		try {
 			db = DatabaseAccess.getDatabaseAccess();
 			plant = db.getPlant(plantPosition);
@@ -77,6 +77,7 @@ public class PlantView extends AppCompatActivity {
 		}
 
 		//on button click, add to Garden
+		final Plant finalPlant = plant;
 		addToGarden.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -97,8 +98,14 @@ public class PlantView extends AppCompatActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						text = userInput.getText().toString();
-						//p = new PersonalPlant(plant, text);
-						//DatabaseAccess.open().addPersonalPlantToGarden(p);
+						p = new PersonalPlant(finalPlant, text, -1);
+						try {
+							DatabaseAccess.getDatabaseAccess().addPersonalPlantToGarden(p);
+						} catch (SQLException e) {
+							e.printStackTrace();
+						} catch (DatabaseStartFailureException e) {
+							e.printStackTrace();
+						}
 					}
 				});
 

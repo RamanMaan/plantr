@@ -21,19 +21,8 @@ public class PersonalPlant {
 	private int _personalPlantID;
 	private Date _lastWatered;
 
-	private static int idCtr = -1;
-
 	public PersonalPlant(Plant plantType, String plantName) {
-		_plantType = plantType;
-		_plantName = plantName;
-
-		idCtr++;
-		while(idNotUnique(idCtr)) {
-			idCtr++;
-		}
-
-		_personalPlantID = idCtr;
-		_lastWatered = new Date();
+		this(plantType, plantName, -1);
 	}
 
 	public PersonalPlant(Plant plantType, String plantName, int ID) {
@@ -41,22 +30,6 @@ public class PersonalPlant {
 		_plantName = plantName;
 		_personalPlantID = ID;
 		_lastWatered = new Date();
-	}
-
-	private boolean idNotUnique(int ID) {
-		List<PersonalPlant> list = null;
-		try {
-			list = DatabaseAccess.getDatabaseAccess().getAllPersonalPlants();
-		} catch (DatabaseStartFailureException | SQLException e) {
-			e.printStackTrace();
-		}
-		for(int i = 0; i < list.size(); i++) {
-			if(list.get(i).getID() == ID) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	public boolean equals(Object other) {
