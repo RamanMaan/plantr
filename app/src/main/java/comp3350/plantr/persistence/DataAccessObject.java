@@ -2,10 +2,13 @@ package comp3350.plantr.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import comp3350.plantr.business.DatabaseAccess;
@@ -177,6 +180,7 @@ public class DataAccessObject implements DatabaseInterface {
 
 		String personalPlantName;
 		int personalPlantID, plantType;
+		Timestamp lastWatered;
 
 		cmdString = "Select * from Garden where PersonalPlantID=" + ID;
 		rs1 = st1.executeQuery(cmdString);
@@ -185,8 +189,9 @@ public class DataAccessObject implements DatabaseInterface {
 			personalPlantID = rs1.getInt("PersonalPlantID");
 			personalPlantName = rs1.getString("PERSONALPLANTNAME");
 			plantType = rs1.getInt("PLANTID");
+			lastWatered = rs1.getTimestamp("LASTWATERED");
 
-			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID);
+			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()));
 		}
 
 		rs1.close();
@@ -207,6 +212,18 @@ public class DataAccessObject implements DatabaseInterface {
 		st1.executeUpdate(cmdString);
 	}
 
+	@Override
+	public void updatePersonalPlant(PersonalPlant plant) throws SQLException {
+		PreparedStatement cmd;
+
+		cmd = c1.prepareStatement("UPDATE Garden SET LASTWATERED = ? WHERE PERSONALPLANTID = ?");
+		Timestamp sqlDate = new Timestamp(plant.getLastWatered().getTime());
+		cmd.setTimestamp(1, sqlDate);
+		cmd.setInt(2, plant.getID());
+
+		cmd.executeUpdate();
+	}
+
 
 	//Return a list of all PersonalPlants
 	public List<PersonalPlant> getAllPersonalPlants() throws SQLException {
@@ -214,6 +231,7 @@ public class DataAccessObject implements DatabaseInterface {
 		PersonalPlant plant;
 		String personalPlantName;
 		int personalPlantID, plantType;
+		Timestamp lastWatered;
 
 		cmdString = "Select * from Garden";
 		rs2 = st2.executeQuery(cmdString);
@@ -222,8 +240,9 @@ public class DataAccessObject implements DatabaseInterface {
 			personalPlantID = rs2.getInt("PersonalPlantID");
 			personalPlantName = rs2.getString("PersonalPlantName");
 			plantType = rs2.getInt("PlantID");
+			lastWatered = rs2.getTimestamp("LASTWATERED");
 
-			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID);
+			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()));
 			plantsResult.add(plant);
 		}
 

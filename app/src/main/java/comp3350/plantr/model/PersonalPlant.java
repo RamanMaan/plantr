@@ -21,15 +21,11 @@ public class PersonalPlant {
 	private int _personalPlantID;
 	private Date _lastWatered;
 
-	public PersonalPlant(Plant plantType, String plantName) {
-		this(plantType, plantName, -1);
-	}
-
-	public PersonalPlant(Plant plantType, String plantName, int ID) {
+	public PersonalPlant(Plant plantType, String plantName, int ID, Date lastWatered) {
 		_plantType = plantType;
 		_plantName = plantName;
 		_personalPlantID = ID;
-		_lastWatered = new Date();
+		_lastWatered = lastWatered;
 	}
 
 	public boolean equals(Object other) {
@@ -59,15 +55,18 @@ public class PersonalPlant {
 	}
 
 	public void setLastWatered(Date d) {
+		//TODO add tests with getNextWatering
 		_lastWatered = d;
 	}
 
 	public Date getNextWatering() {
 		Date nextWatering = _lastWatered;
+		Date currentDate = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(nextWatering);
 		cal.add(Calendar.HOUR_OF_DAY, _plantType.getWateringFreq());
-		return cal.getTime();
+		//the latest the next watering period can be is the current time
+		return cal.getTime().before(currentDate) ? currentDate : cal.getTime();
 	}
 
 }

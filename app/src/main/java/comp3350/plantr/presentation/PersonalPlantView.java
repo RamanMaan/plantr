@@ -80,7 +80,20 @@ public class PersonalPlantView extends AppCompatActivity {
 				builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						//TODO this is business logic, should be in business class, not presentation layer
 						finalPlant.setLastWatered(new Date());
+						try {
+							DatabaseAccess.getDatabaseAccess().updatePersonalPlant(finalPlant);
+						} catch (SQLException e) {
+							//TODO print a toast
+							e.printStackTrace();
+						} catch (DatabaseStartFailureException e) {
+							e.printStackTrace();
+						}
+
+						//refresh the activity
+						finish();
+						startActivity(getIntent());
 					}
 				});
 

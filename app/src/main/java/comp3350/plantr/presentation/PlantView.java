@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
@@ -98,7 +99,7 @@ public class PlantView extends AppCompatActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						text = userInput.getText().toString();
-						p = new PersonalPlant(finalPlant, text, -1);
+						p = new PersonalPlant(finalPlant, text, -1, null);
 						try {
 							DatabaseAccess.getDatabaseAccess().addPersonalPlantToGarden(p);
 						} catch (SQLException e) {

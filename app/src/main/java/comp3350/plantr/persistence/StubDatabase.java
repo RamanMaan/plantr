@@ -2,19 +2,18 @@ package comp3350.plantr.persistence;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.Garden;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.model.Temperature;
-import comp3350.plantr.model.TemperatureRange;
 
 /**
  * Created by Keaton MacLeod on 5/30/2017.
- *
+ * <p>
  * Stub Database, used to mimick the behavior of a real database
  */
 
@@ -25,7 +24,7 @@ public class StubDatabase implements DatabaseInterface {
 
 	@Override
 	public void open(String dbPath) {
-		plants = new ArrayList<Plant>(Arrays.asList(
+		plants = new ArrayList<>(Arrays.asList(
 				new Plant.PlantBuilder(0)
 						.name("Aloe")
 						.desc("An Aloe!! Whew Lad")
@@ -85,19 +84,23 @@ public class StubDatabase implements DatabaseInterface {
 		));
 
 		_userGarden = new Garden();
+
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.add(Calendar.YEAR, -20);
 		ArrayList<PersonalPlant> stubPersonalPlants = new ArrayList<>(Arrays.asList(
-				new PersonalPlant(getPlant(0), "Vera the Aloe Vera", 0),
-				new PersonalPlant(getPlant(1), "Arthur the Anthurium", 1),
-				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern", 2),
-				new PersonalPlant(getPlant(3), "Reece the Peace Lily", 3),
-				new PersonalPlant(getPlant(4), "Pupper the Peperomia", 4)
+				new PersonalPlant(getPlant(0), "Vera the Aloe Vera", 0, cal.getTime()),
+				new PersonalPlant(getPlant(1), "Arthur the Anthurium", 1, cal.getTime()),
+				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern", 2, cal.getTime()),
+				new PersonalPlant(getPlant(3), "Reece the Peace Lily", 3, cal.getTime()),
+				new PersonalPlant(getPlant(4), "Pupper the Peperomia", 4, cal.getTime())
 		));
 
 		_userGarden.addPlants(stubPersonalPlants);
 	}
 
 	@Override
-	public void close(){
+	public void close() {
 		System.out.println("Closed Stub Database");
 	}
 
@@ -137,18 +140,30 @@ public class StubDatabase implements DatabaseInterface {
 	}//getAllPlants
 
 	@Override
-	public PersonalPlant getPersonalPlantByID(int ID){
+	public PersonalPlant getPersonalPlantByID(int ID) {
 		return _userGarden.getPersonalPlantById(ID);
 	}
 
 	@Override
-	public List<PersonalPlant> getAllPersonalPlants(){
+	public List<PersonalPlant> getAllPersonalPlants() {
 		return _userGarden.getAllPlants();
 	}
 
 	@Override
 	public void addPersonalPlantToGarden(PersonalPlant plant) {
 		_userGarden.addPlant(plant);
+	}
+
+	@Override
+	public void updatePersonalPlant(PersonalPlant plant) {
+		//TODO write tests
+		if (plant == null) {
+			System.out.println("Trying to update null plant");
+			throw new NullPointerException("Updating Personal Plant");
+		}
+
+		PersonalPlant dbPlant = _userGarden.getPersonalPlantById(plant.getID());
+		dbPlant.setLastWatered(plant.getLastWatered());
 	}
 
 }//StubDatabase
