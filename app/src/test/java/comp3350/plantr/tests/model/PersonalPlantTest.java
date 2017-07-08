@@ -23,35 +23,33 @@ public class PersonalPlantTest {
 		Plant dummyPlantOne = new Plant(1);
 		Plant dummyPlantTwo = new Plant(2);
 
-		PersonalPlant firstPlant = new PersonalPlant(null, "myTestPlant");
-		PersonalPlant secondPlant = new PersonalPlant(dummyPlantOne, "myTestPlant2");
-
-		int first = firstPlant.getID();
-		int second = first+1;
+		PersonalPlant firstPlant = new PersonalPlant(null, "myTestPlant", 1, null);
+		PersonalPlant secondPlant = new PersonalPlant(dummyPlantOne, "myTestPlant2", 2, null);
 
 		//testing the equals function
-		assertTrue(firstPlant.equals(first));
-		assertTrue(secondPlant.equals(second));
+		assertTrue(firstPlant.equals(firstPlant.getID()));
+		assertTrue(secondPlant.equals(secondPlant.getID()));
 
-		assertTrue(!firstPlant.equals(second));
-		assertTrue(!secondPlant.equals(first));
+		assertTrue(!firstPlant.equals(secondPlant));
+		assertTrue(!secondPlant.equals(firstPlant));
 
 		assertNotEquals(firstPlant, secondPlant);
 
 		//same everything
-		firstPlant = new PersonalPlant(dummyPlantOne, "sameString");
+		firstPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null);
+		secondPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null);
 
 		assertEquals(firstPlant,firstPlant);
 
 		//different ID, same plant and string though
-		firstPlant = new PersonalPlant(dummyPlantOne, "sameString");
-		secondPlant = new PersonalPlant(dummyPlantOne, "sameString");
+		firstPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null);
+		secondPlant = new PersonalPlant(dummyPlantOne, "sameString", 2, null);
 
 		assertNotEquals(firstPlant, secondPlant);
 
 		//different ID, diff plant, diff string
-		firstPlant = new PersonalPlant(dummyPlantOne, "I am a string");
-		secondPlant = new PersonalPlant(dummyPlantTwo, "I am a string that is different");
+		firstPlant = new PersonalPlant(dummyPlantOne, "I am a string", 1, null);
+		secondPlant = new PersonalPlant(dummyPlantTwo, "I am a string that is different", 2, null);
 
 		assertNotEquals(firstPlant, secondPlant);
 	}
