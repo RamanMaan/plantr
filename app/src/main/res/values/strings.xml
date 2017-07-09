@@ -36,4 +36,10 @@
     <string name="navheader_firstname_lastname">Database Error</string>
     <string name="navheader_username">Database Error</string>
     <string name="add_to_garden">Add to Garden</string>
+    <string name="login_password">Password</string>
+    <string name="login_email">Email Address</string>
+    <string name="login_loginbutton">Login</string>
+    <string name="login_email_invalid">Invalid email entered</string>
+    <string name="login_password_invalid">Invalid password entered</string>
+    <string name="login_failedlogin">Invalid credentials</string>
 </resources>

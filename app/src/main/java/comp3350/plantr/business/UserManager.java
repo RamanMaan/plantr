@@ -35,4 +35,12 @@ public class UserManager {
 
 		_USER = u;
 	}
+
+	public static boolean invalidEmail(String email) {
+		return email == null || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+	}
+
+	public static boolean invalidPassword(String password) {
+		return password.length() <= 1;
+	}
 }
