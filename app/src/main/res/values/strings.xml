@@ -42,4 +42,9 @@
     <string name="login_email_invalid">Invalid email entered</string>
     <string name="login_password_invalid">Invalid password entered</string>
     <string name="login_failedlogin">Invalid credentials</string>
+    <string name="login_database_init_failure">Database could not be setup on device</string>
+    <string name="login_user_login_failure">User could not be logged in</string>
+    <string name="main_database_close_failure">Database could not be closed</string>
+    <string name="app_database_failure">Database Failure</string>
+    <string name="app_database_start_failure">Database could not be started</string>
 </resources>
