@@ -10,6 +10,7 @@ import comp3350.plantr.model.Garden;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.model.Temperature;
+import comp3350.plantr.model.User;
 
 /**
  * Created by Keaton MacLeod on 5/30/2017.
@@ -21,6 +22,7 @@ public class StubDatabase implements DatabaseInterface {
 
 	private ArrayList<Plant> plants;
 	private Garden _userGarden;
+	private List<User> _users;
 
 	@Override
 	public void open(String dbPath) {
@@ -97,6 +99,12 @@ public class StubDatabase implements DatabaseInterface {
 		));
 
 		_userGarden.addPlants(stubPersonalPlants);
+
+		_users = new ArrayList<>(Arrays.asList(
+				new User("du@plantr.io", "Default-o User-o", "plantr"),
+				new User("ramanmaan@plantr.io", "Raman Maan", "plantr"),
+				new User("kevindam@plantr.io", "Kevin Dam", "plantr")
+		));
 	}
 
 	@Override
@@ -164,6 +172,17 @@ public class StubDatabase implements DatabaseInterface {
 
 		PersonalPlant dbPlant = _userGarden.getPersonalPlantById(plant.getID());
 		dbPlant.setLastWatered(plant.getLastWatered());
+	}
+
+	@Override
+	public User getUser(String email) {
+		for (User u : _users) {
+			if (u.getEmail().equals(email)) {
+				return u;
+			}
+		}
+
+		return null;
 	}
 
 }//StubDatabase

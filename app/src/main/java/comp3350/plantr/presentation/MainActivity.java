@@ -11,6 +11,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,8 +21,11 @@ import java.io.InputStreamReader;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.UserManager;
 import comp3350.plantr.business.exceptions.DatabaseCloseFailureException;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
+import comp3350.plantr.business.exceptions.UserLoginException;
+import comp3350.plantr.model.User;
 
 public class MainActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,6 +50,13 @@ public class MainActivity extends AppCompatActivity
 			NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 			navigationView.setNavigationItemSelectedListener(this);
 
+			View header = navigationView.getHeaderView(0);
+			User loggedInUser = UserManager.getUser();
+			TextView userName = (TextView) header.findViewById(R.id.nav_user_name);
+			userName.setText(loggedInUser.getName());
+			TextView userEmail = (TextView) header.findViewById(R.id.nav_user_email);
+			userEmail.setText(loggedInUser.getEmail());
+
 			//set default fragment to garden layout
 			displayFragment(R.id.nav_garden_layout);
 
@@ -53,8 +65,7 @@ public class MainActivity extends AppCompatActivity
 			//TODO should make a toast to print msg
 			System.out.println("Database failed during open");
 			e.printStackTrace();
-		} catch (Exception e) {
-			//TODO add better handling
+		} catch (UserLoginException e) {
 			e.printStackTrace();
 		}
 	}

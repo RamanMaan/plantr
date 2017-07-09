@@ -14,9 +14,11 @@ import java.util.List;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.business.exceptions.DatabaseCloseFailureException;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
+import comp3350.plantr.business.exceptions.UserLoginException;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.model.Temperature;
+import comp3350.plantr.model.User;
 
 /**
  * Created by KevinD on 6/27/2017.
@@ -38,6 +40,7 @@ public class DataAccessObject implements DatabaseInterface {
 		this.dbType = "HSQL";
 	}
 
+	@Override
 	public void open(String dbPath) throws DatabaseStartFailureException {
 		try {
 			String url;
@@ -55,6 +58,7 @@ public class DataAccessObject implements DatabaseInterface {
 		}
 	}
 
+	@Override
 	public void close() throws DatabaseCloseFailureException {
 		try {    // commit all changes to the database
 			cmdString = "shutdown compact";
@@ -68,7 +72,7 @@ public class DataAccessObject implements DatabaseInterface {
 	}
 
 
-	//Return a Plant Object by id
+	@Override
 	public Plant getPlant(int id) throws SQLException {
 		Plant plant = null;
 
@@ -102,7 +106,7 @@ public class DataAccessObject implements DatabaseInterface {
 		return plant;
 	}
 
-	//Return a Plant Object by name
+	@Override
 	public Plant getPlant(String name) throws SQLException {
 		Plant plant = null;
 
@@ -137,7 +141,7 @@ public class DataAccessObject implements DatabaseInterface {
 		return plant;
 	}
 
-	//Return an ArrayList of all Plant Objects
+	@Override
 	public List<Plant> getAllPlants() throws SQLException {
 		Plant plant = null;
 
@@ -174,7 +178,7 @@ public class DataAccessObject implements DatabaseInterface {
 		return plantsResult;
 	}
 
-	//Return a PersonalPlant by Id
+	@Override
 	public PersonalPlant getPersonalPlantByID(int ID) throws SQLException {
 		PersonalPlant plant = null;
 
@@ -224,8 +228,7 @@ public class DataAccessObject implements DatabaseInterface {
 		cmd.executeUpdate();
 	}
 
-
-	//Return a list of all PersonalPlants
+	@Override
 	public List<PersonalPlant> getAllPersonalPlants() throws SQLException {
 		List<PersonalPlant> plantsResult = new ArrayList<>();
 		PersonalPlant plant;
@@ -250,4 +253,24 @@ public class DataAccessObject implements DatabaseInterface {
 
 		return plantsResult;
 	}
+
+	@Override
+	public User getUser(String email) throws SQLException {
+		User user = null;
+		PreparedStatement cmd;
+
+		cmd = c1.prepareStatement("SELECT * FROM USERS WHERE EMAIL = ?");
+		cmd.setString(1, email);
+		rs1 = cmd.executeQuery();
+
+		if (rs1.next()) {
+			user = new User(rs1.getString("EMAIL"), rs1.getString("NAME"), rs1.getString("PASSWORD"));
+		}
+
+		rs1.close();
+		cmd.close();
+
+		return user;
+	}
+
 }

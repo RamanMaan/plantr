@@ -88,3 +88,5 @@ Thumbs.db
 # DB
 *.sql
 *.sqlite
+*.lck
+*.properties

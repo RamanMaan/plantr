@@ -1,14 +1,13 @@
 package comp3350.plantr.persistence;
 
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.List;
 
 import comp3350.plantr.business.exceptions.DatabaseCloseFailureException;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
-import comp3350.plantr.model.Garden;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
+import comp3350.plantr.model.User;
 
 /**
  * An interface for databases in our system
@@ -32,4 +31,6 @@ public interface DatabaseInterface {
 	void addPersonalPlantToGarden(PersonalPlant plant) throws SQLException;
 
 	void updatePersonalPlant(PersonalPlant plant) throws SQLException;
+
+	User getUser(String email) throws SQLException;
 }//StudDatabaseInterface
