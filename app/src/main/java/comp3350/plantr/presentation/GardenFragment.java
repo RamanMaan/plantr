@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
+import comp3350.plantr.business.exceptions.UserLoginException;
 import comp3350.plantr.model.Garden;
 import comp3350.plantr.persistence.DatabaseInterface;
 
@@ -44,6 +45,9 @@ public class GardenFragment extends Fragment {
 			myGarden.addPlants(DatabaseAccess.getDatabaseAccess().getAllPersonalPlants());
 		} catch (DatabaseStartFailureException | SQLException e) {
 			Toast.makeText(getActivity().getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		} catch (UserLoginException e) {
+			Toast.makeText(getActivity().getApplicationContext(), R.string.login_user_login_failure, Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 

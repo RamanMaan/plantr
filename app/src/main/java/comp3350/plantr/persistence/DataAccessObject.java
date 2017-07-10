@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.UserManager;
 import comp3350.plantr.business.exceptions.DatabaseCloseFailureException;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.business.exceptions.UserLoginException;
@@ -233,30 +234,28 @@ public class DataAccessObject implements DatabaseInterface {
 	}
 
 	@Override
-	public List<PersonalPlant> getAllPersonalPlants() throws SQLException {
+	public List<PersonalPlant> getAllPersonalPlants() throws SQLException, UserLoginException {
 		List<PersonalPlant> plantsResult = new ArrayList<>();
 		PersonalPlant plant;
-		String personalPlantName;
-		int personalPlantID, plantType;
-		Timestamp lastWatered;
-		String owner;
+		PreparedStatement cmd;
 
-		cmdString = "Select * from Garden";
-		rs2 = st2.executeQuery(cmdString);
+		cmd = c1.prepareStatement("SELECT * FROM Garden WHERE OWNER = ?");
+		cmd.setString(1, UserManager.getUser().getEmail());
+		rs2 = cmd.executeQuery();
 
 		while (rs2.next()) {
-			personalPlantID = rs2.getInt("PersonalPlantID");
-			personalPlantName = rs2.getString("PersonalPlantName");
-			plantType = rs2.getInt("PlantID");
-			lastWatered = rs2.getTimestamp("LASTWATERED");
-			owner = rs2.getString("OWNER");
+			Plant plantid = getPlant(rs2.getInt("PLANTID"));
+			String personalPlantName = rs2.getString("PERSONALPLANTNAME");
+			int personalPlantID = rs2.getInt("PERSONALPLANTID");
+			Date lastwatered = new Date(rs2.getTimestamp("LASTWATERED").getTime());
+			User owner = getUser(rs2.getString("OWNER"));
 
-			User u = getUser(owner);
-			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()), u);
+			plant = new PersonalPlant(plantid, personalPlantName, personalPlantID, lastwatered, owner);
 			plantsResult.add(plant);
 		}
 
 		rs2.close();
+		cmd.close();
 
 		return plantsResult;
 	}
