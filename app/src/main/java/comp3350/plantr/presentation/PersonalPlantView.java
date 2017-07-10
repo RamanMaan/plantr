@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -85,9 +86,10 @@ public class PersonalPlantView extends AppCompatActivity {
 						try {
 							DatabaseAccess.getDatabaseAccess().updatePersonalPlant(finalPlant);
 						} catch (SQLException e) {
-							//TODO print a toast
+							Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
 							e.printStackTrace();
 						} catch (DatabaseStartFailureException e) {
+							Toast.makeText(getApplicationContext(), R.string.app_database_start_failure, Toast.LENGTH_LONG).show();
 							e.printStackTrace();
 						}
 
