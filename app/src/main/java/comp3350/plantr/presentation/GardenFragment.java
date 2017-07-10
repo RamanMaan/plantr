@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 
@@ -42,6 +43,7 @@ public class GardenFragment extends Fragment {
 		try {
 			myGarden.addPlants(DatabaseAccess.getDatabaseAccess().getAllPersonalPlants());
 		} catch (DatabaseStartFailureException | SQLException e) {
+			Toast.makeText(getActivity().getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 
