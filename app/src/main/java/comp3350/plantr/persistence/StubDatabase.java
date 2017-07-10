@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import comp3350.plantr.business.UserManager;
+import comp3350.plantr.business.exceptions.UserLoginException;
 import comp3350.plantr.model.Garden;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
@@ -154,7 +156,20 @@ public class StubDatabase implements DatabaseInterface {
 
 	@Override
 	public List<PersonalPlant> getAllPersonalPlants() {
-		return _userGarden.getAllPlants();
+		List<PersonalPlant> usersPersonalPlants = new ArrayList<>();
+		User u = null;
+		try {
+			u = UserManager.getUser();
+		} catch (UserLoginException e) {
+			System.out.println("Couldn't log in user!");
+			e.printStackTrace();
+		}
+		for (PersonalPlant p : _userGarden.getAllPlants()) {
+			if (p.getOwner() == u) {
+				usersPersonalPlants.add(p);
+			}
+		}
+		return usersPersonalPlants;
 	}
 
 	@Override

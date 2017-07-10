@@ -26,4 +26,9 @@ public class User {
 	public boolean passwordMatches(String p) {
 		return _password.equals(p);
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof User && this.getEmail().equals(((User) obj).getEmail());
+	}
 }
