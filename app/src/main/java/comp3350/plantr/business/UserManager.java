@@ -8,9 +8,7 @@ import comp3350.plantr.model.User;
 
 public class UserManager {
 
-	//TODO switch this back, for now only creating a default user until login screen implemented
-	//private static User _USER = null;
-	private static User _USER = new User("defaultuser@plantr.io", "Default Name", "plantr");
+	private static User _USER = null;
 
 	public static User getUser() throws UserLoginException {
 		if(_USER == null) {

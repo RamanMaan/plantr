@@ -19,12 +19,12 @@ public class PersonalPlantTest {
 
 	@Test
 	public void personalPlant_testEquals(){
-
+//TODO add testing between two personal plants under different users, should they be equal?
 		Plant dummyPlantOne = new Plant(1);
 		Plant dummyPlantTwo = new Plant(2);
 
-		PersonalPlant firstPlant = new PersonalPlant(null, "myTestPlant", 1, null);
-		PersonalPlant secondPlant = new PersonalPlant(dummyPlantOne, "myTestPlant2", 2, null);
+		PersonalPlant firstPlant = new PersonalPlant(null, "myTestPlant", 1, null, null);
+		PersonalPlant secondPlant = new PersonalPlant(dummyPlantOne, "myTestPlant2", 2, null, null);
 
 		//testing the equals function
 		assertTrue(firstPlant.equals(firstPlant.getID()));
@@ -36,20 +36,20 @@ public class PersonalPlantTest {
 		assertNotEquals(firstPlant, secondPlant);
 
 		//same everything
-		firstPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null);
-		secondPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null);
+		firstPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null, null);
+		secondPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null, null);
 
 		assertEquals(firstPlant,firstPlant);
 
 		//different ID, same plant and string though
-		firstPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null);
-		secondPlant = new PersonalPlant(dummyPlantOne, "sameString", 2, null);
+		firstPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null, null);
+		secondPlant = new PersonalPlant(dummyPlantOne, "sameString", 2, null, null);
 
 		assertNotEquals(firstPlant, secondPlant);
 
 		//different ID, diff plant, diff string
-		firstPlant = new PersonalPlant(dummyPlantOne, "I am a string", 1, null);
-		secondPlant = new PersonalPlant(dummyPlantTwo, "I am a string that is different", 2, null);
+		firstPlant = new PersonalPlant(dummyPlantOne, "I am a string", 1, null, null);
+		secondPlant = new PersonalPlant(dummyPlantTwo, "I am a string that is different", 2, null, null);
 
 		assertNotEquals(firstPlant, secondPlant);
 	}

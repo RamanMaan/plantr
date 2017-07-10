@@ -185,6 +185,7 @@ public class DataAccessObject implements DatabaseInterface {
 		String personalPlantName;
 		int personalPlantID, plantType;
 		Timestamp lastWatered;
+		String owner;
 
 		cmdString = "Select * from Garden where PersonalPlantID=" + ID;
 		rs1 = st1.executeQuery(cmdString);
@@ -194,8 +195,10 @@ public class DataAccessObject implements DatabaseInterface {
 			personalPlantName = rs1.getString("PERSONALPLANTNAME");
 			plantType = rs1.getInt("PLANTID");
 			lastWatered = rs1.getTimestamp("LASTWATERED");
+			owner = rs1.getString("OWNER");
 
-			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()));
+			User u = getUser(owner);
+			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()), u);
 		}
 
 		rs1.close();
@@ -207,11 +210,12 @@ public class DataAccessObject implements DatabaseInterface {
 	public void addPersonalPlantToGarden(PersonalPlant personalPlant) throws SQLException {
 		PreparedStatement cmd;
 
-		cmd = c1.prepareStatement("INSERT into Garden VALUES(NULL, ?, ?, ?)");
+		cmd = c1.prepareStatement("INSERT into Garden VALUES(NULL, ?, ?, ?, ?)");
 		cmd.setString(1, personalPlant.getName());
 		Timestamp sqlDate = new Timestamp(new Date().getTime());
 		cmd.setTimestamp(2, sqlDate);
 		cmd.setInt(3, personalPlant.getType().getPlantID());
+		cmd.setString(4, personalPlant.getOwner().getEmail());
 
 		cmd.executeUpdate();
 	}
@@ -235,6 +239,7 @@ public class DataAccessObject implements DatabaseInterface {
 		String personalPlantName;
 		int personalPlantID, plantType;
 		Timestamp lastWatered;
+		String owner;
 
 		cmdString = "Select * from Garden";
 		rs2 = st2.executeQuery(cmdString);
@@ -244,8 +249,10 @@ public class DataAccessObject implements DatabaseInterface {
 			personalPlantName = rs2.getString("PersonalPlantName");
 			plantType = rs2.getInt("PlantID");
 			lastWatered = rs2.getTimestamp("LASTWATERED");
+			owner = rs2.getString("OWNER");
 
-			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()));
+			User u = getUser(owner);
+			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()), u);
 			plantsResult.add(plant);
 		}
 

@@ -85,26 +85,26 @@ public class StubDatabase implements DatabaseInterface {
 						.make()
 		));
 
+		_users = new ArrayList<>(Arrays.asList(
+				new User("du@plantr.io", "Default-o User-o", "plantr"),
+				new User("ramanmaan@plantr.io", "Raman Maan", "plantr"),
+				new User("kevindam@plantr.io", "Kevin Dam", "plantr")
+		));
+
 		_userGarden = new Garden();
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		cal.add(Calendar.YEAR, -20);
 		ArrayList<PersonalPlant> stubPersonalPlants = new ArrayList<>(Arrays.asList(
-				new PersonalPlant(getPlant(0), "Vera the Aloe Vera", 0, cal.getTime()),
-				new PersonalPlant(getPlant(1), "Arthur the Anthurium", 1, cal.getTime()),
-				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern", 2, cal.getTime()),
-				new PersonalPlant(getPlant(3), "Reece the Peace Lily", 3, cal.getTime()),
-				new PersonalPlant(getPlant(4), "Pupper the Peperomia", 4, cal.getTime())
+				new PersonalPlant(getPlant(0), "Vera the Aloe Vera", 0, cal.getTime(), _users.get(0)),
+				new PersonalPlant(getPlant(1), "Arthur the Anthurium", 1, cal.getTime(), _users.get(0)),
+				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern", 2, cal.getTime(), _users.get(0)),
+				new PersonalPlant(getPlant(3), "Reece the Peace Lily", 3, cal.getTime(), _users.get(1)),
+				new PersonalPlant(getPlant(4), "Pupper the Peperomia", 4, cal.getTime(), _users.get(2))
 		));
 
 		_userGarden.addPlants(stubPersonalPlants);
-
-		_users = new ArrayList<>(Arrays.asList(
-				new User("du@plantr.io", "Default-o User-o", "plantr"),
-				new User("ramanmaan@plantr.io", "Raman Maan", "plantr"),
-				new User("kevindam@plantr.io", "Kevin Dam", "plantr")
-		));
 	}
 
 	@Override
