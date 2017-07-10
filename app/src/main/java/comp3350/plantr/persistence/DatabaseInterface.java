@@ -30,4 +30,6 @@ public interface DatabaseInterface {
 	List<PersonalPlant> getAllPersonalPlants() throws SQLException;
 
 	void addPersonalPlantToGarden(PersonalPlant plant) throws SQLException;
+
+	void updatePersonalPlant(PersonalPlant plant) throws SQLException;
 }//StudDatabaseInterface
