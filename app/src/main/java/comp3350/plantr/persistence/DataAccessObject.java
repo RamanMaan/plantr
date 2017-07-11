@@ -16,6 +16,7 @@ import comp3350.plantr.business.UserManager;
 import comp3350.plantr.business.exceptions.DatabaseCloseFailureException;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.business.exceptions.UserLoginException;
+import comp3350.plantr.model.Garden;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.model.Temperature;
@@ -277,6 +278,17 @@ public class DataAccessObject implements DatabaseInterface {
 		cmd.close();
 
 		return user;
+	}
+
+	@Override
+	public Garden getGarden() throws SQLException{
+		PreparedStatement command = c1.prepareStatement("SELECT * FROM Garden");
+		rs1 = command.executeQuery();
+		while (rs1.next())
+		{
+			//NOT FINISHED
+		}
+		return null;
 	}
 
 }

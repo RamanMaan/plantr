@@ -2,6 +2,7 @@ package comp3350.plantr.presentation;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,7 +21,9 @@ import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.PersonalPlant;
+import comp3350.plantr.persistence.DataAccessObject;
 import comp3350.plantr.persistence.DatabaseInterface;
+import comp3350.plantr.persistence.StubDatabase;
 
 /**
  * Created by Keaton MacLeod on 6/6/2017.
@@ -32,7 +35,7 @@ public class PersonalPlantView extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		DatabaseInterface db;
+
 		PersonalPlant plant = null;
 		ImageButton waterPlant;
 		Button removeFromGarden;
@@ -43,7 +46,7 @@ public class PersonalPlantView extends AppCompatActivity {
 		setContentView(R.layout.activity_personal_plant_view);
 		Log.d(TAG, "onCreate: started.");
 
-		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
+		final int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
 		try {
 			plant = DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantPosition);
@@ -120,7 +123,21 @@ public class PersonalPlantView extends AppCompatActivity {
 				builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						//TODO Remove the plant from the Garden
+						try
+						{
+							try
+							{
+								DatabaseAccess.getDatabaseAccess().getGarden();
+							}
+							catch (SQLException queryException)
+							{
+								queryException.printStackTrace();
+							}
+						}
+						catch (DatabaseStartFailureException exception) {
+							exception.printStackTrace();
+						}
+
 					}
 				});
 

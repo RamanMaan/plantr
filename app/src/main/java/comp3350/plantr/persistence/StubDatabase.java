@@ -200,4 +200,10 @@ public class StubDatabase implements DatabaseInterface {
 		return null;
 	}
 
+	@Override
+	public Garden getGarden()
+	{
+		return _userGarden;
+	}
+
 }//StubDatabase
