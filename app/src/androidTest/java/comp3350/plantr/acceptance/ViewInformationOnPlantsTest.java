@@ -36,12 +36,45 @@ public class ViewInformationOnPlantsTest extends ActivityInstrumentationTestCase
 	// Please note again that this is not a complete set of acceptance tests
 
 	@Test
-	public void testNavigateToPlant()
+	public void testPlantInformation(){
+		navigateToPlant();
+
+		Assert.assertTrue(solo.searchText("Aloe"));
+		Assert.assertTrue(solo.searchText("Difficulty: HARD"));
+		Assert.assertTrue(solo.searchText("Optimal Temperature: 21.0°C - 23.0°C"));
+		Assert.assertTrue(solo.searchText("Watering Frequency: Every 23 day"));
+	}
+
+	@Test
+	public void testAddToGarden(){
+		navigateToPlant();
+
+		Assert.assertTrue(solo.searchButton("Add to Garden"));
+		solo.clickOnButton("Add to Garden");
+
+		Assert.assertTrue(solo.searchText("Enter a name for your plant:"));
+		Assert.assertTrue(solo.searchButton("OK"));
+		Assert.assertTrue(solo.searchButton("Cancel"));
+		Assert.assertTrue(solo.searchEditText(""));
+
+		solo.enterText(0, "KEATON'S PLANTR TEST");
+
+		solo.clickOnButton("Cancel");
+
+		Assert.assertTrue(solo.searchButton("Add to Garden"));
+		solo.clickOnButton("Add to Garden");
+
+		solo.enterText(0, "KEATON'S PLANTR TEST");
+
+		solo.clickOnButton("OK");
+	}
+
+	public void navigateToPlant()
 	{
 		solo.waitForActivity("LoginActivity");
 
 		//login credentials
-		solo.enterText(1,"kevindam@plantr.io");
+		solo.enterText(1,"TEST_USER@plantr.io");
 		solo.enterText(0, "plantr");
 
 		solo.clickOnButton("Login");
@@ -53,7 +86,10 @@ public class ViewInformationOnPlantsTest extends ActivityInstrumentationTestCase
 
 		solo.clickInList(0);
 
-//		solo.clickOnButton("Students");
+		solo.assertCurrentActivity("Expected activity MainActivity", "MainActivity");
+
+
+		//		solo.clickOnButton("Students");
 //		solo.assertCurrentActivity("Expected activity StudentsActivity", "StudentsActivity");
 //
 //		Assert.assertTrue(solo.searchText("400: Mary Bailey"));
