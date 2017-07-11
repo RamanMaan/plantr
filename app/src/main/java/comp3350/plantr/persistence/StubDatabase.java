@@ -91,7 +91,7 @@ public class StubDatabase implements DatabaseInterface {
 				new User("du@plantr.io", "Default-o User-o", "plantr"),
 				new User("ramanmaan@plantr.io", "Raman Maan", "plantr"),
 				new User("kevindam@plantr.io", "Kevin Dam", "plantr"),
-				new User("test@plantr.io", "Test User", "plantr")
+				new User("TEST_USER@plantr.io", "Test User", "plantr")
 		));
 
 		_userGarden = new Garden();
