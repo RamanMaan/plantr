@@ -1,7 +1,4 @@
 <resources>
-    <!-- the below should be in another xml, perhaps an intent.xml?-->
-    <!--<string name="plant_id">plantID</string>-->
-
     <!-- Application Wide Text -->
     <string name="app_name">plantr</string>
 
@@ -14,15 +11,15 @@
 
     <string name="cancel">Cancel</string>
     <string name="water">Water</string>
-    <string name="waterYourPlant">Water&#160;</string>
+    <string name="waterYourPlant">Water %s?</string>
     <string name="remove">Remove</string>
     <string name="questionMark">"?"</string>
-    <string name="theNextWateringPeriodWillBeIn">The next watering period will be in&#160;</string>
+    <string name="theNextWateringPeriodWillBeIn">The next watering period will be in %s.</string>
 
     <string name="thisPlantWillBeRemoved">"This plant will be removed from your garden."</string>
     <string name="removeThisPlant">"Remove this plant from your garden?"</string>
-    <string name="lastTimeWatered">Last Time Watered:</string>
-    <string name="nextWateringPeriod">Next Watering Period:</string>
+    <string name="lastTimeWatered">Last Time Watered: %s</string>
+    <string name="nextWateringPeriod">Next Watering Period: %s</string>
     <string name="removeFromGarden">Remove From Garden</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -47,4 +44,5 @@
     <string name="main_database_close_failure">Database could not be closed</string>
     <string name="app_database_failure">Database Failure</string>
     <string name="app_database_start_failure">Database could not be started</string>
+    <string name="database_failure_bounds">Database access was out of index bounds</string>
 </resources>
