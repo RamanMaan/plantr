@@ -9,6 +9,7 @@ import org.junit.Test;
 import junit.framework.Assert;
 
 import comp3350.plantr.presentation.LoginActivity;
+import comp3350.plantr.presentation.PlantListAdapter;
 
 
 public class LookupTest extends ActivityInstrumentationTestCase2<LoginActivity> {
@@ -36,7 +37,7 @@ public class LookupTest extends ActivityInstrumentationTestCase2<LoginActivity> 
 	}
 
 	@Test
-	public void searchPlant()
+	public void testSearchPlant()
 	{
 		solo.waitForActivity("LoginActivity");
 
@@ -47,43 +48,19 @@ public class LookupTest extends ActivityInstrumentationTestCase2<LoginActivity> 
 
 		solo.waitForActivity("MainActivity");
 
-		solo.clickOnImageButton(0); // click on menu button
-		solo.clickOnText("Plantipedia"); // click on plantepedia option
+		// click on menu button
+		solo.clickOnImageButton(0);
 
-		solo.waitForActivity("PlantipediaFragment");
+		// click on plantepedia option
+		solo.clickOnText("Plantipedia");
 
-		solo.assertCurrentActivity("Expected activity PlantipediaFragment", "PlantipediaFragment");
+		// search for dracaena
+		solo.enterText(0,"Dracaena");
 
-//		Assert.assertTrue(solo.searchText("400: Mary Bailey"));
-//		solo.clickOnText("400: Mary Bailey");
-//		Assert.assertTrue(solo.searchEditText("400"));
-//		Assert.assertTrue(solo.searchEditText("Mary Bailey"));
-//		Assert.assertTrue(solo.searchEditText("Off Campus"));
-//
-//		solo.clearEditText(1);
-//		solo.enterText(1, "Mary Bucket");
-//		solo.clearEditText(2);
-//		solo.enterText(2, "Somewhere Else");
-//		solo.clickOnButton("Update");
-//
-//		solo.goBack();
-//
-//		solo.waitForActivity("HomeActivity");
-//		solo.clickOnButton("Students");
-//		solo.assertCurrentActivity("Expected activity StudentsActivity", "StudentsActivity");
-//
-//		solo.waitForText("400: Mary Bucket");
-//		Assert.assertTrue(solo.searchText("400: Mary Bucket"));
-//		solo.clickOnText("400: Mary Bucket");
-//		Assert.assertTrue(solo.searchEditText("400"));
-//		Assert.assertTrue(solo.searchEditText("Mary Bucket"));
-//		Assert.assertTrue(solo.searchEditText("Somewhere Else"));
-//
-//		// clean up
-//		solo.clearEditText(1);
-//		solo.enterText(1, "Mary Bailey");
-//		solo.clearEditText(2);
-//		solo.enterText(2, "Off Campus");
-//		solo.clickOnButton("Update");
+		Assert.assertTrue(solo.searchText("Dracaena"));
+
+		solo.clickInList(0);
+
+//		Assert.assertTrue(solo.searchText("Dracaena"));
 	}
 }
