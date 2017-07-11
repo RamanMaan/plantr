@@ -22,3 +22,4 @@ INSERT INTO GARDEN VALUES(4, 'Pupper the Peperomia', '1995-01-01 00:00:00.0', 4,
 INSERT INTO USERS VALUES('du@plantr.io', 'Default-o User-o', 'plantr')
 INSERT INTO USERS VALUES('ramanmaan@plantr.io', 'Raman Maan', 'plantr')
 INSERT INTO USERS VALUES('kevindam@plantr.io', 'Kevin Dam', 'plantr')
+INSERT INTO USERS VALUES('TEST_USER@plantr.io', 'TEST USER', 'plantr')

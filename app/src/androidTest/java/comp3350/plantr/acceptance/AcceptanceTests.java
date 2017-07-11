@@ -11,6 +11,7 @@ public class AcceptanceTests
     {
         suite = new TestSuite("Acceptance tests");
         suite.addTestSuite(LookupTest.class);
+        suite.addTestSuite(ViewInformationOnPlantsTest.class);
         return suite;
     }
 }
