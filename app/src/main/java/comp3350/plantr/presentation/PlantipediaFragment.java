@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,9 +20,7 @@ import java.util.List;
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
-import comp3350.plantr.business.exceptions.UserLoginException;
 import comp3350.plantr.model.Plant;
-import comp3350.plantr.model.User;
 
 /**
  * Plantipedia view
@@ -44,6 +43,7 @@ public class PlantipediaFragment extends Fragment {
 		try {
 			plantList = DatabaseAccess.getDatabaseAccess().getAllPlants();
 		} catch (DatabaseStartFailureException | SQLException e) {
+			Toast.makeText(getActivity().getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 
@@ -57,9 +57,10 @@ public class PlantipediaFragment extends Fragment {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				int plantID = ((Plant) parent.getAdapter().getItem(position)).getPlantID();
 				Intent intent = new Intent(getActivity(), PlantView.class);
 				//store the plant ID with the intent to display
-				intent.putExtra(getString(R.string.plant_id), position);
+				intent.putExtra(getString(R.string.plant_id), plantID);
 				startActivity(intent);
 			}
 		});
