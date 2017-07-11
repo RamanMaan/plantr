@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -18,117 +17,112 @@ import java.util.Date;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.PersonalPlantManager;
+import comp3350.plantr.business.exceptions.DatabaseOutOfBoundsException;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.PersonalPlant;
-import comp3350.plantr.persistence.DatabaseInterface;
-
-/**
- * Created by Keaton MacLeod on 6/6/2017.
- */
 
 public class PersonalPlantView extends AppCompatActivity {
 
-	private static final String TAG = "PersonalPlantView"; // for logging purposes
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		DatabaseInterface db;
-		PersonalPlant plant = null;
-		ImageButton waterPlant;
-		Button removeFromGarden;
-		ImageView plantImage;
-		TextView plantTitle, lastTimeWatered, nextWateringPeriod;
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_personal_plant_view);
-		Log.d(TAG, "onCreate: started.");
 
-		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
+		PersonalPlant personalPlant;			//the plant we're viewing
+		int plantID;							//the ID of the plant we want to view
+
+		//get the ID of the plant to view
+		plantID = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
 		try {
-			plant = DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantPosition);
-		} catch (SQLException e) {
+			//get that plant
+			personalPlant = DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantID);
+
+			//if the plant returns null AND reaches this point, index was out of bounds
+			if(personalPlant == null) {
+				throw new DatabaseOutOfBoundsException();
+			}
+
+			//plant - title
+			TextView plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
+			plantTitle.setText(personalPlant.getName());
+
+			//plant - image
+			ImageView plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
+			plantImage.setImageResource(getResources().getIdentifier("@drawable/" + personalPlant.getType().getPlantImg(), null, this.getPackageName()));
+
+			//plant - last time watered
+			TextView lastTimeWatered = (TextView) findViewById(R.id.personalPlantViewLastTimeWatered);
+			lastTimeWatered.setText(String.format(getString(R.string.lastTimeWatered), dateToString(personalPlant.getLastWatered())));
+
+			//plant - next time water
+			TextView nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
+			nextWateringPeriod.setText(String.format(getString(R.string.nextWateringPeriod), dateToString(personalPlant.getNextWatering())));
+
+			//The watering can button and its associated Listener
+			ImageButton waterPlant = (ImageButton) findViewById(R.id.waterPersonalPlant);
+			final PersonalPlant finalPlant = personalPlant;
+			waterPlant.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
+					builder.setTitle(String.format(getString(R.string.waterYourPlant), finalPlant.getName()));
+					builder.setMessage(String.format(getString(R.string.theNextWateringPeriodWillBeIn), dateToString(finalPlant.getNextWatering())));
+
+					//When the user has selected that they have watered their plant
+					builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							PersonalPlantManager.waterPlant(getApplicationContext(), finalPlant);
+							finish();
+							startActivity(getIntent());
+						}
+					});
+
+					builder.setNegativeButton(getString(R.string.cancel), null);
+
+					//Set up the dialogue for the water plant button
+					AlertDialog waterPlantDialogue = builder.create();
+					waterPlantDialogue.show();
+				}
+			});
+
+			//The remove from garden button and its associated dialouge
+			Button removeFromGarden = (Button) findViewById(R.id.removeFromGarden);
+			removeFromGarden.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
+					builder.setTitle(getString(R.string.removeThisPlant));
+					builder.setMessage(getString(R.string.thisPlantWillBeRemoved));
+
+					builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							//TODO Remove the plant from the Garden
+						}
+					});
+
+					builder.setNegativeButton(getString(R.string.cancel), null);
+
+					AlertDialog removeFromGardenDialogue = builder.create();
+					removeFromGardenDialogue.show();
+				}
+			});
+		} catch (SQLException | DatabaseStartFailureException e) {
+			Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
 			e.printStackTrace();
-		} catch (DatabaseStartFailureException e) {
+		} catch (DatabaseOutOfBoundsException e) {
+			finish();
+			Toast.makeText(getApplicationContext(), R.string.database_failure_bounds, Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
+	}
 
-		plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
-		plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
-		lastTimeWatered = (TextView) findViewById(R.id.personalPlantViewLastTimeWatered);
-		nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
-		plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getType().getPlantImg(), null, this.getPackageName()));
-
-		plantTitle.setText(plant.getName());
-		lastTimeWatered.setText(getString(R.string.lastTimeWatered) + DateFormat.getDateInstance().format(plant.getLastWatered()));
-
-		//calculate the next watering date
-
-		nextWateringPeriod.setText(getString(R.string.nextWateringPeriod) + DateFormat.getDateInstance().format(plant.getNextWatering()));
-
-		//The watering can button and its associated Listener
-		waterPlant = (ImageButton) findViewById(R.id.waterPersonalPlant);
-		final PersonalPlant finalPlant = plant;
-		waterPlant.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-				builder.setTitle(getString(R.string.waterYourPlant) + finalPlant.getName() + getString(R.string.questionMark));
-				builder.setMessage(getString(R.string.theNextWateringPeriodWillBeIn) + DateFormat.getDateInstance().format(finalPlant.getNextWatering()));
-
-				//When the user has selected that they have watered their plant
-				builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						//TODO this is business logic, should be in business class, not presentation layer
-						finalPlant.setLastWatered(new Date());
-						try {
-							DatabaseAccess.getDatabaseAccess().updatePersonalPlant(finalPlant);
-						} catch (SQLException e) {
-							Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
-							e.printStackTrace();
-						} catch (DatabaseStartFailureException e) {
-							Toast.makeText(getApplicationContext(), R.string.app_database_start_failure, Toast.LENGTH_LONG).show();
-							e.printStackTrace();
-						}
-
-						//refresh the activity
-						finish();
-						startActivity(getIntent());
-					}
-				});
-
-				builder.setNegativeButton(getString(R.string.cancel), null);
-
-				//Set up the dialogue for the water plant button
-				AlertDialog waterPlantDialogue = builder.create();
-				waterPlantDialogue.show();
-			}
-		});
-
-		//The remove from garden button and its associated dialouge
-		removeFromGarden = (Button) findViewById(R.id.removeFromGarden);
-		removeFromGarden.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-				builder.setTitle(getString(R.string.removeThisPlant));
-				builder.setMessage(getString(R.string.thisPlantWillBeRemoved));
-
-				builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						//TODO Remove the plant from the Garden
-					}
-				});
-
-				builder.setNegativeButton(getString(R.string.cancel), null);
-
-				AlertDialog removeFromGardenDialogue = builder.create();
-				removeFromGardenDialogue.show();
-			}
-		});
+	private String dateToString(Date date) {
+		return DateFormat.getDateInstance().format(date);
 	}
 }
