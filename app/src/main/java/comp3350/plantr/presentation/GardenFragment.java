@@ -9,9 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.sql.SQLException;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.Garden;
 import comp3350.plantr.persistence.DatabaseInterface;
 
@@ -36,7 +40,12 @@ public class GardenFragment extends Fragment {
 		myView = inflater.inflate(R.layout.garden_layout, container, false);
 
 		myGarden = new Garden();
-		myGarden.addPlants(DatabaseAccess.open().getAllPersonalPlants());
+		try {
+			myGarden.addPlants(DatabaseAccess.getDatabaseAccess().getAllPersonalPlants());
+		} catch (DatabaseStartFailureException | SQLException e) {
+			Toast.makeText(getActivity().getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
 
 
 		ListView listView = (ListView) myView.findViewById(R.id.garden_view);

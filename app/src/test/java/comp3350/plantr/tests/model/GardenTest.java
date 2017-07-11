@@ -7,12 +7,13 @@ import java.util.ArrayList;
 import comp3350.plantr.model.Garden;
 import comp3350.plantr.model.PersonalPlant;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 
 /**
  * Created by Michael on 27/06/2017
- *
+ * <p>
  * Class that currently only tests plant object creation.
  */
 
@@ -20,23 +21,23 @@ public class GardenTest {
 
 	private Garden myGarden;
 
-	private ArrayList<PersonalPlant> generatePlantList(){
+	private ArrayList<PersonalPlant> generatePlantList() {
 		ArrayList<PersonalPlant> plantList = new ArrayList<>();
 
-		for(int i = 2; i < 12; i++){
-			plantList.add(new PersonalPlant(null, null));
+		for (int i = 0; i < 10; i++) {
+			plantList.add(new PersonalPlant(null, null, i, null));
 		}
 
 		return plantList;
 	}
 
 	@Test
-	public void garden_testAddPlant(){
+	public void garden_testAddPlant() {
 
 		myGarden = new Garden();
 
-		PersonalPlant plantOne = new PersonalPlant(null, null);
-		PersonalPlant plantTwo = new PersonalPlant(null, null);
+		PersonalPlant plantOne = new PersonalPlant(null, null, 1, null);
+		PersonalPlant plantTwo = new PersonalPlant(null, null, 2, null);
 
 		assertTrue(myGarden.addPlant(plantOne));
 		assertTrue(myGarden.addPlant(plantTwo));
@@ -45,7 +46,7 @@ public class GardenTest {
 	}
 
 	@Test
-	public void garden_testAddPlants(){
+	public void garden_testAddPlants() {
 
 		myGarden = new Garden();
 
@@ -60,15 +61,12 @@ public class GardenTest {
 	}
 
 	@Test
-	public void garden_testRemovePersonalPlant(){
+	public void garden_testRemovePersonalPlant() {
 		myGarden = new Garden();
 
-		PersonalPlant plantOne = new PersonalPlant(null, null);
-		PersonalPlant plantTwo = new PersonalPlant(null, null);
+		PersonalPlant plantOne = new PersonalPlant(null, null, 1, null);
+		PersonalPlant plantTwo = new PersonalPlant(null, null, 2, null);
 
-		ArrayList<PersonalPlant> plants = generatePlantList();
-
-		myGarden.addPlants(plants);
 		myGarden.addPlant(plantOne);
 		myGarden.addPlant(plantTwo);
 
@@ -81,7 +79,9 @@ public class GardenTest {
 		assertTrue(myGarden.removePersonalPlant(plantTwo));
 		assertFalse(myGarden.removePersonalPlant(plantTwo));
 
-		for(PersonalPlant plant: plants){
+		ArrayList<PersonalPlant> plants = generatePlantList();
+		myGarden.addPlants(plants);
+		for (PersonalPlant plant : plants) {
 			assertTrue(myGarden.removePersonalPlant(plant));
 			assertFalse(myGarden.removePersonalPlant(plant));
 		}
@@ -90,18 +90,15 @@ public class GardenTest {
 	}
 
 	@Test
-	public void garden_testRemovePersonalPlantByID(){
+	public void garden_testRemovePersonalPlantByID() {
 		myGarden = new Garden();
 
-		PersonalPlant plantOne = new PersonalPlant(null, null);
-		PersonalPlant plantTwo = new PersonalPlant(null, null);
+		PersonalPlant plantOne = new PersonalPlant(null, null, 1, null);
+		PersonalPlant plantTwo = new PersonalPlant(null, null, 2, null);
 
 		int plantIdOne = plantOne.getID();
 		int plantIdTwo = plantTwo.getID();
 
-		ArrayList<PersonalPlant> plants = generatePlantList();
-
-		myGarden.addPlants(plants);
 		myGarden.addPlant(plantOne);
 		myGarden.addPlant(plantTwo);
 
@@ -112,7 +109,9 @@ public class GardenTest {
 		assertTrue(myGarden.removePersonalPlantById(plantIdTwo));
 		assertFalse(myGarden.removePersonalPlantById(plantIdTwo));
 
-		for(PersonalPlant plant : plants){
+		ArrayList<PersonalPlant> plants = generatePlantList();
+		myGarden.addPlants(plants);
+		for (PersonalPlant plant : plants) {
 			assertTrue(myGarden.removePersonalPlantById(plant.getID()));
 			assertFalse(myGarden.removePersonalPlantById(plant.getID()));
 		}

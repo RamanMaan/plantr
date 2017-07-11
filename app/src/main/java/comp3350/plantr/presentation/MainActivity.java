@@ -19,6 +19,8 @@ import java.io.InputStreamReader;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseCloseFailureException;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 
 public class MainActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,32 +28,48 @@ public class MainActivity extends AppCompatActivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		try {
+			copyDatabaseToDevice();
+			DatabaseAccess.open();
 
-		copyDatabaseToDevice();
-		DatabaseAccess.open();
+			setContentView(R.layout.activity_main);
+			Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+			setSupportActionBar(toolbar);
 
-		setContentView(R.layout.activity_main);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+			DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+			ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+					this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+			drawer.addDrawerListener(toggle);
+			toggle.syncState();
 
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-		drawer.addDrawerListener(toggle);
-		toggle.syncState();
+			NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+			navigationView.setNavigationItemSelectedListener(this);
 
-		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-		navigationView.setNavigationItemSelectedListener(this);
+			//set default fragment to garden layout
+			displayFragment(R.id.nav_garden_layout);
 
-		//set default fragment to garden layout
-		displayFragment(R.id.nav_garden_layout);
+			//TODO make exception more specific
+		} catch (DatabaseStartFailureException e) {
+			//TODO should make a toast to print msg
+			System.out.println("Database failed during open");
+			e.printStackTrace();
+		} catch (Exception e) {
+			//TODO add better handling
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 
-		DatabaseAccess.close();
+		try {
+			DatabaseAccess.close();
+		} catch (DatabaseCloseFailureException e) {
+			//TODO add better handling
+			System.out.println("Failure during database close.");
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -102,16 +120,13 @@ public class MainActivity extends AppCompatActivity
 		AssetManager assetManager = getAssets();
 
 		try {
-
 			assetNames = assetManager.list(DB_PATH);
 			for (int i = 0; i < assetNames.length; i++) {
 				assetNames[i] = DB_PATH + "/" + assetNames[i];
 			}
-
 			copyAssetsToDirectory(assetNames, dataDirectory);
 
 			DatabaseAccess.setDBPathName(dataDirectory.toString() + "/" + DatabaseAccess.dbName);
-
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

@@ -1,10 +1,12 @@
 package comp3350.plantr.model;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 
 /**
  * Created by Michael on 27/06/2017.
@@ -19,37 +21,11 @@ public class PersonalPlant {
 	private int _personalPlantID;
 	private Date _lastWatered;
 
-	private static int idCtr = -1;
-
-	public PersonalPlant(Plant plantType, String plantName) {
-		_plantType = plantType;
-		_plantName = plantName;
-
-		idCtr++;
-		while(idNotUnique(idCtr)) {
-			idCtr++;
-		}
-
-		_personalPlantID = idCtr;
-		_lastWatered = new Date();
-	}
-
-	public PersonalPlant(Plant plantType, String plantName, int ID) {
+	public PersonalPlant(Plant plantType, String plantName, int ID, Date lastWatered) {
 		_plantType = plantType;
 		_plantName = plantName;
 		_personalPlantID = ID;
-		_lastWatered = new Date();
-	}
-
-	private boolean idNotUnique(int ID) {
-		List<PersonalPlant> list = DatabaseAccess.open().getAllPersonalPlants();
-		for(int i = 0; i < list.size(); i++) {
-			if(list.get(i).getID() == ID) {
-				return true;
-			}
-		}
-
-		return false;
+		_lastWatered = lastWatered;
 	}
 
 	public boolean equals(Object other) {
@@ -79,15 +55,18 @@ public class PersonalPlant {
 	}
 
 	public void setLastWatered(Date d) {
+		//TODO add tests with getNextWatering
 		_lastWatered = d;
 	}
 
 	public Date getNextWatering() {
 		Date nextWatering = _lastWatered;
+		Date currentDate = new Date();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(nextWatering);
 		cal.add(Calendar.HOUR_OF_DAY, _plantType.getWateringFreq());
-		return cal.getTime();
+		//the latest the next watering period can be is the current time
+		return cal.getTime().before(currentDate) ? currentDate : cal.getTime();
 	}
 
 }
