@@ -7,6 +7,7 @@ import com.robotium.solo.Solo;
 import comp3350.plantr.presentation.LoginActivity;
 import android.test.ActivityInstrumentationTestCase2;
 
+
 public class StudentsTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
 	private Solo solo;
