@@ -127,23 +127,6 @@ public class StubDatabase implements DatabaseInterface {
 		return plant;
 	}//getPlant
 
-	@Override
-	public Plant getPlant(String name) {
-		if (name == null) {
-			return null;
-		}
-
-		Plant p;
-		for (int a = 0; a < plants.size(); a++) {
-			p = plants.get(a);
-			if (p.getPlantName().compareToIgnoreCase(name) == 0) {
-				return p;
-			}
-		}
-
-		return null;
-	}//getPlant
-
 	//Return an ArrayList of all Plant Objects
 	@Override
 	public List<Plant> getAllPlants() {

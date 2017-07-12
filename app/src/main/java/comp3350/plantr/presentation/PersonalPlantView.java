@@ -16,7 +16,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import comp3350.plantr.R;
-import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.AccessGarden;
 import comp3350.plantr.business.PersonalPlantManager;
 import comp3350.plantr.business.exceptions.DatabaseOutOfBoundsException;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
@@ -30,18 +30,18 @@ public class PersonalPlantView extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_personal_plant_view);
 
-		PersonalPlant personalPlant;			//the plant we're viewing
-		int plantID;							//the ID of the plant we want to view
+		PersonalPlant personalPlant;            //the plant we're viewing
+		int plantID;                            //the ID of the plant we want to view
 
 		//get the ID of the plant to view
 		plantID = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
 		try {
 			//get that plant
-			personalPlant = DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantID);
+			personalPlant = AccessGarden.getPersonalPlantByID(plantID);
 
 			//if the plant returns null AND reaches this point, index was out of bounds
-			if(personalPlant == null) {
+			if (personalPlant == null) {
 				throw new DatabaseOutOfBoundsException();
 			}
 

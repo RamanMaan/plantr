@@ -21,8 +21,6 @@ public interface DatabaseInterface {
 
 	Plant getPlant(int id) throws SQLException; //Return a Plant Object by id
 
-	Plant getPlant(String name) throws SQLException; //Return a Plant Object by name
-
 	List<Plant> getAllPlants() throws SQLException; //Return an ArrayList of all Plant Objects
 
 	PersonalPlant getPersonalPlantByID(int ID) throws SQLException; //Return a PersonalPlant by Id,

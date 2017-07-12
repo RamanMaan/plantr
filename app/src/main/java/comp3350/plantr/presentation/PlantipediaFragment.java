@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import comp3350.plantr.R;
-import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.AccessPlants;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.Plant;
 
@@ -41,7 +41,7 @@ public class PlantipediaFragment extends Fragment {
 
 		List<Plant> plantList = null;
 		try {
-			plantList = DatabaseAccess.getDatabaseAccess().getAllPlants();
+			plantList = AccessPlants.getAllPlants();
 		} catch (DatabaseStartFailureException | SQLException e) {
 			Toast.makeText(getActivity().getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
 			e.printStackTrace();

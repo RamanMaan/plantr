@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.sql.SQLException;
 
 import comp3350.plantr.R;
-import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.AccessGarden;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.business.exceptions.UserLoginException;
 import comp3350.plantr.model.Garden;
@@ -41,7 +41,7 @@ public class GardenFragment extends Fragment {
 
 		Garden myGarden = new Garden();
 		try {
-			myGarden.addPlants(DatabaseAccess.getDatabaseAccess().getAllPersonalPlants());
+			myGarden.addPlants(AccessGarden.getAllPersonalPlants());
 		} catch (DatabaseStartFailureException | SQLException e) {
 			Toast.makeText(getActivity().getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
 			e.printStackTrace();

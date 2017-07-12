@@ -17,7 +17,7 @@ public class PersonalPlantManager {
 
 		//update the database
 		try {
-			DatabaseAccess.getDatabaseAccess().updatePersonalPlant(p);
+			AccessGarden.updatePersonalPlant(p);
 		} catch (SQLException e) {
 			Toast.makeText(c, R.string.app_database_failure, Toast.LENGTH_LONG).show();
 			e.printStackTrace();

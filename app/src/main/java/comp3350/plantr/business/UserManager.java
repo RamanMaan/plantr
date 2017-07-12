@@ -20,7 +20,7 @@ public class UserManager {
 	public static void loginUser(String email, String password) throws UserLoginException {
 		User u = null;
 		try {
-			u = DatabaseAccess.getDatabaseAccess().getUser(email);
+			u = AccessUsers.getUser(email);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (DatabaseStartFailureException e) {
