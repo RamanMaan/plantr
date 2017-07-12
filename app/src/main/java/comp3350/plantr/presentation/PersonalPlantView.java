@@ -52,14 +52,10 @@ public class PersonalPlantView extends AppCompatActivity {
 					plant = DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantPosition);
 				}//try
 
-				catch (SQLException e)
+				catch (DatabaseStartFailureException |SQLException exception)
 				{
-					e.printStackTrace();
-				}//catch
-
-				catch (DatabaseStartFailureException e)
-				{
-					e.printStackTrace();
+					Toast.makeText(PersonalPlantView.this, R.string.app_database_failure, Toast.LENGTH_LONG).show();
+					exception.printStackTrace();
 				}//catch
 
 				plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
@@ -92,16 +88,15 @@ public class PersonalPlantView extends AppCompatActivity {
 							public void onClick(DialogInterface dialog, int which) {
 								//TODO this is business logic, should be in business class, not presentation layer
 								finalPlant.setLastWatered(new Date());
-								try {
+								try
+								{
 									DatabaseAccess.getDatabaseAccess().updatePersonalPlant(finalPlant);
-								} catch (SQLException e) {
-									Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
-									e.printStackTrace();
-								} catch (DatabaseStartFailureException e) {
-									Toast.makeText(getApplicationContext(), R.string.app_database_start_failure, Toast.LENGTH_LONG).show();
-									e.printStackTrace();
 								}
-
+								catch (DatabaseStartFailureException | SQLException exception)
+								{
+									Toast.makeText(getApplicationContext(), R.string.app_database_start_failure, Toast.LENGTH_LONG).show();
+									exception.printStackTrace();
+								}
 								//refresh the activity
 								finish();
 								startActivity(getIntent());
@@ -130,20 +125,14 @@ public class PersonalPlantView extends AppCompatActivity {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								try {
-									try {
-										DatabaseAccess.getDatabaseAccess().removePersonalPlantByID(plantPosition);
+									DatabaseAccess.getDatabaseAccess().removePersonalPlantByID(plantPosition);
 //										listViewAdapter.remove(DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantPosition));
 //										listViewAdapter.notifyDataSetChanged();
-										finish();
-									}//try
-									catch (DatabaseStartFailureException queryException) {
-										queryException.printStackTrace();
-									}//catch
-
+									finish();
 								}//try
-
-								catch (SQLException queryExeception) {
-									queryExeception.printStackTrace();
+								catch (DatabaseStartFailureException  | SQLException exception) {
+									Toast.makeText(PersonalPlantView.this, R.string.app_database_failure, Toast.LENGTH_LONG).show();
+									exception.printStackTrace();
 								}//catch
 							}
 						});
