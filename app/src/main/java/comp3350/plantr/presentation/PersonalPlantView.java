@@ -2,7 +2,6 @@ package comp3350.plantr.presentation;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -21,9 +20,6 @@ import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.PersonalPlant;
-import comp3350.plantr.persistence.DataAccessObject;
-import comp3350.plantr.persistence.DatabaseInterface;
-import comp3350.plantr.persistence.StubDatabase;
 
 /**
  * Created by Keaton MacLeod on 6/6/2017.
@@ -35,120 +31,139 @@ public class PersonalPlantView extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+//		try {
+//			try {
+//				final PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(this, R.layout.activity_plant_list_item, DatabaseAccess.getDatabaseAccess().getGarden().getAllPlants());
 
-		PersonalPlant plant = null;
-		ImageButton waterPlant;
-		Button removeFromGarden;
-		ImageView plantImage;
-		TextView plantTitle, lastTimeWatered, nextWateringPeriod;
+				PersonalPlant plant = null;
+				ImageButton waterPlant;
+				Button removeFromGarden;
+				ImageView plantImage;
+				TextView plantTitle, lastTimeWatered, nextWateringPeriod;
 
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_personal_plant_view);
-		Log.d(TAG, "onCreate: started.");
+				super.onCreate(savedInstanceState);
+				setContentView(R.layout.activity_personal_plant_view);
+				Log.d(TAG, "onCreate: started.");
 
-		final int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
+				final int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
-		try {
-			plant = DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantPosition);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (DatabaseStartFailureException e) {
-			e.printStackTrace();
-		}
+				try
+				{
+					plant = DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantPosition);
+				}//try
 
-		plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
-		plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
-		lastTimeWatered = (TextView) findViewById(R.id.personalPlantViewLastTimeWatered);
-		nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
-		plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getType().getPlantImg(), null, this.getPackageName()));
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}//catch
 
-		plantTitle.setText(plant.getName());
-		lastTimeWatered.setText(getString(R.string.lastTimeWatered) + DateFormat.getDateInstance().format(plant.getLastWatered()));
+				catch (DatabaseStartFailureException e)
+				{
+					e.printStackTrace();
+				}//catch
 
-		//calculate the next watering date
+				plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
+				plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
+				lastTimeWatered = (TextView) findViewById(R.id.personalPlantViewLastTimeWatered);
+				nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
+				plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getType().getPlantImg(), null, this.getPackageName()));
 
-		nextWateringPeriod.setText(getString(R.string.nextWateringPeriod) + DateFormat.getDateInstance().format(plant.getNextWatering()));
+				plantTitle.setText(plant.getName());
+				lastTimeWatered.setText(getString(R.string.lastTimeWatered) + DateFormat.getDateInstance().format(plant.getLastWatered()));
 
-		//The watering can button and its associated Listener
-		waterPlant = (ImageButton) findViewById(R.id.waterPersonalPlant);
-		final PersonalPlant finalPlant = plant;
-		waterPlant.setOnClickListener(new View.OnClickListener() {
+				//calculate the next watering date
 
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-				builder.setTitle(getString(R.string.waterYourPlant) + finalPlant.getName() + getString(R.string.questionMark));
-				builder.setMessage(getString(R.string.theNextWateringPeriodWillBeIn) + DateFormat.getDateInstance().format(finalPlant.getNextWatering()));
+				nextWateringPeriod.setText(getString(R.string.nextWateringPeriod) + DateFormat.getDateInstance().format(plant.getNextWatering()));
 
-				//When the user has selected that they have watered their plant
-				builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
+				//The watering can button and its associated Listener
+				waterPlant = (ImageButton) findViewById(R.id.waterPersonalPlant);
+				final PersonalPlant finalPlant = plant;
+				waterPlant.setOnClickListener(new View.OnClickListener() {
+
 					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						//TODO this is business logic, should be in business class, not presentation layer
-						finalPlant.setLastWatered(new Date());
-						try {
-							DatabaseAccess.getDatabaseAccess().updatePersonalPlant(finalPlant);
-						} catch (SQLException e) {
-							Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
-							e.printStackTrace();
-						} catch (DatabaseStartFailureException e) {
-							Toast.makeText(getApplicationContext(), R.string.app_database_start_failure, Toast.LENGTH_LONG).show();
-							e.printStackTrace();
-						}
+					public void onClick(View v) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
+						builder.setTitle(getString(R.string.waterYourPlant) + finalPlant.getName() + getString(R.string.questionMark));
+						builder.setMessage(getString(R.string.theNextWateringPeriodWillBeIn) + DateFormat.getDateInstance().format(finalPlant.getNextWatering()));
 
-						//refresh the activity
-						finish();
-						startActivity(getIntent());
+						//When the user has selected that they have watered their plant
+						builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								//TODO this is business logic, should be in business class, not presentation layer
+								finalPlant.setLastWatered(new Date());
+								try {
+									DatabaseAccess.getDatabaseAccess().updatePersonalPlant(finalPlant);
+								} catch (SQLException e) {
+									Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
+									e.printStackTrace();
+								} catch (DatabaseStartFailureException e) {
+									Toast.makeText(getApplicationContext(), R.string.app_database_start_failure, Toast.LENGTH_LONG).show();
+									e.printStackTrace();
+								}
+
+								//refresh the activity
+								finish();
+								startActivity(getIntent());
+							}
+						});
+
+						builder.setNegativeButton(getString(R.string.cancel), null);
+
+						//Set up the dialogue for the water plant button
+						AlertDialog waterPlantDialogue = builder.create();
+						waterPlantDialogue.show();
 					}
 				});
 
-				builder.setNegativeButton(getString(R.string.cancel), null);
+				//The remove from garden button and its associated dialouge
+				removeFromGarden = (Button) findViewById(R.id.removeFromGarden);
+				removeFromGarden.setOnClickListener(new View.OnClickListener() {
 
-				//Set up the dialogue for the water plant button
-				AlertDialog waterPlantDialogue = builder.create();
-				waterPlantDialogue.show();
-			}
-		});
-
-		//The remove from garden button and its associated dialouge
-		removeFromGarden = (Button) findViewById(R.id.removeFromGarden);
-		removeFromGarden.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-				builder.setTitle(getString(R.string.removeThisPlant));
-				builder.setMessage(getString(R.string.thisPlantWillBeRemoved));
-
-				builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
 					@Override
-					public void onClick(DialogInterface dialog, int which)
-					{
-						try
-						{
-							try
-							{
-								DatabaseAccess.getDatabaseAccess().removePersonalPlantByID(plantPosition);
-							}//try
-							catch (DatabaseStartFailureException queryException)
-							{
-								queryException.printStackTrace();
-							}//catch
+					public void onClick(View v) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
+						builder.setTitle(getString(R.string.removeThisPlant));
+						builder.setMessage(getString(R.string.thisPlantWillBeRemoved));
 
-						}//try
+						builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								try {
+									try {
+										DatabaseAccess.getDatabaseAccess().removePersonalPlantByID(plantPosition);
+//										listViewAdapter.remove(DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantPosition));
+//										listViewAdapter.notifyDataSetChanged();
+										finish();
+									}//try
+									catch (DatabaseStartFailureException queryException) {
+										queryException.printStackTrace();
+									}//catch
 
-						catch (SQLException queryExeception)
-						{
-							queryExeception.printStackTrace();
-						}//catch
+								}//try
+
+								catch (SQLException queryExeception) {
+									queryExeception.printStackTrace();
+								}//catch
+							}
+						});
+
+						builder.setNegativeButton(getString(R.string.cancel), null);
+
+						AlertDialog removeFromGardenDialogue = builder.create();
+						removeFromGardenDialogue.show();
 					}
 				});
 
-				builder.setNegativeButton(getString(R.string.cancel), null);
-
-				AlertDialog removeFromGardenDialogue = builder.create();
-				removeFromGardenDialogue.show();
-			}
-		});
+//			}//try
+//			catch (SQLException queryException)
+//			{
+//				queryException.printStackTrace();
+//			}//catch
+//
+//		}//try
+//		catch (DatabaseStartFailureException databaseStartFailureException) {
+//			databaseStartFailureException.printStackTrace();
+//		}//catch
 	}
 }
