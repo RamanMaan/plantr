@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.util.List;
 
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.model.Garden;
+import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
 import comp3350.plantr.persistence.StubDatabase;
@@ -76,5 +78,22 @@ public class DatabaseTest {
 			assertTrue(p.equals(plants.get(i)));
 		}
 	}//getAllPlants
+
+	@Test
+	public void removePersonalPlantByID() throws Exception
+	{
+		DatabaseAccess.openStub();
+		DatabaseInterface database = DatabaseAccess.getDatabaseAccess();
+
+		Garden garden = database.getGarden();
+		List<PersonalPlant> plants = garden.getAllPlants(); //Get the garden
+
+		PersonalPlant personalPlant = plants.get(0);
+		assertNotNull(personalPlant); //Make sure at least one personal plant is in the Garden
+
+		database.removePersonalPlantByID(personalPlant.getID());
+		assertNull(garden.getPersonalPlantById(personalPlant.getID())); //Check correctness of removal
+
+	}//removePersonalPlantByID
 
 }//StubDatabaseTest
