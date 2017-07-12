@@ -31,9 +31,9 @@ public class PersonalPlantView extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-//		try {
-//			try {
-//				final PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(this, R.layout.activity_plant_list_item, DatabaseAccess.getDatabaseAccess().getGarden().getAllPlants());
+
+			//try {
+			//	final PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(this, R.layout.activity_plant_list_item, DatabaseAccess.getDatabaseAccess().getGarden().getAllPlants());
 
 				PersonalPlant plant = null;
 				ImageButton waterPlant;
@@ -144,15 +144,11 @@ public class PersonalPlantView extends AppCompatActivity {
 					}
 				});
 
-//			}//try
-//			catch (SQLException queryException)
-//			{
-//				queryException.printStackTrace();
-//			}//catch
-//
-//		}//try
-//		catch (DatabaseStartFailureException databaseStartFailureException) {
-//			databaseStartFailureException.printStackTrace();
-//		}//catch
+			//}//try
+
+		//catch (DatabaseStartFailureException | SQLException exception)
+		//{
+		//	exception.printStackTrace();
+		//}//catch
 	}
 }
