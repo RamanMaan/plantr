@@ -1,6 +1,7 @@
 package comp3350.plantr.presentation;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import comp3350.plantr.business.PersonalPlantManager;
 import comp3350.plantr.business.exceptions.DatabaseOutOfBoundsException;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.PersonalPlant;
+import comp3350.plantr.persistence.DatabaseInterface;
 
 public class PersonalPlantView extends AppCompatActivity {
 
@@ -30,8 +32,8 @@ public class PersonalPlantView extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_personal_plant_view);
 
-		PersonalPlant personalPlant;            //the plant we're viewing
-		int plantID;                            //the ID of the plant we want to view
+		final PersonalPlant personalPlant;			//the plant we're viewing
+		int plantID;							//the ID of the plant we want to view
 
 		//get the ID of the plant to view
 		plantID = getIntent().getIntExtra(getString(R.string.plant_id), -1);
@@ -63,19 +65,18 @@ public class PersonalPlantView extends AppCompatActivity {
 
 			//The watering can button and its associated Listener
 			ImageButton waterPlant = (ImageButton) findViewById(R.id.waterPersonalPlant);
-			final PersonalPlant finalPlant = personalPlant;
 			waterPlant.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-					builder.setTitle(String.format(getString(R.string.waterYourPlant), finalPlant.getName()));
-					builder.setMessage(String.format(getString(R.string.theNextWateringPeriodWillBeIn), dateToString(finalPlant.getNextWatering())));
+					builder.setTitle(String.format(getString(R.string.waterYourPlant), personalPlant.getName()));
+					builder.setMessage(String.format(getString(R.string.theNextWateringPeriodWillBeIn), dateToString(personalPlant.getNextWatering())));
 
 					//When the user has selected that they have watered their plant
 					builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							PersonalPlantManager.waterPlant(getApplicationContext(), finalPlant);
+							PersonalPlantManager.waterPlant(getApplicationContext(), personalPlant);
 							finish();
 							startActivity(getIntent());
 						}
@@ -102,7 +103,10 @@ public class PersonalPlantView extends AppCompatActivity {
 					builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							//TODO Remove the plant from the Garden
+							PersonalPlantManager.removePlant(getApplicationContext(), personalPlant);
+							Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+							startActivity(intent);
+							finish();
 						}
 					});
 

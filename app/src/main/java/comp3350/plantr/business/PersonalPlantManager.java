@@ -26,4 +26,16 @@ public class PersonalPlantManager {
 			e.printStackTrace();
 		}
 	}
+
+	public static void removePlant(Context c, PersonalPlant p) {
+		try {
+			AccessGarden.removePersonalPlant(p);
+		} catch (SQLException e) {
+			Toast.makeText(c, R.string.app_database_failure, Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		} catch (DatabaseStartFailureException e) {
+			Toast.makeText(c, R.string.app_database_start_failure, Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
+	}
 }

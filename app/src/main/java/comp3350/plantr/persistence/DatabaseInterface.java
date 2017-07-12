@@ -31,5 +31,7 @@ public interface DatabaseInterface {
 
 	void updatePersonalPlant(PersonalPlant plant) throws SQLException;
 
+	void removePersonalPlant(int ID) throws SQLException;
+
 	User getUser(String email) throws SQLException;
 }//StudDatabaseInterface

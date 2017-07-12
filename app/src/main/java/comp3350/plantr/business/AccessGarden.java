@@ -23,4 +23,8 @@ public class AccessGarden {
 	public static void updatePersonalPlant(PersonalPlant p) throws DatabaseStartFailureException, SQLException {
 		DatabaseAccess.getDatabaseAccess().updatePersonalPlant(p);
 	}
+
+	public static void removePersonalPlant(PersonalPlant p) throws DatabaseStartFailureException, SQLException {
+		DatabaseAccess.getDatabaseAccess().removePersonalPlant(p.getID());
+	}
 }

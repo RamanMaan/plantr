@@ -199,6 +199,16 @@ public class DataAccessObject implements DatabaseInterface {
 	}
 
 	@Override
+	public void removePersonalPlant(int ID) throws SQLException {
+		PreparedStatement cmd;
+
+		cmd = c1.prepareStatement("DELETE FROM Garden WHERE PERSONALPLANTID = ?");
+		cmd.setInt(1, ID);
+
+		cmd.executeUpdate();
+	}
+
+	@Override
 	public List<PersonalPlant> getAllPersonalPlants() throws SQLException, UserLoginException {
 		List<PersonalPlant> plantsResult = new ArrayList<>();
 		PersonalPlant plant;

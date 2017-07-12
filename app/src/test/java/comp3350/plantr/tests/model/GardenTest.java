@@ -69,35 +69,6 @@ public class GardenTest {
 	}
 
 	@Test
-	public void garden_testRemovePersonalPlant() {
-		myGarden = new Garden();
-
-		PersonalPlant plantOne = new PersonalPlant(null, null, 1, null, null);
-		PersonalPlant plantTwo = new PersonalPlant(null, null, 2, null, null);
-
-		myGarden.addPlant(plantOne);
-		myGarden.addPlant(plantTwo);
-
-		//removing
-		assertTrue(myGarden.removePersonalPlant(plantOne));
-
-		//ensuring it was deleted
-		assertFalse(myGarden.removePersonalPlant(plantOne));
-
-		assertTrue(myGarden.removePersonalPlant(plantTwo));
-		assertFalse(myGarden.removePersonalPlant(plantTwo));
-
-		ArrayList<PersonalPlant> plants = generatePlantList();
-		myGarden.addPlants(plants);
-		for (PersonalPlant plant : plants) {
-			assertTrue(myGarden.removePersonalPlant(plant));
-			assertFalse(myGarden.removePersonalPlant(plant));
-		}
-
-		assertFalse(myGarden.removePersonalPlant(null));
-	}
-
-	@Test
 	public void garden_testRemovePersonalPlantByID() {
 		myGarden = new Garden();
 
@@ -110,24 +81,23 @@ public class GardenTest {
 		myGarden.addPlant(plantOne);
 		myGarden.addPlant(plantTwo);
 
+		assertTrue(myGarden.removePersonalPlant(plantIdOne));
+		assertFalse(myGarden.removePersonalPlant(plantIdOne));
 
-		assertTrue(myGarden.removePersonalPlantById(plantIdOne));
-		assertFalse(myGarden.removePersonalPlantById(plantIdOne));
-
-		assertTrue(myGarden.removePersonalPlantById(plantIdTwo));
-		assertFalse(myGarden.removePersonalPlantById(plantIdTwo));
+		assertTrue(myGarden.removePersonalPlant(plantIdTwo));
+		assertFalse(myGarden.removePersonalPlant(plantIdTwo));
 
 		ArrayList<PersonalPlant> plants = generatePlantList();
 		myGarden.addPlants(plants);
 		for (PersonalPlant plant : plants) {
-			assertTrue(myGarden.removePersonalPlantById(plant.getID()));
-			assertFalse(myGarden.removePersonalPlantById(plant.getID()));
+			assertTrue(myGarden.removePersonalPlant(plant.getID()));
+			assertFalse(myGarden.removePersonalPlant(plant.getID()));
 		}
 
-		assertFalse(myGarden.removePersonalPlantById(-1));
+		assertFalse(myGarden.removePersonalPlant(-1));
 
-		assertFalse(myGarden.removePersonalPlantById(Integer.MAX_VALUE));
-		assertFalse(myGarden.removePersonalPlantById(Integer.MIN_VALUE));
+		assertFalse(myGarden.removePersonalPlant(Integer.MAX_VALUE));
+		assertFalse(myGarden.removePersonalPlant(Integer.MIN_VALUE));
 	}
 
 }
