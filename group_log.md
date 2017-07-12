@@ -128,3 +128,9 @@
 - Created reuseable GUI elements for Circular Buttons with Images
 - Code Reviewed DUS 39
 - Code Reviewed DUS 63
+
+### Keaton MacLeod - 07/11/17
+- removePersonalPlantByID SQL Statement Added to remove a PersonalPlant from the Garden (Persistance Layer)
+- getGarden() function implemented in the DatabaseInterface, StubDatabase and DatabaseAccessObject
+- Skeleton code for the PersonalPlantListAdapter
+- Unit Tests for testing all new features added
