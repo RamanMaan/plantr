@@ -57,10 +57,14 @@ public class LookupTest extends ActivityInstrumentationTestCase2<LoginActivity> 
 		// search for dracaena
 		solo.enterText(0,"Dracaena");
 
+		// check if Dracaena shows up from the search
 		Assert.assertTrue(solo.searchText("Dracaena"));
 
+		// check that Aloe does not show up after search
+		Assert.assertFalse(solo.searchText("Aloe"));
 		solo.clickInList(0);
 
-//		Assert.assertTrue(solo.searchText("Dracaena"));
+		// check if we are on the Dracaena plantview screen
+		Assert.assertTrue(solo.searchText("Dracaena"));
 	}
 }
