@@ -36,6 +36,8 @@ public interface DatabaseInterface {
 
 	User getUser(String email) throws SQLException;
 
+	void removePersonalPlantByID(int plantID) throws SQLException;
+
 	Garden getGarden() throws SQLException;
 
 }//StudDatabaseInterface

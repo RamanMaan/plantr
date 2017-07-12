@@ -122,22 +122,25 @@ public class PersonalPlantView extends AppCompatActivity {
 
 				builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
 					@Override
-					public void onClick(DialogInterface dialog, int which) {
+					public void onClick(DialogInterface dialog, int which)
+					{
 						try
 						{
 							try
 							{
-								DatabaseAccess.getDatabaseAccess().getGarden();
-							}
-							catch (SQLException queryException)
+								DatabaseAccess.getDatabaseAccess().removePersonalPlantByID(plantPosition);
+							}//try
+							catch (DatabaseStartFailureException queryException)
 							{
 								queryException.printStackTrace();
-							}
-						}
-						catch (DatabaseStartFailureException exception) {
-							exception.printStackTrace();
-						}
+							}//catch
 
+						}//try
+
+						catch (SQLException queryExeception)
+						{
+							queryExeception.printStackTrace();
+						}//catch
 					}
 				});
 

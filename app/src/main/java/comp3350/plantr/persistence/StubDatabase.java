@@ -206,4 +206,14 @@ public class StubDatabase implements DatabaseInterface {
 		return _userGarden;
 	}
 
+	@Override
+	public void removePersonalPlantByID(int plantID)
+	{
+		for (int a = 0; a < _userGarden.getAllPlants().size(); a++)
+		{
+			if (_userGarden.getAllPlants().get(a).getID() == plantID)
+				_userGarden.getAllPlants().remove(a);
+		}
+	}//removePersonalPlant
+
 }//StubDatabase

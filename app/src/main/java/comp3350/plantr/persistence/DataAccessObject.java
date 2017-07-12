@@ -291,4 +291,13 @@ public class DataAccessObject implements DatabaseInterface {
 		return null;
 	}
 
+	@Override
+	public void removePersonalPlantByID(int plantID) throws SQLException {
+		PreparedStatement cmd;
+
+		cmd = c1.prepareStatement("DELETE FROM Garden WHERE PERSONALPLANTID = ?");
+		cmd.setInt(1, plantID);
+		cmd.executeUpdate();
+	}
+
 }
