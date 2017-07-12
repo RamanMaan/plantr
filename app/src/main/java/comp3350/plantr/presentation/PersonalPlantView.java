@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -17,112 +18,152 @@ import java.util.Date;
 
 import comp3350.plantr.R;
 import comp3350.plantr.business.DatabaseAccess;
-import comp3350.plantr.business.PersonalPlantManager;
-import comp3350.plantr.business.exceptions.DatabaseOutOfBoundsException;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.PersonalPlant;
 
+/**
+ * Created by Keaton MacLeod on 6/6/2017.
+ */
+
 public class PersonalPlantView extends AppCompatActivity {
 
+	private static final String TAG = "PersonalPlantView"; // for logging purposes
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_personal_plant_view);
+//		try {
+//			try {
+//				final PersonalPlantListAdapter listViewAdapter = new PersonalPlantListAdapter(this, R.layout.activity_plant_list_item, DatabaseAccess.getDatabaseAccess().getGarden().getAllPlants());
 
-		PersonalPlant personalPlant;			//the plant we're viewing
-		int plantID;							//the ID of the plant we want to view
+				PersonalPlant plant = null;
+				ImageButton waterPlant;
+				Button removeFromGarden;
+				ImageView plantImage;
+				TextView plantTitle, lastTimeWatered, nextWateringPeriod;
 
-		//get the ID of the plant to view
-		plantID = getIntent().getIntExtra(getString(R.string.plant_id), -1);
+				super.onCreate(savedInstanceState);
+				setContentView(R.layout.activity_personal_plant_view);
+				Log.d(TAG, "onCreate: started.");
 
-		try {
-			//get that plant
-			personalPlant = DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantID);
+				final int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
-			//if the plant returns null AND reaches this point, index was out of bounds
-			if(personalPlant == null) {
-				throw new DatabaseOutOfBoundsException();
-			}
+				try
+				{
+					plant = DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantPosition);
+				}//try
 
-			//plant - title
-			TextView plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
-			plantTitle.setText(personalPlant.getName());
+				catch (SQLException e)
+				{
+					e.printStackTrace();
+				}//catch
 
-			//plant - image
-			ImageView plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
-			plantImage.setImageResource(getResources().getIdentifier("@drawable/" + personalPlant.getType().getPlantImg(), null, this.getPackageName()));
+				catch (DatabaseStartFailureException e)
+				{
+					e.printStackTrace();
+				}//catch
 
-			//plant - last time watered
-			TextView lastTimeWatered = (TextView) findViewById(R.id.personalPlantViewLastTimeWatered);
-			lastTimeWatered.setText(String.format(getString(R.string.lastTimeWatered), dateToString(personalPlant.getLastWatered())));
+				plantImage = (ImageView) findViewById(R.id.personalPlantViewImage);
+				plantTitle = (TextView) findViewById(R.id.personalPlantViewTitle);
+				lastTimeWatered = (TextView) findViewById(R.id.personalPlantViewLastTimeWatered);
+				nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
+				plantImage.setImageResource(getResources().getIdentifier("@drawable/" + plant.getType().getPlantImg(), null, this.getPackageName()));
 
-			//plant - next time water
-			TextView nextWateringPeriod = (TextView) findViewById(R.id.personalPlantViewNextWateringPeriod);
-			nextWateringPeriod.setText(String.format(getString(R.string.nextWateringPeriod), dateToString(personalPlant.getNextWatering())));
+				plantTitle.setText(plant.getName());
+				lastTimeWatered.setText(getString(R.string.lastTimeWatered) + DateFormat.getDateInstance().format(plant.getLastWatered()));
 
-			//The watering can button and its associated Listener
-			ImageButton waterPlant = (ImageButton) findViewById(R.id.waterPersonalPlant);
-			final PersonalPlant finalPlant = personalPlant;
-			waterPlant.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-					builder.setTitle(String.format(getString(R.string.waterYourPlant), finalPlant.getName()));
-					builder.setMessage(String.format(getString(R.string.theNextWateringPeriodWillBeIn), dateToString(finalPlant.getNextWatering())));
+				//calculate the next watering date
 
-					//When the user has selected that they have watered their plant
-					builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							PersonalPlantManager.waterPlant(getApplicationContext(), finalPlant);
-							finish();
-							startActivity(getIntent());
-						}
-					});
+				nextWateringPeriod.setText(getString(R.string.nextWateringPeriod) + DateFormat.getDateInstance().format(plant.getNextWatering()));
 
-					builder.setNegativeButton(getString(R.string.cancel), null);
+				//The watering can button and its associated Listener
+				waterPlant = (ImageButton) findViewById(R.id.waterPersonalPlant);
+				final PersonalPlant finalPlant = plant;
+				waterPlant.setOnClickListener(new View.OnClickListener() {
 
-					//Set up the dialogue for the water plant button
-					AlertDialog waterPlantDialogue = builder.create();
-					waterPlantDialogue.show();
-				}
-			});
+					@Override
+					public void onClick(View v) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
+						builder.setTitle(getString(R.string.waterYourPlant) + finalPlant.getName() + getString(R.string.questionMark));
+						builder.setMessage(getString(R.string.theNextWateringPeriodWillBeIn) + DateFormat.getDateInstance().format(finalPlant.getNextWatering()));
 
-			//The remove from garden button and its associated dialouge
-			Button removeFromGarden = (Button) findViewById(R.id.removeFromGarden);
-			removeFromGarden.setOnClickListener(new View.OnClickListener() {
+						//When the user has selected that they have watered their plant
+						builder.setPositiveButton(getString(R.string.water), new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								//TODO this is business logic, should be in business class, not presentation layer
+								finalPlant.setLastWatered(new Date());
+								try {
+									DatabaseAccess.getDatabaseAccess().updatePersonalPlant(finalPlant);
+								} catch (SQLException e) {
+									Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
+									e.printStackTrace();
+								} catch (DatabaseStartFailureException e) {
+									Toast.makeText(getApplicationContext(), R.string.app_database_start_failure, Toast.LENGTH_LONG).show();
+									e.printStackTrace();
+								}
 
-				@Override
-				public void onClick(View v) {
-					AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
-					builder.setTitle(getString(R.string.removeThisPlant));
-					builder.setMessage(getString(R.string.thisPlantWillBeRemoved));
+								//refresh the activity
+								finish();
+								startActivity(getIntent());
+							}
+						});
 
-					builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							//TODO Remove the plant from the Garden
-						}
-					});
+						builder.setNegativeButton(getString(R.string.cancel), null);
 
-					builder.setNegativeButton(getString(R.string.cancel), null);
+						//Set up the dialogue for the water plant button
+						AlertDialog waterPlantDialogue = builder.create();
+						waterPlantDialogue.show();
+					}
+				});
 
-					AlertDialog removeFromGardenDialogue = builder.create();
-					removeFromGardenDialogue.show();
-				}
-			});
-		} catch (SQLException | DatabaseStartFailureException e) {
-			Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
-			e.printStackTrace();
-		} catch (DatabaseOutOfBoundsException e) {
-			finish();
-			Toast.makeText(getApplicationContext(), R.string.database_failure_bounds, Toast.LENGTH_LONG).show();
-			e.printStackTrace();
-		}
-	}
+				//The remove from garden button and its associated dialouge
+				removeFromGarden = (Button) findViewById(R.id.removeFromGarden);
+				removeFromGarden.setOnClickListener(new View.OnClickListener() {
 
-	private String dateToString(Date date) {
-		return DateFormat.getDateInstance().format(date);
+					@Override
+					public void onClick(View v) {
+						AlertDialog.Builder builder = new AlertDialog.Builder(PersonalPlantView.this);
+						builder.setTitle(getString(R.string.removeThisPlant));
+						builder.setMessage(getString(R.string.thisPlantWillBeRemoved));
+
+						builder.setPositiveButton(getString(R.string.remove), new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								try {
+									try {
+										DatabaseAccess.getDatabaseAccess().removePersonalPlantByID(plantPosition);
+//										listViewAdapter.remove(DatabaseAccess.getDatabaseAccess().getPersonalPlantByID(plantPosition));
+//										listViewAdapter.notifyDataSetChanged();
+										finish();
+									}//try
+									catch (DatabaseStartFailureException queryException) {
+										queryException.printStackTrace();
+									}//catch
+
+								}//try
+
+								catch (SQLException queryExeception) {
+									queryExeception.printStackTrace();
+								}//catch
+							}
+						});
+
+						builder.setNegativeButton(getString(R.string.cancel), null);
+
+						AlertDialog removeFromGardenDialogue = builder.create();
+						removeFromGardenDialogue.show();
+					}
+				});
+
+//			}//try
+//			catch (SQLException queryException)
+//			{
+//				queryException.printStackTrace();
+//			}//catch
+//
+//		}//try
+//		catch (DatabaseStartFailureException databaseStartFailureException) {
+//			databaseStartFailureException.printStackTrace();
+//		}//catch
 	}
 }
