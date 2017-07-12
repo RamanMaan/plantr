@@ -1,9 +1,12 @@
 package comp3350.plantr.tests.model;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
+import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.Garden;
 import comp3350.plantr.model.PersonalPlant;
 
@@ -20,6 +23,11 @@ import static org.junit.Assert.assertTrue;
 public class GardenTest {
 
 	private Garden myGarden;
+
+	@Before
+	public void startUp() throws DatabaseStartFailureException {
+		DatabaseAccess.openStub();
+	}
 
 	private ArrayList<PersonalPlant> generatePlantList() {
 		ArrayList<PersonalPlant> plantList = new ArrayList<>();

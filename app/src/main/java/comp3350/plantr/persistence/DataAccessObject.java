@@ -108,41 +108,6 @@ public class DataAccessObject implements DatabaseInterface {
 	}
 
 	@Override
-	public Plant getPlant(String name) throws SQLException {
-		Plant plant = null;
-
-		String plantName, plantDesc, plantIMG;
-		Float minTempRange, maxTempRange;
-		int plantID, wateringPeriod;
-
-		cmdString = "Select * from Plants where PlantName=" + name;
-		rs1 = st1.executeQuery(cmdString);
-
-		while (rs1.next()) {
-			plantID = rs1.getInt("PlantID");
-			plantName = rs1.getString("PlantName");
-			plantDesc = rs1.getString("PlantDesc");
-			plantIMG = rs1.getString("PlantIMG");
-			minTempRange = rs1.getFloat("MinTempRange");
-			maxTempRange = rs1.getFloat("MaxTempRange");
-			wateringPeriod = rs1.getInt("MaxTempRange");
-
-			//				plant = new Plant(plantID, plantName, plantDesc, plantIMG, new TemperatureRange(new Temperature(minTempRange), new Temperature(maxTempRange)), wateringPeriod);
-			new Plant.PlantBuilder(plantID)
-					.name(plantName)
-					.desc(plantDesc)
-					.img(plantIMG)
-					.tempRange(new Temperature(minTempRange), new Temperature(maxTempRange))
-					.wateringPeriod(wateringPeriod)
-					.make();
-		}
-
-		rs1.close();
-
-		return plant;
-	}
-
-	@Override
 	public List<Plant> getAllPlants() throws SQLException {
 		Plant plant = null;
 

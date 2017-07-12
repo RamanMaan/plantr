@@ -18,6 +18,8 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import comp3350.plantr.R;
+import comp3350.plantr.business.AccessGarden;
+import comp3350.plantr.business.AccessPlants;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.business.UserManager;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
@@ -50,11 +52,9 @@ public class PlantView extends AppCompatActivity {
 
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
-		DatabaseInterface db;
 		Plant plant = null;
 		try {
-			db = DatabaseAccess.getDatabaseAccess();
-			plant = db.getPlant(plantPosition);
+			plant = AccessPlants.getPlant(plantPosition);
 
 			plantImage = (ImageView) findViewById(R.id.plantImageView);
 			plantTitle = (TextView) findViewById(R.id.plantViewTitle);
@@ -101,7 +101,7 @@ public class PlantView extends AppCompatActivity {
 						text = userInput.getText().toString();
 						try {
 							p = new PersonalPlant(finalPlant, text, -1, null, UserManager.getUser());
-							DatabaseAccess.getDatabaseAccess().addPersonalPlantToGarden(p);
+							AccessGarden.addPersonalPlantToGarden(p);
 						} catch (SQLException e) {
 							Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
 							e.printStackTrace();

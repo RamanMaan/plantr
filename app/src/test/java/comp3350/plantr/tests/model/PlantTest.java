@@ -3,6 +3,7 @@ package comp3350.plantr.tests.model;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+import comp3350.plantr.business.AccessPlants;
 import comp3350.plantr.business.DatabaseAccess;
 import comp3350.plantr.model.DifficultyType;
 import comp3350.plantr.model.Plant;
@@ -21,13 +22,12 @@ public class PlantTest {
 	@Test
 	public void plant_testPlantDifficultyNull() throws Exception {
 		DatabaseAccess.openStub();
-		DatabaseInterface database = DatabaseAccess.getDatabaseAccess();
 		//test if plant parameters are invalid
 		Plant p = new Plant(0);
 		assertNull(p.getDifficulty());
 
 		//test an actual plant
-		p = database.getAllPlants().get(0);
+		p = AccessPlants.getAllPlants().get(0);
 		assertNotNull(p.getDifficulty());
 	}
 
