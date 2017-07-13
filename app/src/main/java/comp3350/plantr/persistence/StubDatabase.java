@@ -162,6 +162,11 @@ public class StubDatabase implements DatabaseInterface {
 	}
 
 	@Override
+	public void removePersonalPlant(int ID) {
+		_userGarden.removePersonalPlant(ID);
+	}
+
+	@Override
 	public void updatePersonalPlant(PersonalPlant plant) {
 		//TODO write tests
 		if (plant == null) {
