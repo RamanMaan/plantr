@@ -36,6 +36,49 @@ public class TrackPersonalPlantsTest extends ActivityInstrumentationTestCase2<Lo
 		solo.finishOpenedActivities();
 	}
 
+	@Test
+	public void testDeleteFromGarden(){
+		navigateToPersonalPlant();
+
+		Assert.assertTrue(solo.searchButton("Remove From Garden"));
+		solo.clickOnButton("Remove From Garden");
+
+		Assert.assertTrue(solo.searchButton("Remove"));
+		Assert.assertTrue(solo.searchButton("Cancel"));
+
+		//cancel function works
+		//solo.clickOnButton("Cancel");
+		//solo.assertCurrentActivity("Expected activity PersonalPlantView", "PersonalPlantView");
+
+
+		//Assert.assertTrue(solo.searchButton("Remove From Garden"));
+		//solo.clickOnButton("Remove From Garden");
+
+		//Delete button
+		solo.clickOnButton("Remove");
+		solo.assertCurrentActivity("Expected activity MainActivity", "MainActivity");
+	}
+
+	public void testEditPersonalPlants(){
+		navigateToPersonalPlant();
+
+		solo.clickOnImageButton(1);
+
+		Assert.assertTrue(solo.searchButton("Water"));
+		Assert.assertTrue(solo.searchButton("Cancel"));
+
+		//cancel function works
+		solo.clickOnButton("Cancel");
+		solo.assertCurrentActivity("Expected activity PersonalPlantView", "PersonalPlantView");
+
+		solo.clickOnImageButton(0);
+		Assert.assertTrue(solo.searchButton("Water"));
+		Assert.assertTrue(solo.searchButton("Cancel"));
+
+		//Delete button
+		solo.clickOnButton("Water");
+		solo.assertCurrentActivity("Expected activity PersonalPlantView", "PersonalPlantView");
+	}
 
 	public void navigateToGarden()
 	{
