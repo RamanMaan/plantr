@@ -9,17 +9,18 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import comp3350.plantr.R;
-import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.AccessPlants;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.Plant;
-import comp3350.plantr.persistence.DatabaseInterface;
 
 /**
  * Plantipedia view
@@ -38,7 +39,13 @@ public class PlantipediaFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		myView = inflater.inflate(R.layout.plantipedia_layout, container, false);
 
-		List<Plant> plantList = DatabaseAccess.open().getAllPlants();
+		List<Plant> plantList = null;
+		try {
+			plantList = AccessPlants.getAllPlants();
+		} catch (DatabaseStartFailureException | SQLException e) {
+			Toast.makeText(getActivity().getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		}
 
 		EditText search = (EditText) myView.findViewById(R.id.plantipedia_searchbar);
 		final ListView listView = (ListView) myView.findViewById(R.id.plantipedia_listview);
@@ -50,9 +57,10 @@ public class PlantipediaFragment extends Fragment {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				int plantID = ((Plant) parent.getAdapter().getItem(position)).getPlantID();
 				Intent intent = new Intent(getActivity(), PlantView.class);
 				//store the plant ID with the intent to display
-				intent.putExtra(getString(R.string.plant_id), position);
+				intent.putExtra(getString(R.string.plant_id), plantID);
 				startActivity(intent);
 			}
 		});
