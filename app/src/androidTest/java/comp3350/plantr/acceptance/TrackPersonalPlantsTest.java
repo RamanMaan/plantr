@@ -35,4 +35,31 @@ public class TrackPersonalPlantsTest extends ActivityInstrumentationTestCase2<Lo
 	{
 		solo.finishOpenedActivities();
 	}
+
+
+	public void navigateToGarden()
+	{
+		login();
+		//you start at the garden, so no need for further navigation
+	}
+
+	public void navigateToPersonalPlant()
+	{
+		login();
+
+		solo.clickInList(0);
+		solo.assertCurrentActivity("Expected activity MainActivity", "MainActivity");
+	}
+
+	public void login(){
+		solo.waitForActivity("LoginActivity");
+
+		//login credentials
+		solo.enterText(1,"TEST_USER@plantr.io");
+		solo.enterText(0, "plantr");
+
+		solo.clickOnButton("Login");
+
+		solo.waitForActivity("MainActivity");
+	}
 }
