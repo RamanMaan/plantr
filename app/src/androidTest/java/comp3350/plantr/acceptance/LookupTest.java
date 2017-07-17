@@ -16,13 +16,11 @@ public class LookupTest extends ActivityInstrumentationTestCase2<LoginActivity> 
 
 	private Solo solo;
 
-	public LookupTest()
-	{
+	public LookupTest() {
 		super(LoginActivity.class);
 	}
 
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		solo = new Solo(getInstrumentation(), getActivity());
 
 		// Disable this for full acceptance test
@@ -31,14 +29,12 @@ public class LookupTest extends ActivityInstrumentationTestCase2<LoginActivity> 
 	}
 
 	@Override
-	public void tearDown() throws Exception
-	{
+	public void tearDown() throws Exception {
 		solo.finishOpenedActivities();
 	}
 
 	@Test
-	public void testSearchPlant()
-	{
+	public void testSearchPlant() {
 		solo.waitForActivity("LoginActivity");
 
 		solo.enterText(1, "kevindam@plantr.io");
@@ -55,7 +51,7 @@ public class LookupTest extends ActivityInstrumentationTestCase2<LoginActivity> 
 		solo.clickOnText("Plantipedia");
 
 		// search for dracaena
-		solo.enterText(0,"Dracaena");
+		solo.enterText(0, "Dracaena");
 
 		// check if Dracaena shows up from the search
 		Assert.assertTrue(solo.searchText("Dracaena"));

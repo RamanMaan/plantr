@@ -16,13 +16,11 @@ public class TrackPersonalPlantsTest extends ActivityInstrumentationTestCase2<Lo
 
 	private Solo solo;
 
-	public TrackPersonalPlantsTest()
-	{
+	public TrackPersonalPlantsTest() {
 		super(LoginActivity.class);
 	}
 
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		solo = new Solo(getInstrumentation(), getActivity());
 
 		// Disable this for full acceptance test
@@ -31,14 +29,12 @@ public class TrackPersonalPlantsTest extends ActivityInstrumentationTestCase2<Lo
 	}
 
 	@Override
-	public void tearDown() throws Exception
-	{
+	public void tearDown() throws Exception {
 		solo.finishOpenedActivities();
 	}
 
 	@Test
-	public void testViewGarden()
-	{
+	public void testViewGarden() {
 		solo.waitForActivity("LoginActivity");
 		solo.enterText(1, "kevindam@plantr.io");
 		solo.enterText(0, "plantr");
@@ -50,8 +46,7 @@ public class TrackPersonalPlantsTest extends ActivityInstrumentationTestCase2<Lo
 	}
 
 	@Test
-	public void testViewPersonalPlant()
-	{
+	public void testViewPersonalPlant() {
 		solo.waitForActivity("LoginActivity");
 		solo.enterText(1, "kevindam@plantr.io");
 		solo.enterText(0, "plantr");

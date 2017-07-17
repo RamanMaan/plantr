@@ -5,6 +5,7 @@ import junit.framework.Assert;
 import com.robotium.solo.Solo;
 
 import comp3350.plantr.presentation.LoginActivity;
+
 import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.Test;
@@ -13,13 +14,11 @@ public class ViewInformationOnPlantsTest extends ActivityInstrumentationTestCase
 
 	private Solo solo;
 
-	public ViewInformationOnPlantsTest()
-	{
+	public ViewInformationOnPlantsTest() {
 		super(LoginActivity.class);
 	}
 
-	public void setUp() throws Exception
-	{
+	public void setUp() throws Exception {
 		solo = new Solo(getInstrumentation(), getActivity());
 
 		// Disable this for full acceptance test
@@ -28,15 +27,14 @@ public class ViewInformationOnPlantsTest extends ActivityInstrumentationTestCase
 	}
 
 	@Override
-	public void tearDown() throws Exception
-	{
+	public void tearDown() throws Exception {
 		solo.finishOpenedActivities();
 	}
 
 	// Please note again that this is not a complete set of acceptance tests
 
 	@Test
-	public void testPlantInformation(){
+	public void testPlantInformation() {
 		navigateToPlant();
 
 		Assert.assertTrue(solo.searchText("Aloe"));
@@ -46,7 +44,7 @@ public class ViewInformationOnPlantsTest extends ActivityInstrumentationTestCase
 	}
 
 	@Test
-	public void testAddToGarden(){
+	public void testAddToGarden() {
 		navigateToPlant();
 
 		Assert.assertTrue(solo.searchButton("Add to Garden"));
@@ -69,12 +67,11 @@ public class ViewInformationOnPlantsTest extends ActivityInstrumentationTestCase
 		solo.clickOnButton("OK");
 	}
 
-	public void navigateToPlant()
-	{
+	public void navigateToPlant() {
 		solo.waitForActivity("LoginActivity");
 
 		//login credentials
-		solo.enterText(1,"TEST_USER@plantr.io");
+		solo.enterText(1, "TEST_USER@plantr.io");
 		solo.enterText(0, "plantr");
 
 		solo.clickOnButton("Login");
