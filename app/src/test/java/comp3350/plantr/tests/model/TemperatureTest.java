@@ -1,7 +1,10 @@
 package comp3350.plantr.tests.model;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.Temperature;
 
 import static org.junit.Assert.assertFalse;
@@ -15,6 +18,11 @@ import static org.junit.Assert.assertTrue;
  */
 
 public class TemperatureTest {
+
+	@Before
+	public void startUp() throws DatabaseStartFailureException {
+		DatabaseAccess.openStub();
+	}
 
 	@Test
 	public void temperature_testCreation() {
