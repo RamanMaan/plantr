@@ -47,15 +47,16 @@ public class TrackPersonalPlantsTest extends ActivityInstrumentationTestCase2<Lo
 		Assert.assertTrue(solo.searchButton("Cancel"));
 
 		//cancel function works
-		//solo.clickOnButton("Cancel");
-		//solo.assertCurrentActivity("Expected activity PersonalPlantView", "PersonalPlantView");
+		solo.clickOnButton("Cancel");
+		solo.assertCurrentActivity("Expected activity PersonalPlantView", "PersonalPlantView");
 
 
-		//Assert.assertTrue(solo.searchButton("Remove From Garden"));
-		//solo.clickOnButton("Remove From Garden");
+		Assert.assertTrue(solo.searchButton("Remove From Garden"));
+		solo.clickOnButton("Remove From Garden");
 
 		//Delete button
 		solo.clickOnButton("Remove");
+		solo.waitForActivity("MainActivity");
 		solo.assertCurrentActivity("Expected activity MainActivity", "MainActivity");
 	}
 
