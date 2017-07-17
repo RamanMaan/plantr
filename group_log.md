@@ -160,3 +160,6 @@
 - Cleaned up project a little more, man I hate Github Projects, should have used Trello :cry:
 - Fixed some defects that got missed in the testing: #81, #82
 - Refactored some business logic out of presentation layer and into business layer
+---
+### Raman - 07/17/2017
+- Fixed failing unit tests regarding Garden

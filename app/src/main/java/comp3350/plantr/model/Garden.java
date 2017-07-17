@@ -36,11 +36,11 @@ public class Garden {
 	}
 
 	public boolean addPlant(PersonalPlant plant) {
-		return _plants.add(plant);
+		return plant != null && _plants.add(plant);
 	}
 
 	public boolean addPlants(Collection<PersonalPlant> plants) {
-		return _plants.addAll(plants);
+		return plants != null && _plants.addAll(plants);
 	}
 
 	public List<PersonalPlant> getAllPlants() {
