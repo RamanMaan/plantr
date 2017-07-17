@@ -12,11 +12,14 @@ import java.util.Date;
 import java.util.List;
 
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.UserManager;
 import comp3350.plantr.business.exceptions.DatabaseCloseFailureException;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
+import comp3350.plantr.business.exceptions.UserLoginException;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.model.Temperature;
+import comp3350.plantr.model.User;
 
 /**
  * Created by KevinD on 6/27/2017.
@@ -38,6 +41,7 @@ public class DataAccessObject implements DatabaseInterface {
 		this.dbType = "HSQL";
 	}
 
+	@Override
 	public void open(String dbPath) throws DatabaseStartFailureException {
 		try {
 			String url;
@@ -55,6 +59,7 @@ public class DataAccessObject implements DatabaseInterface {
 		}
 	}
 
+	@Override
 	public void close() throws DatabaseCloseFailureException {
 		try {    // commit all changes to the database
 			cmdString = "shutdown compact";
@@ -68,7 +73,7 @@ public class DataAccessObject implements DatabaseInterface {
 	}
 
 
-	//Return a Plant Object by id
+	@Override
 	public Plant getPlant(int id) throws SQLException {
 		Plant plant = null;
 
@@ -86,7 +91,7 @@ public class DataAccessObject implements DatabaseInterface {
 			plantIMG = rs1.getString("PlantIMG");
 			minTempRange = rs1.getFloat("MinTempRange");
 			maxTempRange = rs1.getFloat("MaxTempRange");
-			wateringPeriod = rs1.getInt("MaxTempRange");
+			wateringPeriod = rs1.getInt("WATERINGPERIOD");
 
 			plant = new Plant.PlantBuilder(plantID)
 					.name(plantName)
@@ -102,42 +107,7 @@ public class DataAccessObject implements DatabaseInterface {
 		return plant;
 	}
 
-	//Return a Plant Object by name
-	public Plant getPlant(String name) throws SQLException {
-		Plant plant = null;
-
-		String plantName, plantDesc, plantIMG;
-		Float minTempRange, maxTempRange;
-		int plantID, wateringPeriod;
-
-		cmdString = "Select * from Plants where PlantName=" + name;
-		rs1 = st1.executeQuery(cmdString);
-
-		while (rs1.next()) {
-			plantID = rs1.getInt("PlantID");
-			plantName = rs1.getString("PlantName");
-			plantDesc = rs1.getString("PlantDesc");
-			plantIMG = rs1.getString("PlantIMG");
-			minTempRange = rs1.getFloat("MinTempRange");
-			maxTempRange = rs1.getFloat("MaxTempRange");
-			wateringPeriod = rs1.getInt("MaxTempRange");
-
-			//				plant = new Plant(plantID, plantName, plantDesc, plantIMG, new TemperatureRange(new Temperature(minTempRange), new Temperature(maxTempRange)), wateringPeriod);
-			new Plant.PlantBuilder(plantID)
-					.name(plantName)
-					.desc(plantDesc)
-					.img(plantIMG)
-					.tempRange(new Temperature(minTempRange), new Temperature(maxTempRange))
-					.wateringPeriod(wateringPeriod)
-					.make();
-		}
-
-		rs1.close();
-
-		return plant;
-	}
-
-	//Return an ArrayList of all Plant Objects
+	@Override
 	public List<Plant> getAllPlants() throws SQLException {
 		Plant plant = null;
 
@@ -174,13 +144,14 @@ public class DataAccessObject implements DatabaseInterface {
 		return plantsResult;
 	}
 
-	//Return a PersonalPlant by Id
+	@Override
 	public PersonalPlant getPersonalPlantByID(int ID) throws SQLException {
 		PersonalPlant plant = null;
 
 		String personalPlantName;
 		int personalPlantID, plantType;
 		Timestamp lastWatered;
+		String owner;
 
 		cmdString = "Select * from Garden where PersonalPlantID=" + ID;
 		rs1 = st1.executeQuery(cmdString);
@@ -190,8 +161,10 @@ public class DataAccessObject implements DatabaseInterface {
 			personalPlantName = rs1.getString("PERSONALPLANTNAME");
 			plantType = rs1.getInt("PLANTID");
 			lastWatered = rs1.getTimestamp("LASTWATERED");
+			owner = rs1.getString("OWNER");
 
-			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()));
+			User u = getUser(owner);
+			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()), u);
 		}
 
 		rs1.close();
@@ -203,11 +176,12 @@ public class DataAccessObject implements DatabaseInterface {
 	public void addPersonalPlantToGarden(PersonalPlant personalPlant) throws SQLException {
 		PreparedStatement cmd;
 
-		cmd = c1.prepareStatement("INSERT into Garden VALUES(NULL, ?, ?, ?)");
+		cmd = c1.prepareStatement("INSERT into Garden VALUES(NULL, ?, ?, ?, ?)");
 		cmd.setString(1, personalPlant.getName());
 		Timestamp sqlDate = new Timestamp(new Date().getTime());
 		cmd.setTimestamp(2, sqlDate);
 		cmd.setInt(3, personalPlant.getType().getPlantID());
+		cmd.setString(4, personalPlant.getOwner().getEmail());
 
 		cmd.executeUpdate();
 	}
@@ -224,30 +198,60 @@ public class DataAccessObject implements DatabaseInterface {
 		cmd.executeUpdate();
 	}
 
+	@Override
+	public void removePersonalPlant(int ID) throws SQLException {
+		PreparedStatement cmd;
 
-	//Return a list of all PersonalPlants
-	public List<PersonalPlant> getAllPersonalPlants() throws SQLException {
+		cmd = c1.prepareStatement("DELETE FROM Garden WHERE PERSONALPLANTID = ?");
+		cmd.setInt(1, ID);
+
+		cmd.executeUpdate();
+	}
+
+	@Override
+	public List<PersonalPlant> getAllPersonalPlants() throws SQLException, UserLoginException {
 		List<PersonalPlant> plantsResult = new ArrayList<>();
 		PersonalPlant plant;
-		String personalPlantName;
-		int personalPlantID, plantType;
-		Timestamp lastWatered;
+		PreparedStatement cmd;
 
-		cmdString = "Select * from Garden";
-		rs2 = st2.executeQuery(cmdString);
+		cmd = c1.prepareStatement("SELECT * FROM Garden WHERE OWNER = ?");
+		cmd.setString(1, UserManager.getUser().getEmail());
+		rs2 = cmd.executeQuery();
 
 		while (rs2.next()) {
-			personalPlantID = rs2.getInt("PersonalPlantID");
-			personalPlantName = rs2.getString("PersonalPlantName");
-			plantType = rs2.getInt("PlantID");
-			lastWatered = rs2.getTimestamp("LASTWATERED");
+			Plant plantid = getPlant(rs2.getInt("PLANTID"));
+			String personalPlantName = rs2.getString("PERSONALPLANTNAME");
+			int personalPlantID = rs2.getInt("PERSONALPLANTID");
+			Date lastwatered = new Date(rs2.getTimestamp("LASTWATERED").getTime());
+			User owner = getUser(rs2.getString("OWNER"));
 
-			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()));
+			plant = new PersonalPlant(plantid, personalPlantName, personalPlantID, lastwatered, owner);
 			plantsResult.add(plant);
 		}
 
 		rs2.close();
+		cmd.close();
 
 		return plantsResult;
 	}
+
+	@Override
+	public User getUser(String email) throws SQLException {
+		User user = null;
+		PreparedStatement cmd;
+
+		cmd = c1.prepareStatement("SELECT * FROM USERS WHERE EMAIL = ?");
+		cmd.setString(1, email);
+		rs1 = cmd.executeQuery();
+
+		if (rs1.next()) {
+			user = new User(rs1.getString("EMAIL"), rs1.getString("NAME"), rs1.getString("PASSWORD"));
+		}
+
+		rs1.close();
+		cmd.close();
+
+		return user;
+	}
+
 }

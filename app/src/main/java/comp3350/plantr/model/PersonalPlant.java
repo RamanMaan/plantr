@@ -1,12 +1,7 @@
 package comp3350.plantr.model;
 
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
-import comp3350.plantr.business.DatabaseAccess;
-import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 
 /**
  * Created by Michael on 27/06/2017.
@@ -20,12 +15,14 @@ public class PersonalPlant {
 	private String _plantName;
 	private int _personalPlantID;
 	private Date _lastWatered;
+	private User _owner;
 
-	public PersonalPlant(Plant plantType, String plantName, int ID, Date lastWatered) {
+	public PersonalPlant(Plant plantType, String plantName, int ID, Date lastWatered, User user) {
 		_plantType = plantType;
 		_plantName = plantName;
 		_personalPlantID = ID;
-		_lastWatered = lastWatered;
+		_lastWatered = lastWatered == null ? new Date() : lastWatered;
+		_owner = user;
 	}
 
 	public boolean equals(Object other) {
@@ -55,7 +52,6 @@ public class PersonalPlant {
 	}
 
 	public void setLastWatered(Date d) {
-		//TODO add tests with getNextWatering
 		_lastWatered = d;
 	}
 
@@ -67,6 +63,10 @@ public class PersonalPlant {
 		cal.add(Calendar.HOUR_OF_DAY, _plantType.getWateringFreq());
 		//the latest the next watering period can be is the current time
 		return cal.getTime().before(currentDate) ? currentDate : cal.getTime();
+	}
+
+	public User getOwner() {
+		return _owner;
 	}
 
 }

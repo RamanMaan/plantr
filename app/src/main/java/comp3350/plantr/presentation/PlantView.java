@@ -12,13 +12,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.SQLException;
 import java.util.Date;
 
 import comp3350.plantr.R;
+import comp3350.plantr.business.AccessGarden;
+import comp3350.plantr.business.AccessPlants;
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.UserManager;
 import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
+import comp3350.plantr.business.exceptions.UserLoginException;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.persistence.DatabaseInterface;
@@ -44,15 +49,12 @@ public class PlantView extends AppCompatActivity {
 		Log.d(TAG, "onCreate: started.");
 
 		addToGarden = (Button) findViewById(R.id.addPersonalPlantButton);//initialize button
-		final android.content.Context context = this;
 
 		int plantPosition = getIntent().getIntExtra(getString(R.string.plant_id), -1);
 
-		DatabaseInterface db;
 		Plant plant = null;
 		try {
-			db = DatabaseAccess.getDatabaseAccess();
-			plant = db.getPlant(plantPosition);
+			plant = AccessPlants.getPlant(plantPosition);
 
 			plantImage = (ImageView) findViewById(R.id.plantImageView);
 			plantTitle = (TextView) findViewById(R.id.plantViewTitle);
@@ -66,14 +68,12 @@ public class PlantView extends AppCompatActivity {
 			plantDesc.setText(plant.getPlantDesc());
 			plantDifficulty.setText(String.format(getString(R.string.plantview_difficulty), plant.getDifficulty()));
 			plantOptimalTempRange.setText(String.format(getString(R.string.plantview_optimal_temps), plant.getOptimalTemp().getLowerTemp(), plant.getOptimalTemp().getUpperTemp()));
-			wateringFrequency.setText(String.format(getString(R.string.plantview_watering_freq), plant.getWateringFreq(), "day"));
-
-			//TODO make exception more specific
+			wateringFrequency.setText(String.format(getString(R.string.plantview_watering_freq), plant.getWateringFreq(), "hours"));
 		} catch (SQLException e) {
-			System.out.println("Database issue in PlantView");
+			Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		} catch (DatabaseStartFailureException e) {
-			//TODO add more exception handling here, print a toast maybe
+			Toast.makeText(getApplicationContext(), R.string.app_database_start_failure, Toast.LENGTH_LONG).show();
 			e.printStackTrace();
 		}
 
@@ -99,12 +99,17 @@ public class PlantView extends AppCompatActivity {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						text = userInput.getText().toString();
-						p = new PersonalPlant(finalPlant, text, -1, null);
 						try {
-							DatabaseAccess.getDatabaseAccess().addPersonalPlantToGarden(p);
+							p = new PersonalPlant(finalPlant, text, -1, null, UserManager.getUser());
+							AccessGarden.addPersonalPlantToGarden(p);
 						} catch (SQLException e) {
+							Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
 							e.printStackTrace();
 						} catch (DatabaseStartFailureException e) {
+							Toast.makeText(getApplicationContext(), R.string.app_database_start_failure, Toast.LENGTH_LONG).show();
+							e.printStackTrace();
+						} catch (UserLoginException e) {
+							Toast.makeText(getApplicationContext(), R.string.login_user_login_failure, Toast.LENGTH_LONG).show();
 							e.printStackTrace();
 						}
 					}
