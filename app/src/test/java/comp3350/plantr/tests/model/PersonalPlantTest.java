@@ -1,12 +1,16 @@
 package comp3350.plantr.tests.model;
 
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
+import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
-import comp3350.plantr.model.Temperature;
-import comp3350.plantr.model.TemperatureRange;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Michael on 27/06/2017
@@ -16,10 +20,13 @@ import comp3350.plantr.model.TemperatureRange;
 
 public class PersonalPlantTest {
 
+	@Before
+	public void startUp() throws DatabaseStartFailureException {
+		DatabaseAccess.openStub();
+	}
 
 	@Test
 	public void personalPlant_testEquals(){
-//TODO add testing between two personal plants under different users, should they be equal?
 		Plant dummyPlantOne = new Plant(1);
 		Plant dummyPlantTwo = new Plant(2);
 
@@ -39,7 +46,7 @@ public class PersonalPlantTest {
 		firstPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null, null);
 		secondPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null, null);
 
-		assertEquals(firstPlant,firstPlant);
+		assertEquals(firstPlant, secondPlant);
 
 		//different ID, same plant and string though
 		firstPlant = new PersonalPlant(dummyPlantOne, "sameString", 1, null, null);
