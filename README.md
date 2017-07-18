@@ -64,3 +64,29 @@ Items marked with * are not effective due to the Non-Implemented features below
     + Replaces the HSQLDB with the stub database, so it doesn't crash immediately. 
     + Unfortunately many of the features in the iteration will not work with the stub. 
     + However, running AllTests passes when done like so
+
+## Iteration 3
+
+### Organization
++ Our source code is located in the src/main/comp3350/plantr directory. This contains our packages:     
+    + business - contains our business logic
+    + model - contains objects used throughout application
+    + persistence - contains our database related files
+    + presentation - our presentation/GUI layer   
+    
++ Our acceptance test code is located under src/androidTest/comp3350/plantr
+    + each class corresponds with a big user story
++ Our integration test code is located under src/androidTest/comp3350/plantr/tests 
++ Our unit test code is located under src/test/comp3350/plantr/tests
+    + each class is contained in the same package its class is located in
+
+
+### Overview of Implemented Features
++ We completed acceptance tests of 3 big user stories
+    + NOTE: Depending on the machine, up to 3 tests will fail for unknown reasons. On windows machines there seems to be no failed tests
++ We completed integration tests
+    + NOTE: integration tests have database issues and so won't actually test anything
++ Fixed the broken HSQLDB  
++ Implemented users
+    + With user email, password, and their own garden
++ Personal Plant watering now tracked in DB
