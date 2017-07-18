@@ -176,7 +176,6 @@ public class StubDatabase implements DatabaseInterface {
 
 	@Override
 	public void updatePersonalPlant(PersonalPlant plant) {
-		//TODO write tests
 		if (plant == null) {
 			System.out.println("Trying to update null plant");
 			throw new NullPointerException("Updating Personal Plant");

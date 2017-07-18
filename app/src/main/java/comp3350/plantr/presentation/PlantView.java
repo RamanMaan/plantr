@@ -68,7 +68,7 @@ public class PlantView extends AppCompatActivity {
 			plantDesc.setText(plant.getPlantDesc());
 			plantDifficulty.setText(String.format(getString(R.string.plantview_difficulty), plant.getDifficulty()));
 			plantOptimalTempRange.setText(String.format(getString(R.string.plantview_optimal_temps), plant.getOptimalTemp().getLowerTemp(), plant.getOptimalTemp().getUpperTemp()));
-			wateringFrequency.setText(String.format(getString(R.string.plantview_watering_freq), plant.getWateringFreq(), "day"));
+			wateringFrequency.setText(String.format(getString(R.string.plantview_watering_freq), plant.getWateringFreq(), "hours"));
 		} catch (SQLException e) {
 			Toast.makeText(getApplicationContext(), R.string.app_database_failure, Toast.LENGTH_LONG).show();
 			e.printStackTrace();
