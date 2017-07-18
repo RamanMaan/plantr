@@ -76,6 +76,7 @@ Items marked with * are not effective due to the Non-Implemented features below
     
 + Our unit test code is located under src/test/comp3350/plantr
     + each class is contained in the same package its class is located in
++ Our integration test code is located in src/test/comp3350/plantr
 + Our acceptance test code is located under src/androidTest/comp3350/plantr
     + each class corresponds with a big user story
 
