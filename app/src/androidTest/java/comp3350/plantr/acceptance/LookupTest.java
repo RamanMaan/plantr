@@ -37,7 +37,8 @@ public class LookupTest extends ActivityInstrumentationTestCase2<LoginActivity> 
 	public void testSearchPlant() {
 		solo.waitForActivity("LoginActivity");
 
-		solo.enterText(0, "kevindam@plantr.io");
+		//login credentials
+		solo.enterText(0,"TEST_USER@plantr.io");
 		solo.enterText(1, "plantr");
 
 		solo.clickOnButton("Login");

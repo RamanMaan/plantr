@@ -84,13 +84,6 @@ public class StubDatabase implements DatabaseInterface {
 						.img("philodendron")
 						.tempRange(new Temperature(21), new Temperature(23))
 						.wateringPeriod(50)
-						.make(),
-				new Plant.PlantBuilder(8)
-						.name("Hoya")
-						.desc("Can I get a?")
-						.img("hoya")
-						.tempRange(new Temperature(21), new Temperature(23))
-						.wateringPeriod(50)
 						.make()
 		));
 
@@ -111,8 +104,8 @@ public class StubDatabase implements DatabaseInterface {
 				new PersonalPlant(getPlant(1), "Arthur the Anthurium", 1, cal.getTime(), _users.get(0)),
 				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern", 2, cal.getTime(), _users.get(0)),
 				new PersonalPlant(getPlant(3), "Reece the Peace Lily", 3, cal.getTime(), _users.get(1)),
-				new PersonalPlant(getPlant(4), "Pupper the Peperomia", 4, cal.getTime(), _users.get(2)),
-				new PersonalPlant(getPlant(8), "Can-I-Get-A", 5, cal.getTime(), _users.get(2))
+				new PersonalPlant(getPlant(4), "Pupper the Peperomia", 4, cal.getTime(), _users.get(3)),
+				new PersonalPlant(getPlant(5), "Snek", 5, cal.getTime(), _users.get(3))
 		));
 
 		_userGarden.addPlants(stubPersonalPlants);
