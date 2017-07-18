@@ -38,9 +38,9 @@ public class ViewInformationOnPlantsTest extends ActivityInstrumentationTestCase
 		navigateToPlant();
 
 		Assert.assertTrue(solo.searchText("Aloe"));
-		Assert.assertTrue(solo.searchText("Difficulty: HARD"));
+		Assert.assertTrue(solo.searchText("Difficulty: EASY"));
 		Assert.assertTrue(solo.searchText("Optimal Temperature: 21.0°C - 23.0°C"));
-		Assert.assertTrue(solo.searchText("Watering Frequency: Every 23 day"));
+		Assert.assertTrue(solo.searchText("Watering Frequency: Every 170 hours"));
 	}
 
 	@Test
@@ -71,8 +71,8 @@ public class ViewInformationOnPlantsTest extends ActivityInstrumentationTestCase
 		solo.waitForActivity("LoginActivity");
 
 		//login credentials
-		solo.enterText(1, "TEST_USER@plantr.io");
-		solo.enterText(0, "plantr");
+		solo.enterText(0,"TEST_USER@plantr.io");
+		solo.enterText(1, "plantr");
 
 		solo.clickOnButton("Login");
 
