@@ -21,7 +21,7 @@ public class PersonalPlant {
 		_plantType = plantType;
 		_plantName = plantName;
 		_personalPlantID = ID;
-		_lastWatered = lastWatered;
+		_lastWatered = lastWatered == null ? new Date() : lastWatered;
 		_owner = user;
 	}
 
@@ -52,7 +52,6 @@ public class PersonalPlant {
 	}
 
 	public void setLastWatered(Date d) {
-		//TODO add tests with getNextWatering
 		_lastWatered = d;
 	}
 
