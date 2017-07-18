@@ -28,3 +28,39 @@ The [project log](group_log.md) is located in the root directory
     + This can be observed by clicking on any plant in our list of plants
 + We can list all the plants in the database
     + These plants can then be clicked to bring up the plant detailed view
+    
+## Iteration 2
+
+### Organization
++ Our source code is located in the src/main/comp3350/plantr directory. This contains our packages:     
+    + business - contains our business logic
+    + model - contains objects used throughout application
+    + persistence - contains our database related files
+    + presentation - our presentation/GUI layer   
+    
++ Our test code is located under src/test/comp3350/plantr
+    + each class is contained in the same package its class is located in
+
+### Overview of Implemented Features
++ We completed Detailed User Story : "Personal Plant View"
+    + We can see all the relevant details we would need to see on a PersonalPlant
+    + This can be observed by clicking on any plant in our Garden (list of PersonalPlants)   
+    + The details shown are: Personal Plant name, last time watered, when to next water the plant
+    + Also have buttons for removing from Garden*, and watering plant*
++ We completed Detailed User Story : "Modify Users Garden Plants"
+    + Personal Plants can be added and removed from the Garden*   
+
++ Difficulty is now calculated within a Plant, versus as its own Difficulty class
+
+Items marked with * are not effective due to the Non-Implemented features below
+    
+### Overview of Non-Implemented Features
++ We could not get the HSQLDB working
+
++ Note to markers: in DatabaseAccess.Java, the open() method can be filled with: 
+
+    return _db == null ? new StubDatabase() : _db;
+
+    + Replaces the HSQLDB with the stub database, so it doesn't crash immediately. 
+    + Unfortunately many of the features in the iteration will not work with the stub. 
+    + However, running AllTests passes when done like so
