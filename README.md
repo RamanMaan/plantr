@@ -85,3 +85,6 @@ Items marked with * are not effective due to the Non-Implemented features below
 + We completed integration tests
     + NOTE: integration tests have database issues and so won't actually test anything
 + Fixed the broken HSQLDB  
++ Implemented users
+    + With user email, password, and their own garden
++ Personal Plant watering now tracked in DB
