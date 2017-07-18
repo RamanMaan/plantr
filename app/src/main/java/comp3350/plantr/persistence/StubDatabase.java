@@ -112,7 +112,7 @@ public class StubDatabase implements DatabaseInterface {
 				new PersonalPlant(getPlant(2), "Sarah the aspara-gus fern", 2, cal.getTime(), _users.get(0)),
 				new PersonalPlant(getPlant(3), "Reece the Peace Lily", 3, cal.getTime(), _users.get(1)),
 				new PersonalPlant(getPlant(4), "Pupper the Peperomia", 4, cal.getTime(), _users.get(2)),
-				new PersonalPlant(getPlant(8), "Can-I-get-a Hoya", 5, cal.getTime(), _users.get(2))
+				new PersonalPlant(getPlant(8), "Can-I-Get-A", 5, cal.getTime(), _users.get(2))
 		));
 
 		_userGarden.addPlants(stubPersonalPlants);
