@@ -134,3 +134,6 @@
 - getGarden() function implemented in the DatabaseInterface, StubDatabase and DatabaseAccessObject
 - Skeleton code for the PersonalPlantListAdapter
 - Unit Tests for testing all new features added
+
+### Austin Cooke - 07/17/17
+- Added Integration tests including the RunIntegrationTests class, IntegrationTests class, BusinessPersistenceSeam class, HSQLDBTest and HSQLDatabaseTest classes
