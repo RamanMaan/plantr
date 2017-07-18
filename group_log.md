@@ -121,6 +121,49 @@
 - Discussed user stories and developer tasks
 - Designed paper prototype for basic UI and user navigation
 - Assigned developer tasks
+---
+### Raman - 07/06/2017
+- Big overhaul in HSQLDB, correcting silly mistakes, got it up and running
+- Added an alternative way of calling the stub to make running unit tests easier
+- Added support for personal plants to be added to the garden
+- added better error handling with try/catches and introduced some exceptions to wrap with
+---
+### Raman - 07/07/2017
+- Completed testing of HSQLDB - opened pull request
+- Updated Github project - Iteration 2, moved over stories, closed milestone, cleaned up and organized columns
+---
+### Raman - 07/08/2017
+- Continuing work on user based stories, doing all user related dev tasks in one branch instead of iteration because of tight coupling of dev tasks
+- Added plant watering tracking to database
+---
+### Raman - 07/09/2017
+- Added user support to database
+- Added a login screen
+    - moved initial database configuration tasks from MainActivity to LoginActivity
+- Fixed plants not being added to garden correctly
+- Personal plants now keep track of their owner, and each user can only view plants that they own
+- Slight changes to HSQLDB(prepared statements) to handle new users, leaving other methods untouched due to time constraints
+- Corrected failing tests
+- Updating stub to behave as expected
+---
+### Group Meeting - 07/09/17
+- Discussed and communicated any concerns regarding past iteration
+- Decided not to create more dev tasks or user stories, we have plenty left over from last two iterations
+- Discussed how we will approach certain tests
+- Discussed the presentation for the course
+---
+### Raman - 07/10/2017
+- Merged user details
+- Cleaned up project on Github, closed Iteration 2, cleaned up administrative stuff
+---
+### Raman - 07/11/2017
+- Cleaned up project a little more, man I hate Github Projects, should have used Trello :cry:
+- Fixed some defects that got missed in the testing: #81, #82
+- Refactored some business logic out of presentation layer and into business layer
+---
+### Raman - 07/17/2017
+- Fixed failing unit tests regarding Garden
+=======
 
 ### Keaton MacLeod - 06/28/17
 - Created the PersonalPlantView page

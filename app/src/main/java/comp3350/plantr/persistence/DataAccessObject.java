@@ -2,15 +2,24 @@ package comp3350.plantr.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import comp3350.plantr.business.DatabaseAccess;
+import comp3350.plantr.business.UserManager;
+import comp3350.plantr.business.exceptions.DatabaseCloseFailureException;
+import comp3350.plantr.business.exceptions.DatabaseStartFailureException;
+import comp3350.plantr.business.exceptions.UserLoginException;
 import comp3350.plantr.model.PersonalPlant;
 import comp3350.plantr.model.Plant;
 import comp3350.plantr.model.Temperature;
+import comp3350.plantr.model.User;
 
 /**
  * Created by KevinD on 6/27/2017.
@@ -29,119 +38,77 @@ public class DataAccessObject implements DatabaseInterface {
 
 	public DataAccessObject(String dbName) {
 		this.dbName = dbName;
+		this.dbType = "HSQL";
 	}
 
-	public DatabaseInterface open() {
-		String url;
+	@Override
+	public void open(String dbPath) throws DatabaseStartFailureException {
 		try {
+			String url;
+
 			// Setup for HSQL
-			dbType = "HSQL";
 			Class.forName("org.hsqldb.jdbcDriver").newInstance();
 			url = "jdbc:hsqldb:file:" + DatabaseAccess.getDBPathName(); // stored on disk mode
 			c1 = DriverManager.getConnection(url, "SA", "");
 			st1 = c1.createStatement();
 			st2 = c1.createStatement();
 
-		} catch (Exception e) {
-			processSQLError(e);
+			System.out.println("Opened " + dbType + " database " + DatabaseAccess.getDBPathName());
+		} catch (ClassNotFoundException | SQLException | IllegalAccessException | InstantiationException e) {
+			throw new DatabaseStartFailureException(e);
 		}
-		System.out.println("Opened " + dbType + " database " + DatabaseAccess.getDBPathName());
-
-		return this;
 	}
 
-	public void close() {
+	@Override
+	public void close() throws DatabaseCloseFailureException {
 		try {    // commit all changes to the database
 			cmdString = "shutdown compact";
 			rs1 = st1.executeQuery(cmdString);
 			c1.close();
-		} catch (Exception e) {
-			processSQLError(e);
+
+			System.out.println("Closed " + dbType + " database " + dbName);
+		} catch (SQLException e) {
+			throw new DatabaseCloseFailureException(e);
 		}
-		System.out.println("Closed " + dbType + " database " + dbName);
 	}
 
 
-	//Return a Plant Object by id
-	public Plant getPlant(int id) {
+	@Override
+	public Plant getPlant(int id) throws SQLException {
 		Plant plant = null;
 
 		String plantName, plantDesc, plantIMG;
 		Float minTempRange, maxTempRange;
 		int plantID, wateringPeriod;
 
-		try {
-			cmdString = "Select * from Plants where PlantID=" + id;
-			rs1 = st1.executeQuery(cmdString);
+		cmdString = "Select * from Plants where PlantID=" + id;
+		rs1 = st1.executeQuery(cmdString);
 
-			while (rs1.next()) {
-				plantID = rs1.getInt("PlantID");
-				plantName = rs1.getString("PlantName");
-				plantDesc = rs1.getString("PlantDesc");
-				plantIMG = rs1.getString("PlantIMG");
-				minTempRange = rs1.getFloat("MinTempRange");
-				maxTempRange = rs1.getFloat("MaxTempRange");
-				wateringPeriod = rs1.getInt("MaxTempRange");
+		while (rs1.next()) {
+			plantID = rs1.getInt("PlantID");
+			plantName = rs1.getString("PlantName");
+			plantDesc = rs1.getString("PlantDesc");
+			plantIMG = rs1.getString("PlantIMG");
+			minTempRange = rs1.getFloat("MinTempRange");
+			maxTempRange = rs1.getFloat("MaxTempRange");
+			wateringPeriod = rs1.getInt("WATERINGPERIOD");
 
-				//				plant = new Plant(plantID, plantName, plantDesc, plantIMG, new TemperatureRange(new Temperature(minTempRange), new Temperature(maxTempRange)), wateringPeriod);
-				new Plant.PlantBuilder(plantID)
-						.name(plantName)
-						.desc(plantDesc)
-						.img(plantIMG)
-						.tempRange(new Temperature(minTempRange), new Temperature(maxTempRange))
-						.wateringPeriod(wateringPeriod)
-						.make();
-			}
-
-			rs1.close();
-		} catch (Exception e) {
-			processSQLError(e);
+			plant = new Plant.PlantBuilder(plantID)
+					.name(plantName)
+					.desc(plantDesc)
+					.img(plantIMG)
+					.tempRange(new Temperature(minTempRange), new Temperature(maxTempRange))
+					.wateringPeriod(wateringPeriod)
+					.make();
 		}
+
+		rs1.close();
 
 		return plant;
 	}
 
-	//Return a Plant Object by name
-	public Plant getPlant(String name) {
-		Plant plant = null;
-
-		String plantName, plantDesc, plantIMG;
-		Float minTempRange, maxTempRange;
-		int plantID, wateringPeriod;
-
-		try {
-			cmdString = "Select * from Plants where PlantName=" + name;
-			rs1 = st1.executeQuery(cmdString);
-
-			while (rs1.next()) {
-				plantID = rs1.getInt("PlantID");
-				plantName = rs1.getString("PlantName");
-				plantDesc = rs1.getString("PlantDesc");
-				plantIMG = rs1.getString("PlantIMG");
-				minTempRange = rs1.getFloat("MinTempRange");
-				maxTempRange = rs1.getFloat("MaxTempRange");
-				wateringPeriod = rs1.getInt("MaxTempRange");
-
-				//				plant = new Plant(plantID, plantName, plantDesc, plantIMG, new TemperatureRange(new Temperature(minTempRange), new Temperature(maxTempRange)), wateringPeriod);
-				new Plant.PlantBuilder(plantID)
-						.name(plantName)
-						.desc(plantDesc)
-						.img(plantIMG)
-						.tempRange(new Temperature(minTempRange), new Temperature(maxTempRange))
-						.wateringPeriod(wateringPeriod)
-						.make();
-			}
-
-			rs1.close();
-		} catch (Exception e) {
-			processSQLError(e);
-		}
-
-		return plant;
-	}
-
-	//Return an ArrayList of all Plant Objects
-	public List<Plant> getAllPlants() {
+	@Override
+	public List<Plant> getAllPlants() throws SQLException {
 		Plant plant = null;
 
 		String plantName, plantDesc, plantIMG;
@@ -150,118 +117,141 @@ public class DataAccessObject implements DatabaseInterface {
 
 		List<Plant> plantsResult = new ArrayList<>();
 
-		try {
-			cmdString = "Select * from Plants";
-			rs1 = st1.executeQuery(cmdString);
+		cmdString = "Select * from Plants";
+		rs1 = st1.executeQuery(cmdString);
 
-			while (rs1.next()) {
-				plantID = rs1.getInt("PlantID");
-				plantName = rs1.getString("PlantName");
-				plantDesc = rs1.getString("PlantDesc");
-				plantIMG = rs1.getString("PlantIMG");
-				minTempRange = rs1.getFloat("MinTempRange");
-				maxTempRange = rs1.getFloat("MaxTempRange");
-				wateringPeriod = rs1.getInt("MaxTempRange");
+		while (rs1.next()) {
+			plantID = rs1.getInt("PlantID");
+			plantName = rs1.getString("PlantName");
+			plantDesc = rs1.getString("PlantDesc");
+			plantIMG = rs1.getString("PlantIMG");
+			minTempRange = rs1.getFloat("MinTempRange");
+			maxTempRange = rs1.getFloat("MaxTempRange");
+			wateringPeriod = rs1.getInt("MaxTempRange");
 
-				plant = new Plant.PlantBuilder(plantID)
-						.name(plantName)
-						.desc(plantDesc)
-						.img(plantIMG)
-						.tempRange(new Temperature(minTempRange), new Temperature(maxTempRange))
-						.wateringPeriod(wateringPeriod)
-						.make();
-				plantsResult.add(plant);
-			}
-
-			rs1.close();
-		} catch (Exception e) {
-			processSQLError(e);
+			plant = new Plant.PlantBuilder(plantID)
+					.name(plantName)
+					.desc(plantDesc)
+					.img(plantIMG)
+					.tempRange(new Temperature(minTempRange), new Temperature(maxTempRange))
+					.wateringPeriod(wateringPeriod)
+					.make();
+			plantsResult.add(plant);
 		}
+
+		rs1.close();
 
 		return plantsResult;
 	}
 
-	//Return a PersonalPlant by Id
-	public PersonalPlant getPersonalPlantByID(int ID) {
+	@Override
+	public PersonalPlant getPersonalPlantByID(int ID) throws SQLException {
 		PersonalPlant plant = null;
 
 		String personalPlantName;
 		int personalPlantID, plantType;
+		Timestamp lastWatered;
+		String owner;
 
-		try {
-			cmdString = "Select * from Garden where PersonalPlantID=" + ID;
-			rs1 = st1.executeQuery(cmdString);
+		cmdString = "Select * from Garden where PersonalPlantID=" + ID;
+		rs1 = st1.executeQuery(cmdString);
 
-			while (rs1.next()) {
-				personalPlantID = rs1.getInt("PersonalPlantID");
-				personalPlantName = rs1.getString("PlantName");
-				plantType = rs1.getInt("PlantType");
+		while (rs1.next()) {
+			personalPlantID = rs1.getInt("PersonalPlantID");
+			personalPlantName = rs1.getString("PERSONALPLANTNAME");
+			plantType = rs1.getInt("PLANTID");
+			lastWatered = rs1.getTimestamp("LASTWATERED");
+			owner = rs1.getString("OWNER");
 
-				plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID);
-			}
-
-			rs1.close();
-		} catch (Exception e) {
-			processSQLError(e);
+			User u = getUser(owner);
+			plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID, new Date(lastWatered.getTime()), u);
 		}
+
+		rs1.close();
 
 		return plant;
 	}
 
 	@Override
-	public void addPersonalPlantToGarden(PersonalPlant personalPlant) {
-		String values;
+	public void addPersonalPlantToGarden(PersonalPlant personalPlant) throws SQLException {
+		PreparedStatement cmd;
 
-		try {
-			values = personalPlant.getID()
-					+ ", '" + personalPlant.getName()
-					+ "', '" + personalPlant.getType().getPlantID()
-					+ "'";
-			cmdString = "Insert into Garden " + " Values(" + values + ")";
-			st1.executeUpdate(cmdString);
-		} catch (Exception e) {
-			processSQLError(e);
-		}
+		cmd = c1.prepareStatement("INSERT into Garden VALUES(NULL, ?, ?, ?, ?)");
+		cmd.setString(1, personalPlant.getName());
+		Timestamp sqlDate = new Timestamp(new Date().getTime());
+		cmd.setTimestamp(2, sqlDate);
+		cmd.setInt(3, personalPlant.getType().getPlantID());
+		cmd.setString(4, personalPlant.getOwner().getEmail());
+
+		cmd.executeUpdate();
 	}
 
+	@Override
+	public void updatePersonalPlant(PersonalPlant plant) throws SQLException {
+		PreparedStatement cmd;
 
-	//Return a list of all PersonalPlants
-	public List<PersonalPlant> getAllPersonalPlants() {
+		cmd = c1.prepareStatement("UPDATE Garden SET LASTWATERED = ? WHERE PERSONALPLANTID = ?");
+		Timestamp sqlDate = new Timestamp(plant.getLastWatered().getTime());
+		cmd.setTimestamp(1, sqlDate);
+		cmd.setInt(2, plant.getID());
 
+		cmd.executeUpdate();
+	}
+
+	@Override
+	public void removePersonalPlant(int ID) throws SQLException {
+		PreparedStatement cmd;
+
+		cmd = c1.prepareStatement("DELETE FROM Garden WHERE PERSONALPLANTID = ?");
+		cmd.setInt(1, ID);
+
+		cmd.executeUpdate();
+	}
+
+	@Override
+	public List<PersonalPlant> getAllPersonalPlants() throws SQLException, UserLoginException {
 		List<PersonalPlant> plantsResult = new ArrayList<>();
 		PersonalPlant plant;
-		String personalPlantName;
-		int personalPlantID, plantType;
+		PreparedStatement cmd;
 
-		try {
-			cmdString = "Select * from Garden";
-			rs2 = st2.executeQuery(cmdString);
+		cmd = c1.prepareStatement("SELECT * FROM Garden WHERE OWNER = ?");
+		cmd.setString(1, UserManager.getUser().getEmail());
+		rs2 = cmd.executeQuery();
 
-			while (rs2.next()) {
-				personalPlantID = rs2.getInt("PersonalPlantID");
-				personalPlantName = rs2.getString("PersonalPlantName");
-				plantType = rs2.getInt("PlantID");
+		while (rs2.next()) {
+			Plant plantid = getPlant(rs2.getInt("PLANTID"));
+			String personalPlantName = rs2.getString("PERSONALPLANTNAME");
+			int personalPlantID = rs2.getInt("PERSONALPLANTID");
+			Date lastwatered = new Date(rs2.getTimestamp("LASTWATERED").getTime());
+			User owner = getUser(rs2.getString("OWNER"));
 
-				plant = new PersonalPlant(getPlant(plantType), personalPlantName, personalPlantID);
-				plantsResult.add(plant);
-			}
-
-			rs2.close();
-		} catch (Exception e) {
-			processSQLError(e);
+			plant = new PersonalPlant(plantid, personalPlantName, personalPlantID, lastwatered, owner);
+			plantsResult.add(plant);
 		}
+
+		rs2.close();
+		cmd.close();
 
 		return plantsResult;
 	}
 
+	@Override
+	public User getUser(String email) throws SQLException {
+		User user = null;
+		PreparedStatement cmd;
 
-	public String processSQLError(Exception e) {
-		String result = "*** SQL Error: " + e.getMessage();
+		cmd = c1.prepareStatement("SELECT * FROM USERS WHERE EMAIL = ?");
+		cmd.setString(1, email);
+		rs1 = cmd.executeQuery();
 
-		// Remember, this will NOT be seen by the user!
-		e.printStackTrace();
+		if (rs1.next()) {
+			user = new User(rs1.getString("EMAIL"), rs1.getString("NAME"), rs1.getString("PASSWORD"));
+		}
 
-		return result;
+		rs1.close();
+		cmd.close();
+
+		return user;
 	}
 
 }
