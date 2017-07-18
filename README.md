@@ -74,11 +74,12 @@ Items marked with * are not effective due to the Non-Implemented features below
     + persistence - contains our database related files
     + presentation - our presentation/GUI layer   
     
-+ Our unit test code is located under src/test/comp3350/plantr
-    + each class is contained in the same package its class is located in
-+ Our integration test code is located in src/test/comp3350/plantr
 + Our acceptance test code is located under src/androidTest/comp3350/plantr
     + each class corresponds with a big user story
++ Our integration test code is located under src/androidTest/comp3350/plantr/tests 
++ Our unit test code is located under src/test/comp3350/plantr/tests
+    + each class is contained in the same package its class is located in
+
 
 ### Overview of Implemented Features
 + We completed acceptance tests of 3 big user stories
